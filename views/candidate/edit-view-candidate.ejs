@@ -1,0 +1,1722 @@
+<%- include('../includes/head.ejs') %>
+<link href="/css/company.css" rel="stylesheet" type="text/css">
+<link href="/css/select2.css" rel="stylesheet" type="text/css">
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+</head>
+
+<body id="page-top">
+
+    <%- include('../includes/drawer.ejs') %>
+
+    <script type="text/javascript">
+
+        function getRole()
+        {
+        $(document).ready(function () {
+            $("#client").on("change", function (e) {
+                var type = $(this).val();
+                if(type && type !== '-1')
+                {
+                    $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompanyRole/'+type,
+                            success: function (res) {
+                                var len = res.companyRoleName.length;
+                                $("#process").empty();
+                                if (len > 0) {
+                                    
+                                    for (var i = 0; i < len; i++) {
+                                        var name = res.companyRoleName[i].name;
+                                        var id = res.companyRoleName[i].id;
+
+                                        $("#process").append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#process").append(
+                                        "<option value='-1'>None</option>");
+                                }
+
+                            }
+                        });
+                }
+            })
+        })
+    }
+
+        function getData() {
+
+            $(document).ready(function () {
+                $("#l2assessment").on("change", function (e) {
+
+                    e.preventDefault();
+                    var type = $(this).val();
+                    if (type === 'good' || type === 'tac') {
+                        $('#visible').html(`
+                            
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Client</label>
+                                        <select class="form-control select2" name="client" id="client" required
+                                            style="width: 100%;" onClick="getRole();">
+                                            
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Process</label>
+                                        <select class="form-control select2" id="process" name="process" style="width: 100%;"
+                                            required>
+                                            <option selected="selected">--Select--</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Interview</label>
+                                        <input type="date" id="startDate" name="startDate" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Remark</label>
+                                        <textarea class="form-control" rows="5" id="remark" name='remarkDescription'
+                                            style="resize: none;" required></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Document Check</label>
+                                        <select class="form-control select2" name="docCheck" required
+                                            style="width: 100%; ">
+                                            <option selected>Select</option>
+                                            <option value="DONE">DONE</option>
+                                            <option value="PENDING">PENDING</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Training Status</label>
+                                        <select class="form-control select2" name="trainingStatus" style="width: 100%;"
+                                            required>
+                                            <option selected>Select</option>
+                                            <option value="DONE">DONE</option>
+                                            <option value="PENDING">PENDING</option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Interview Status</label>
+                                        <select class="form-control select2" name="InterviewStatus" style="width: 100%;"
+                                            required>
+
+                                            <option selected="selected">--Select--</option>
+                                            <option value="FSR">Reject: FSR</option>
+                                            <option value="AMCAT">Reject: AMCAT</option>
+                                            <option value="AMCAT_COOLING">AMCAT_COOLING</option>
+                                            <option value="GAT">Reject: GAT</option>
+                                            <option value="VERSANT">Reject: VERSANT</option>
+                                            <option value="TYPING">Reject: TYPING</option>
+                                            <option value="OPS">Reject: OPS</option>
+                                            <option value="CLIENT">Reject: CLIENT</option>
+                                            <option value="GROUP_DISCUSSION">Reject: GROUP DISCUSSION</option>
+                                            <option value="NO_SHOW">No Show - IM</option>
+                                            <option value="OFFER_DROP">Offer Drop</option>
+                                            <option value="HOLD">Hold</option>
+                                            <option value="NO_SHOW_LINE_UP">No Show Line Up</option>
+                                            <option value="HR(P)">HR(P)</option>
+                                            <option value="AMCAT(P)">AMCAT(P)</option>
+                                            <option value="GROUP_DISCUSSION(P)">GROUP DISCUSSION(P)</option>
+                                            <option value="JAM(P)">JAM(P)</option>
+                                            <option value="VERSANT(P)">VERSANT(P)</option>
+                                            <option value="OPS(P)">OPS(P)</option>
+                                            <option value="CLIENT(P)">CLIENT(P)</option>
+                                            <option value="TYPING(P)">TYPING(P)</option>
+                                            <option value="GAT(P)">GAT(P)</option>
+                                            <option value="ONLINE_TEST(P)">ONLINE TEST(P)</option>
+                                            <option value="MEDICAL(P)">MEDICAL(P)</option>
+                                            <option value="WRITTEN_TEST(P)">WRITTEN_TEST(P)</option>
+                                            <option value="CODING(P)">CODING(P)</option>
+                                            <option value="TECHNICAL(P)">TECHNICAL(P)</option>
+                                            <option value="PRE_ASSESSMENT(P)">PRE ASSESSMENT(P)</option>
+                                            <option value="MID_ASSESSMENT(P)">MID ASSESSMENT(P)</option>
+                                            <option value="POST_ASSESSMENT(P)">POST_ASSESSMENT(P)</option>
+
+
+                                            <option value="CLIENT_VENUE">CLIENT VENUE</option>
+                                            <option value="TPP_VENUE">TPP VENUE</option>
+                                            <option value="TELEPHONIC">TELEPHONIC</option>
+                                            <option value="AMCAT(TEL)">AMCAT(TEL)</option>
+
+
+                                            <option value="SVVR:DONE">SVVR:DONE</option>
+                                            <option value="SVVR:NI">SVVR:NI</option>
+
+                                            <option value="SVVR:SEND EMAIL">SVVR:SEND EMAIL</option>
+                                            <option value="SVVR:MAIL CONFIRMATION">SVVR:MAIL CONFIRMATION</option>
+                                            <option value="SVVR:AWAITING ONBOARDING">SVVR:AWAITING ONBOARDING</option>
+                                            <option value="SVVR:L3 CHECK">SVVR:L3 CHECK</option>
+                                            <option value="SVVR:TRAINING">SVVR:TRAINING</option>
+                                            <option value="SVVR:ADD TO GROUP">SVVR:ADD TO GROUP</option>
+                                            <option value="SVVR:LOGIN CREATION">SVVR:LOGIN CREATION</option>
+
+                                            <option value="INTERNSHIP IN PROCESS">INTERNSHIP IN PROCESS</option>
+                                            <option value="INTERNSHIP DROP">INTERNSHIP DROP</option>
+                                            <option value="INTERNSHIP JOINED">INTERNSHIP JOINED</option>
+
+                                            <option value="FINAL_FEEDBACK">Final Feedback</option>
+                                            <option value="SELECTED">Select</option>
+
+                                            // <option selected="selected">--Select--</option>
+                                            // <option value="FSR">Reject: FSR</option>
+                                            // <option value="AMCAT">Reject: AMCAT</option>
+                                            // <option value="GAT">Reject: GAT</option>
+                                            // <option value="VERSANT">Reject: VERSANT</option>
+                                            // <option value="TYPING">Reject: TYPING</option>
+                                            // <option value="OPS">Reject: OPS</option>
+                                            // <option value="CLIENT">Reject: CLIENT</option>
+                                            // <option value="GROUP_DISCUSSION">Reject: GROUP DISCUSSION</option>
+                                            // <option value="NO_SHOW">No Show</option>
+                                            // <option value="OFFER_DROP">Offer Drop</option>
+                                            // <option value="HOLD">Hold</option>
+                                            // <option value="IN_PROCESS">In Process</option>
+                                            // <option value="SELECTED">Select</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row ">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Interview Remark</label>
+                                        <textarea class="form-control" rows="5" id="Interviewremark"
+                                            name='Interviewremark' style="resize: none;" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            `)
+                        $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompany/',
+                            success: function (res) {
+                                var len = res.companyName.length;
+                                if (len > 1) {
+                                    $("#client").empty();
+                                    for (var i = 0; i < len; i++) {
+                                        var name = res.companyName[i].name;
+                                        var id = res.companyName[i].id;
+
+                                        $("#client").append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#client").append(
+                                        "<option>None</option>");
+                                }
+
+                            }
+                        });
+                    } else {
+                        $('#visible').html(``);
+                        console.log('Select is not clear!')
+                    }
+
+                });
+            });
+        }
+
+        function getNewData() {
+            $(document).ready(function () {
+                $("#l1assessment").on("change", function (e) {
+
+                    e.preventDefault();
+                    var type = $(this).val();
+                    if (type === 'wd' || type === 'good' || type === 'tac') {
+                        $('#visible').html(`<div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Client</label>
+                                        <select class="form-control select2" name="client" id="client" required
+                                            style="width: 100%;" onClick="getRole();">
+                                            <option selected="selected">Select</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="Reference">Process</label>
+                                        <select class="form-control select2" name="process" id="process"  style="width: 100%;"
+                                            required>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Interview</label>
+                                        <input type="date" id="startDate" name="startDate" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Remark</label>
+                                        <textarea class="form-control" rows="5" id="remark" name='remarkDescription'
+                                            style="resize: none;" required></textarea>
+
+                                    </div>
+                                </div>
+                            </div>`)
+                        $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompany/',
+                            success: function (res) {
+                                var len = res.companyName.length;
+                                if (len > 1) {
+                                    $("#client").empty();
+                                    for (var i = 0; i < len; i++) {
+                                        var name = res.companyName[i].name;
+                                        var id = res.companyName[i].id;
+                                        $("#client").append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#client").append(
+                                        "<option value='-1'>None</option>");
+                                }
+
+                            }
+                        });
+                    } else {
+                        $('#visible').html('');
+                        console.log('Select is not clear!')
+                    }
+
+
+
+                });
+            });
+        }
+    </script>
+
+    <!-- Begin Page Content -->
+
+    <a class="float-right shadow p-3 mb-2 bg-white rounded" href="#page-bottom">
+        <i class="fas fa-angle-down"></i>
+    </a>
+    
+    <div class="container-fluid">
+
+        <% if(formView) {%>
+
+        <div class="row mx-2 mt-2">
+
+            <div class="col-md-12">
+                <!-- Form 1 for Personal Info -->
+                <div class="card shadow mb-4" id="Form1">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">Personal Information
+                                            </h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+                                        <div class="card-body ">
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Source</label>
+                                                        <select class="form-control select2 " style="width: 100%;"
+                                                            onchange="getClicked(this.value)" name="sourceData" disabled>
+
+                                                            <option selected="selected"><%= personalData && personalData.source ? personalData.source : '' %>
+                                                            </option>
+                                                            
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Reference</label>
+                                                        <input type="text" class="form-control " id="Reference"
+                                                            name="Reference" placeholder="Reference"
+                                                            value="<%= personalData.reference == null ? 'None' : personalData.reference %>" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="name ">Full Name</label>
+                                                <input type="text " class="form-control " id="name" name="name"
+                                                    placeholder="Full Name" disabled
+                                                    value="<%= personalData.fullName == null ? 'None' : personalData.fullName %>">
+
+                                            </div>
+                                            <label for="name ">Mobile</label>
+
+                                            <div class="row " id="files">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile"
+                                                            name="mobileone" aria-label="Recipient's username" disabled
+                                                            value="<%= personalData.phoneNumberOne %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile"
+                                                            name="mobiletwo" aria-label="Recipient's username" disabled
+                                                            value="<%= personalData.phoneNumberTwo %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile"
+                                                            name="mobilethree" aria-label="Recipient's username" disabled
+                                                            value="<%= personalData.phoneNumberthree %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile"
+                                                            name="mobilefour" aria-label="Recipient's username" disabled
+                                                            value="<%= personalData.phoneNumberfour %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <label for="name">Email</label>
+                                            <div class="row " id="emails">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email "
+                                                            name="emailone" value="<%= personalData.emailOne %>" disabled
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email"
+                                                            name="emailtwo" value="<%= personalData.emailTwo %>" disabled
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email "
+                                                            name="emailthree" value="<%= personalData.emailThree %>"
+                                                            aria-label="Recipient's username" disabled
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email "
+                                                            name="emailfour" value="<%= personalData.emailFour %>"
+                                                            aria-label="Recipient's username" disabled
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Hometown</label>
+                                                        <select class="form-control select2 " style="width: 100%; "
+                                                            name="homeLocation" disabled>
+                                                            
+                                                            <option><%= personalData && personalData.homeTown ? personalData.homeTown : ''%></option>
+                                                            
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Current Location</label>
+                                                        <select class="form-control select2 " style="width: 100%;"
+                                                            name="currentLocation" disabled>
+                                                            <option><%= personalData && personalData.currentLocation ? personalData.currentLocation : ''%></option>
+
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>DOB</label>
+                                                        <input type="date" id="birthday" value="<%= personalData.dob %>"
+                                                            name="birthday" class="form-control" disabled>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Prefered Location</label>
+                                                        <div class="s2-example">
+                                                            <p>
+                                                                <select class="js-example-basic-multiple"
+                                                                    name="preferedLocation" multiple="multiple"
+                                                                    style="width: 100%;" disabled>
+
+
+                                                                    <% if(location.length > 0){ 
+                                                                        for (let src of location) { %>
+                                                                                      
+                                                                        <option selected value="<%=src %>"><%=src %></option>
+                                                                                     
+                                                                        <%}%>
+                                                                     <%}%>
+
+                                                                   
+                                                                   
+
+                                                                </select>
+
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="languageComponent">
+                                               
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Language</label>
+                                                            <select class="js-example-basic-multiple"
+                                                                    name="language" id="language" multiple="multiple"
+                                                                    style="width: 100%;" disabled>
+                                                            
+                                                                <%if(languageData.length > 0) {  %>
+                                                                  <% for(let lang of languageData) {%>
+                                                                <option><%=lang.name %></option>
+                                                                
+                                                                  <%}%>
+                                                                <%}%>
+
+                                                                
+
+                                    
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                
+                                            </div>
+
+
+                                        </div>
+                                        </div>
+
+
+                <!-- Form 2 for Education -->
+
+                <div class="card shadow mb-4 " id="Form2">
+                    <div class="card-header ">
+                        <h3 class="m-0 font-weight-bold text-primary ">Educational Information
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <!-- <form role="form "> -->
+                   <div class="card-body ">
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Class 10</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            name="class10" disabled id="class10">
+                                                            <option value="10"
+                                                                <%= (educationData && educationData.highscool) === '10' ? 'selected' : ''%>>
+                                                                10</option>
+                                                            <option value="NONE"
+                                                                <%= (educationData && educationData.highscool) === 'NONE' ? 'selected' : ''%>>
+                                                                NONE</option>
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Passing year</label>
+                                                        <input type="date" id="class10Date" name="class10Date" disabled
+                                                            value="<%= (educationData !== null && educationData.highscoolDate !== null)? educationData.highscoolDate: ""%>"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Under Graduation</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            name="class12" id="class12" disabled>
+                                                            <%if(educationData !== null && educationData.Intermediate !== null) {%>
+                                                            <option value="Diploma"
+                                                                <%= (educationData.Intermediate) === 'Diploma' ? 'selected' : ''%>>
+                                                                DIPLOMA</option>
+                                                            <option value="ITI"
+                                                                <%= (educationData.Intermediate) === 'ITI' ? 'selected' : ''%>>
+                                                                ITI</option>
+                                                            <option value="12"
+                                                                <%= (educationData.Intermediate) === '12' ? 'selected' : ''%>>
+                                                                12</option>
+                                                            <option value="NONE"
+                                                                <%= (educationData.Intermediate) === 'NONE' ? 'selected' : ''%>>
+                                                                NONE</option>
+                                            
+
+                                                            <%}%>
+                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 ">
+                                                            <div class="form-group ">
+                                                                <label for="Reference ">Passing year</label>
+                                                                <input type="date" id="class12Date"  disabled
+                                                                value="<%=( educationData !== null && educationData.IntermediateDate ) ? educationData.IntermediateDate : ""%>"
+                                                            name="class12Date" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Graduation</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            name="classG" id="classG" disabled>
+                                                            <option> <%= (educationData !== null && educationData.graduation !== null) ? educationData.graduation: "" %></option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Passing year</label>
+                                                        <input type="date" id="classGDate" name="classGDate"
+                                                            value="<%= (educationData !== null && educationData.graduationDate !== null) ? educationData.graduationDate : '' %>"
+                                                            class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Post Graduation</label>
+                                                        <select class="form-control select2" style="width: 100%;" disabled
+                                                            name="classP" id="classP" >
+                                                            
+                                                            <option><%= (educationData !== null && educationData.postGraduation !== null) ? educationData.postGraduation: ""%></option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="Reference">Passing year</label>
+                                                        <input type="date" id="classPDate" name="classPDate" disabled
+                                                            value="<%= (educationData !== null && educationData.postGraduationDate !== null ) ? educationData.postGraduationDate : ''%>"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Skills set</label>
+                                                        <div><% if(skillSet.length > 0){%>
+                                        <% for(let loc of skillSet) {%>
+                                        <%= loc %> &nbsp;
+                                        <% }} %></div>
+                                                        
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Certificate</label>
+                                                        <input type="type" class="form-control" name="certificateName" disabled
+                                                            value="<%= certificate !== null? certificate.certificateName: ''%>"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Certification
+                                                            Number</label>
+                                                        <input type="type" class="form-control" name="certificateNumber" disabled
+                                                            value="<%= certificate !== null? certificate.certificateNumber: ''%>"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Typing Speed</label>
+                                                        <select class="form-control select2" style="width: 100%;" disabled
+                                                            required name="typingspeed">
+
+                                                            <%if(educationData !== null && educationData.typingSpeed !== null) {%>
+                                                            <option
+                                                                selected="<%= (educationData.typingSpeed) === '1 to 20 wpm' ? 'selected' : ''%>"
+                                                                value="<%= educationData.typingSpeed %>">
+                                                                1 to 20 wpm</option>
+
+                                                            <option
+                                                                selected="<%= (educationData.typingSpeed) === '20 to 30 wpm' ? 'selected' : ''%>"
+                                                                value="<%= educationData.typingSpeed %>">
+                                                                20 to 30 wpm
+                                                            </option>
+                                                            <option
+                                                                selected="<%= (educationData.typingSpeed) === '30+ wpm' ? 'selected' : ''%>"
+                                                                value="<%= educationData.typingSpeed %>">
+                                                                30+ wpm
+                                                            </option>
+
+                                            
+
+                                                            <%}%>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                    <!-- </form> -->
+                </div>
+
+
+                <div class="card shadow mb-4 " id="Form3">
+                    <div class="card-header ">
+                        <h3 class="m-0 font-weight-bold text-primary ">Experience Information
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <!-- <form role="form "> -->
+
+                    <div class="card-body ">
+
+                        <div class="row mb-2">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="experiencestatus" id="fresher"
+                                        value="EXPERIENCE"
+                                        <%= experienceData !== null && experienceData.experience === 'EXPERIENCE' ?  'checked'  : '' %>>
+                                    <label class="form-check-label" for="fresher">
+                                        EXPERIENCE
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="experiencestatus" id="experience"
+                                        value="FRESHER"
+                                        <%= experienceData !== null && experienceData.experience === 'FRESHER' ?  'checked'  : '' %>>
+                                    <label class="form-check-label" for="experience">
+                                        FRESHER
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <% if(companyData.length > 0) { 
+                                        for (let src of companyData) {%>
+                        <div id="company">
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Company Name</label>
+                                        <input type="organization-title" class="form-control" value="<%= src.name %>"
+                                            placeholder="Company Name" name="company" autocomplete="on" disabled>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Company Industry</label>
+                                        <select class="form-control select2" name="companyIndustry" required
+                                            style="width: 100%; " disabled>
+                                            <option selected="selected "><%= src.companyIndustry %></option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Role</label>
+                                        <select class="form-control select2" name="companyRole" style="width: 100%;"
+                                            disabled>
+                                            <option selected="selected "><%= src.companyRole %></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-md-4 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Start year</label>
+                                        <input type="date" id="startDate" value="<%= src.startDate %>" name="startDate"
+                                            class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">End year</label>
+                                        <input type="date" id="endDate" value="<%= src.endDate %>" name="endDate"
+                                            class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 ">
+                                    <div class="form-group ">
+                                        <label>Salary</label>
+                                        <select class="form-control select2" name="salary" style="width: 100%;"
+                                            disabled>
+                                            <option selected="selected "><%= src.Salary %>
+                                            </option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <% }} %>
+
+                        <% if(preferedIndustryData.length > 0) { 
+                                        for(let src of preferedIndustryData){%>
+                        <div id="prefer">
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Prefered Industry</label>
+                                        <select class="form-control select2" name="preferedIndustry"
+                                            style="width: 100%;" disabled>
+                                            <option selected="selected"><%= src.preferedIndustry %></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Prefered Job Role</label>
+                                        <select class="form-control select2" name="preferedIndustryJobRole"
+                                            style="width: 100%;" disabled>
+                                            <option selected="selected"><%= src.preferedJobRole %></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }} %>
+
+
+                        <div class="row ">
+                            <div class="col-md-6 ">
+                                <div class="form-group ">
+                                    <label>Prefered Job Type</label>
+                                    <select class="form-control select2" name="preferedJobType" disabled
+                                        style="width: 100%;">
+                                        <option selected="selected">
+                                            <%= experienceData === null ? "" : experienceData.preferedJobType %>
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 ">
+                                <div class="form-group ">
+                                    <label>Prefered Shift</label>
+                                    <select class="form-control select2" name="preferedShift" disabled
+                                        style="width: 100%;">
+                                        <option selected="selected">
+                                            <%= experienceData === null ? "" : experienceData.preferedShift %>
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    <!-- </form> -->
+                </div>
+
+
+
+
+
+
+                <%if(levelOneAssesssment){%>
+
+                <form>
+                    <div class="card shadow mb-4" id="Form3">
+                        <div class="card-header">
+                            <h3 class="m-0 font-weight-bold text-primary">L1 Assessment </h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="assessmentone">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <select class="form-control select2" 
+                                                required style="width:100%;" disabled>
+
+                                                <option selected="selected">
+                                                    <%= levelOneAssesssment.dataValues.Assessment %>
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                
+
+
+                                <% if(levelOneAssesssment.dataValues.Assessment && (levelOneAssesssment.dataValues.Assessment === 'wd' 
+                                || levelOneAssesssment.dataValues.Assessment === 'tac' || levelOneAssesssment.dataValues.Assessment === 'good')) {%>
+
+                                 
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Language</label>
+                                            <% if (languageData.length > 0) {for(let loc of languageData) {%>
+                                                <input type="text" disabled class="form-control"
+                                                value="<%= loc.name %>">
+                                            <% }} %>
+                                        </div>
+                                            
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Level</label>
+                                            <% if (languageData.length > 0) {for(let loc of languageData) {%>
+                                                <input type="text" disabled class="form-control"
+                                                value="<%= loc.levelone %>">
+                                            <% }} %>
+                                        </div>
+                                            
+                                        </div>
+                                    </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group ">
+                                            <label>Client</label>
+                                            <select class="form-control select2" disabled style="width: 100%; ">
+                                                
+                                                <% var roles = [];  if(companyValue && companyValue.length > 0){
+                                                     for(let src of companyValue){
+                                                        if(src.id == levelOneAssesssment.dataValues.client ){
+                                                            roles = src.roleData; 
+                                                            console.log(roles);%>
+                                                <option selected="selected ">
+                                                    <!-- <%= levelOneAssesssment.dataValues.client %> -->
+                                                    <%= src.name %>
+                                                </option>
+                                                <%}}}%>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group ">
+                                            <label for="Reference ">Process</label>
+                                            <select class="form-control select2" disabled style="width: 100%;">
+                                                 <% if(roles && roles.length > 0){
+                                                     for(let src of roles){
+                                                        if(src.id == levelOneAssesssment.dataValues.process ){
+                                                             %>
+                                                <option selected="selected ">
+                                                    <%= src.pseudoName %>
+                                                </option>
+                                                <%}}}%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 ">
+                                        <div class="form-group ">
+                                            <label for="Reference ">Interview</label>
+                                            <input type="date" disabled class="form-control"
+                                                value="<%= levelOneAssesssment.dataValues.interview %>" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 ">
+                                        <div class="form-group ">
+                                            <label>Remark</label>
+                                            <textarea class="form-control" rows="5" disabled 
+                                                style="resize: none;" >
+                                            <%= levelOneAssesssment.dataValues.remark %>
+                                            </textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <%}%>
+                            </div>
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </form>
+                <%}%>
+
+
+
+                                <%if(l2AssessmentListData && l2AssessmentListData.length > 0){ var a = 1;%>
+                                <%for(let src of l2AssessmentListData){%>
+                                <form>
+                                    <div class="card shadow mb-4 " id="Form3">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">L2 Assessment
+                                            </h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+
+                                        <div class="card-body ">
+                                            <div id="assessmentone">
+                                                <div class="row ">
+                                                    <div class="col-md-6 col-sm-12 ">
+                                                        <div class="form-group ">
+                                                            <label>L2 Assessment</label>
+                                                            
+                                                            <select disabled class="form-control select2" style="width: 100%;">
+
+                                                                <option selected="selected"><%= src.Assessment %>
+                                                                </option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               
+
+                                                <%if(src.Assessment === 'good' || src.Assessment === 'tac'){%>
+
+                                                     <% if(a === 1){%>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Language</label>
+                                                            <% if (languageData.length > 0) {for(let loc of languageData) {%>
+                                                            <input type="text" disabled class="form-control"
+                                                                value="<%= loc.name %>">
+                                                            <% }} %>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Level</label>
+                                                            <% if (languageData.length > 0) {for(let loc of languageData) {%>
+                                                            <input type="text" disabled class="form-control"
+                                                                value="<%= loc.leveltwo %>">
+                                                            <% }} %>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <%}%>
+
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <label>Client</label>
+                                                           
+                                                            <select disabled class="form-control select2" style="width: 100%; ">
+                                                             <% var roless = []; if(companyValue && companyValue.length > 0){
+                                                                for(let sr of companyValue){
+                                                                    if(sr.id == src.Client ){
+                                                                        roless = sr.roleData; %>    
+                                                                <option selected="selected "><%= sr.name %></option>
+                                                            <%}}}%>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Process</label>
+                                                            <select disabled class="form-control select2"
+                                                                style="width: 100%;">
+                                                                <%if(roless && roless.length > 0){
+                                                                    for(let s of roless){
+                                                                       if(s.id == src.process ){ %>  
+                                                                <option selected="selected "><%= s.pseudoName %></option>
+                                                                        <%}}}%>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Interview</label>
+                                                            <input type="date" disabled value="<%= src.date %>"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 ">
+                                                        <div class="form-group ">
+                                                            <label>Remark</label>
+                                                            <textarea disabled class="form-control" rows="5" style="resize: none;" required>
+                                                                <%= src.remark %>
+                                                            </textarea>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <label>Document Check</label>
+                                                            <select class="form-control select2" style="width: 100%; " disabled>
+                                                                <option selected="selected "><%= src.documentCheck %>
+                                                                </option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Training Status</label>
+                                                            <select class="form-control select2"
+                                                                style="width: 100%;"  disabled>
+                                                                <option selected="selected "><%= src.trainingStatus%>
+                                                                </option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Interview Status</label>
+                                                            <select disabled class="form-control select2"
+                                                                style="width: 100%;" required>
+                                                                <option selected="selected"><%= src.InterviewStatus %>
+                                                                </option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Interview Remark</label>
+                                                            <textarea disabled class="form-control" rows="5" style="resize: none;" required><%= src.InterviewRemark %></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <%}%>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                   
+                                </form>
+
+                                <%a++;}%>
+
+                            <%}%>
+
+
+                        <!-- TAKE ASSESSMENT -->
+
+
+                        <%if(accountAccess && (accountAccess === 'ALL' || accountAccess === 'L1_ASSESSMENT' || accountAccess === 'L2_ASSESSMENT'
+                                           || accountAccess === 'L1 ASSESSMENT' || accountAccess === 'L2 ASSESSMENT')){%>
+                                                <% if(!levelOneAssesssment){ if(!levelOneTake){ %>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <form method="GET" action="/candidate/ajax/<%=candidateId %>">
+                                                            <div class="form-group">
+                                                                <input type="submit" class="btn btn-primary"
+                                                                    id="addL1Assessment" name="addL1Assessment"
+                                                                    value="Add L1 Assessment">
+
+                                                                <input type="hidden" name="_csrf"
+                                                                    value="<%=csrfToken%>">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <% }else{ %>
+                                                <form action="/candidate/level-one-assessment" method="POST">
+                                                    <div class="card shadow mb-4" id="Form3">
+                                                        <div class="card-header">
+                                                            <h3 class="m-0 font-weight-bold text-primary">L1 Assessment
+                                                            </h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="assessmentone">
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <select class="form-control select2"
+                                                                                name="l1assessment" id="l1assessment"
+                                                                                required style="width:100%;"
+                                                                                onclick="getNewData();">
+
+                                                                                <option selected value="">Select
+                                                                                </option>
+
+                                                                                <option value="number_not_reachable">
+                                                                                    NUMBER NOT
+                                                                                    REACHABLE</option>
+                                                                                <option value="did_not_pick">DIDN'T PICK
+                                                                                </option>
+                                                                                <option value="wrong_number">WRONG
+                                                                                    NUMBER</option>
+                                                                                <option value="call_back">CALLBACK
+                                                                                </option>
+                                                                                <option value="black_list">BLACKLIST</option>
+                                                                                <option value="other_client">NE-FRESHER</option>
+                                                                                <option value="ni_in_job">NI-IN-JOB</option>
+                                                                                <option value="ni_experienced">NI-EXPERIENCED</option>
+                                                                                <option value="ni_convincing">NI-CONVINCING</option>
+                                                                                <option value="wd">WD</option>
+                                                                                <option value="good">GOOD</option>
+                                                                                <option value="tac">TAC</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <% if (languageData.length > 0) { var count = 1; %>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Language</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Level</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <%for(let loc of languageData) {%>
+                                                                            
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            
+                                                                            
+                                                                            <input type="text" disabled
+                                                                                class="form-control" id="language<%=count%>"
+                                                                                name="language<%=count%>" value="<%= loc.name %>">
+                                                                            <input type="hidden" name="language<%=count%>" value="<%= loc.name %>">
+                                                                            
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <select class="form-control select2"
+                                                                                required style="width: 100%;" name ="languagelevel<%=count%>">
+
+                                                                                <option value="" Selected>--Select--</option>
+                                                                                <option value="0 to 2">0
+                                                                                    to 2</option>
+                                                                                <option value="2 to 4">2
+                                                                                    to 4</option>
+                                                                                <option value="4 to 5">4
+                                                                                    to 5</option>
+                                                                                <option value="5 to 6">5
+                                                                                    to 6</option>
+                                                                                <option value="6+">6+
+                                                                                </option>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <% count++; }} %>
+
+                                                                
+                                                                <div id="visible">
+
+                                                                    
+
+                                                                </div>
+                                                            </div>
+
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                                                            <input type="hidden" name="candidateId"
+                                                                value="<%= candidateId%>">
+                                                            <input type="submit" class="btn btn-primary" id="third"
+                                                                value="Next">
+                                                        </div>
+                                                        <!-- </form> -->
+                                                    </div>
+                                                </form>
+                                                <% }}}%>
+
+
+
+                                                <% if(accountAccess && (accountAccess === 'ALL' || accountAccess === 'L2_ASSESSMENT' || accountAccess === 'L2 ASSESSMENT')){%>
+                                                <% if(levelOneAssesssment){ %>
+                                                <% if (levelOneAssesssment.dataValues.Assessment === 'wd' ||
+                                                        levelOneAssesssment.dataValues.Assessment === 'good' || 
+                                                        levelOneAssesssment.dataValues.Assessment === 'tac') {%>
+                                                <% if(!levelTwoTake || levelTwoTakeFullBody > 0 ) { %>
+                                                    <!-- !leveltwoAssessment && -->
+
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <form method="GET"
+                                                            action="/candidate/ajaxSecond/<%=candidateId %>">
+                                                            <div class="form-group">
+                                                                <input type="submit" class="btn btn-primary"
+                                                                    id="addL2Assessment" name="addL2Assessment"
+                                                                    value="Add L2 Assessment">
+
+                                                                <input type="hidden" name="_csrf"
+                                                                    value="<%=csrfToken%>">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <%}else{%>
+
+                                                    <form action="/candidate/level-two-assessment" method="POST">
+                                                    <div class="card shadow mb-4 " id="Form3">
+                                                        <div class="card-header ">
+                                                            <h3 class="m-0 font-weight-bold text-primary ">L2 Assessment
+                                                            </h3>
+                                                        </div>
+                                                        <!-- /.card-header -->
+                                                        <!-- form start -->
+                                                        <!-- <form role="form "> -->
+
+                                                        <div class="card-body ">
+                                                            <div id="assessmentone">
+                                                                <div class="row ">
+                                                                    <div class="col-md-6 col-sm-12 ">
+                                                                        <div class="form-group ">
+                                                                            <label>L2 Assessment</label>
+                                                                            <select class="form-control select2"
+                                                                                name="l2assessment" id="l2assessment"
+                                                                                required style="width: 100%;"
+                                                                                onclick="getData();">
+
+
+                                                                                <option selected value="">Select
+                                                                                </option>
+                                                                                <option value="number_not_reachable">
+                                                                                    NUMBER NOT
+                                                                                    REACHABLE</option>
+                                                                                <option value="did_not_pick">DIDN'T PICK
+                                                                                </option>
+                                                                                <option value="wrong_number">WRONG
+                                                                                    NUMBER</option>
+                                                                                <option value="call_back">CALLBACK
+                                                                                </option>
+                                                                                <option value="black_list">BLACKLIST</option>
+                                                                                <option value="other_client">NE-FRESHER</option>
+                                                                                <option value="ni_in_job">NI-IN-JOB</option>
+                                                                                <option value="ni_experienced">NI-EXPERIENCED</option>
+                                                                                <option value="ni_convincing">NI-CONVINCING</option>
+                                                                                <option value="new">NEW</option>
+                                                                                <option value="wd">WD</option>
+                                                                                <option value="no_show">NO SHOW</option>
+                                                                                <option value="good">GOOD</option>
+                                                                                <option value="tac">TAC</option>
+
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <% if (l2AssessmentListData.length === 0 && languageData.length > 0) { %>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Language</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Level</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <%for(let loc of languageData) { var count = 1;%>
+                                                                            
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            
+                                                                            
+                                                                            <input type="text" disabled
+                                                                                class="form-control" id="language<%=count%>"
+                                                                                name ="language<%=count%>"
+                                                                                value="<%= loc.name %>">
+
+                                                                            <input type="hidden" value="<%= loc.name %>"  name ="language<%=count%>">
+    
+                                                                            
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <input type="hidden" value="<%= loc.levelone %>"  name ="languageOnelevel<%=count%>">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <select class="form-control select2"
+                                                                                required style="width: 100%;"  name ="languageTwolevel<%=count%>">
+
+                                                                                <option value="" Selected>--Select--</option>
+                                                                                <option value="0 to 2">0
+                                                                                    to 2</option>
+                                                                                <option value="2 to 4">2
+                                                                                    to 4</option>
+                                                                                <option value="4 to 5">4
+                                                                                    to 5</option>
+                                                                                <option value="5 to 6">5
+                                                                                    to 6</option>
+                                                                                <option value="6+">6+
+                                                                                </option>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <% count++;}} %>
+
+
+                                                                <div id="visible"></div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <!-- /.card-body -->
+
+                                                        <div class="card-footer ">
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                            <input type="hidden" name="assessmentListDataLength" value="<%= l2AssessmentListData.length %>">
+                                                            <input type="hidden" name="candidateId"
+                                                                value="<%= candidateId%>">
+                                                            <input type="submit" class="btn btn-primary" id="third"
+                                                                value="Next">
+                                                        </div>
+                                                        <!-- </form> -->
+                                                    </div>
+                                                </form>
+                                                
+                                                    <%}%>
+                                                <%}%>
+                                                <%}%>
+                                                    
+                                                <%}%>
+
+
+                                                <!-- END -->
+
+
+
+
+                                                <%}%>
+
+
+                                                <% if(table) {%>
+                                                <div class="row mb-4">
+                                                    <div class="col-md-12">
+                                                        <div class="card shadow mb-4">
+                                                            <%if(type && type === "asn"){%>
+                                                            <form method="POST" action="/candidate/assignmentDone">
+                                                                <%}%>
+                                                            <div class="table-responsive">
+                                                                <div class="table-wrapper">
+
+                                                                    <div class="table-title">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6 col-sm-12">
+                                                                                <h2
+                                                                                    class="m-0 font-weight-bold text-primary">
+                                                                                    Candidate
+                                                                                    <b>Details</b>
+                                                                                </h2>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="input-group">
+                                                                                            <input type="text"
+                                                                                                class="form-control bg-light border-0 small"
+                                                                                                placeholder="Search for company..."
+                                                                                                aria-label="Search"
+                                                                                                aria-describedby="basic-addon2">
+                                                                                            <div
+                                                                                                class="input-group-append">
+                                                                                                <button
+                                                                                                    class="btn btn-primary"
+                                                                                                    type="button">
+                                                                                                    <i
+                                                                                                        class="fas fa-search fa-sm"></i>
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <table
+                                                                        class="table table-striped table-hover table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">#</th>
+                                                                                <th scope="col">Candidate Name</th>
+                                                                                <th scope="col">Candidate ID</th>
+                                                                                <th scope="col">Mobile</th>
+                                                                                <th scope="col">Status</th>
+                                                                                <th scope="col">action</th>
+                                                                            </tr>
+                                                                            
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <% if(candidateData.length> 0) {%>
+                                                                            <% let i=1; for (let src of candidateData) { %>
+                                                                            <tr>
+                                                                                <th scope="row" style="width: 5%;">
+                                                                                    <%if(type && type === "can"){%>
+                                                                                    <%=i%>
+                                                                                    <%} else {%>
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox" value="<%= src.dataValues.id %>" class="form-check-input" name="assignCheck" id="exampleCheck1">
+                                                                                    </div>
+                                                                                        <%}%>
+                                                                                </th>
+                                                                                <td style="width: 30%;">
+                                                                                    <%=src.dataValues.fullName %>
+                                                                                </td>
+                                                                                <td style="width: 15%;">
+                                                                                    <%=src.dataValues.CandidateID%>
+                                                                                </td>
+                                                                                <td style="width: 20%;">
+                                                                                    <%=src.dataValues.phoneNumberOne%>
+                                                                                </td>
+                                                                                <td style="width: 10%;">
+                                                                                    <!-- <%=src.dataValues.emailOne%> -->
+                                                                                </td>
+                                                                                <td style="width: 15%;">
+
+                                                                                    <a href="/candidate/candidate/<%= src.dataValues.id %>/?view=true"
+                                                                                        class="edit" title="View"
+                                                                                        data-toggle="tooltip"><i
+                                                                                            class="fas fa-fw fa-eye"></i></a>
+
+                                                                                    <a href="/candidate/candidate/<%= src.dataValues.id %>/?edit=true"
+                                                                                        class="edit" title="Edit"
+                                                                                        data-toggle="tooltip"><i
+                                                                                            class="fas fa-fw fa-pen"></i></a>
+
+                                                                                    <%if(type && type === "can" && user !== "SUPERVISIOR"){%>        
+
+                                                                                    <a href="/candidate/candidate/<%= src.dataValues.id %>/?delete=true" 
+                                                                                        class="edit"
+                                                                                        title="Delete"
+                                                                                        data-toggle="tooltip"><i
+                                                                                            class="fas fa-fw fa-trash"></i></a>
+                                                                                            <%}%>
+                                                                                             
+                                                                                </td>
+
+                                                                            </tr>
+                                                                            <% i++; } %>
+                                                                            <%}%>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <div class="clearfix">
+                                                                        <div class="hint-text">Showing
+                                                                            <b><%= showingItem %></b> out of
+                                                                            <b><%= totalCandidate %></b>
+                                                                            entries
+                                                                        </div>
+                                                                        <ul class="pagination">
+                                                                            <% if( currentPage !== 1 && previousPage !== 1) {%>
+                                                                            <li class="page-item"><a href="?page=1"><i
+                                                                                        class="fa fa-angle-double-left"></i></a>
+                                                                            </li>
+                                                                            <% } else { %>
+                                                                            <li class="page-item disabled"><a
+                                                                                    href="#"><i
+                                                                                        class="fa fa-angle-double-left"></i></a>
+                                                                            </li>
+                                                                            <% } %>
+
+                                                                            <!-- <li class="page-item"><a href="#" class="page-link">1</a></li> -->
+                                                                            <% if(hasPreviousPage) {%>
+                                                                            <li class="page-item">
+                                                                                <a href="?page=<%= previousPage %>"
+                                                                                    class="page-link">
+                                                                                    <%= previousPage %>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% } %>
+                                                                            <li class="page-item active">
+                                                                                <a href="?page=<%= currentPage %>"
+                                                                                    class="page-link">
+                                                                                    <%= currentPage %>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% if(hasNextPage) {%>
+                                                                            <li class="page-item">
+                                                                                <a href="?page=<%= nextPage %>"
+                                                                                    class="page-link">
+                                                                                    <%= nextPage %>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% } %>
+                                                                            <!-- <li class="page-item"><a href="#" class="page-link">5</a></li> -->
+
+                                                                            <% if( lastPage !== currentPage && nextPage !== lastPage && lastPage !== 0) {%>
+                                                                            <li class="page-item"><a
+                                                                                    href="?page=<%= lastPage %>"
+                                                                                    class="page-link"><i
+                                                                                        class="fa fa-angle-double-right"></i></a>
+                                                                            </li>
+                                                                            <% } else { %>
+                                                                            <li class="page-item disabled"><a href="#"
+                                                                                    class="page-link"><i
+                                                                                        class="fa fa-angle-double-right"></i></a>
+                                                                            </li>
+                                                                            <% } %>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <%if(type && type === "asn"){%>
+                                                                    <div>
+                                                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                                                                        <input type="submit" class="btn btn-primary" value="Assign" />
+
+                                                                    </div>
+                                                                    <%}%>
+                                                                </div>
+                                                                 
+                                                            </div>
+                                                            <%if(type && type === "asn"){%>
+                                                            </form>
+                                                            <%}%>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                            </div>
+                                            <%- include('../includes/end.ejs') %>

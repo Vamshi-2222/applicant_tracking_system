@@ -1,0 +1,422 @@
+<%- include('../includes/head.ejs') %>
+
+<body id="page-top">
+  <%- include('../includes/drawer.ejs') %>
+
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-md-6">
+        <div class="card shadow mb-4" id="location">
+          <div class="card-header">
+            <h3 class="m-0 font-weight-bold text-primary">Location</h3>
+          </div>
+          <form role="form" action="/extra/add-location" method="POST">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text "
+                      class="form-control"
+                      required
+                      name="nameState"
+                      id="nameState"
+                      placeholder="State "
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text "
+                      required
+                      class="form-control"
+                      name="nameCity"
+                      id="nameCity"
+                      placeholder="City "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit " class="btn btn-primary">Submit</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow mb-4" id="Prefered_job">
+          <div class="card-header">
+            <h3 class="m-0 font-weight-bold text-primary">Prefered Job</h3>
+          </div>
+          <form role="form" action="/extra/add-prefered-job" method="POST">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text "
+                      class="form-control"
+                      id="jobTitle "
+                      name="jobTitle"
+                      placeholder="Job Title"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text "
+                      class="form-control"
+                      id="jobRole"
+                      name="jobRole"
+                      placeholder="Job Role"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit " class="btn btn-primary">Submit</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-md-6">
+        <div class="card shadow mb-4" id="graduation">
+          <div class="card-header">
+            <h3 class="m-0 font-weight-bold text-primary">Graduation</h3>
+          </div>
+          <form role="form" action="/extra/add-graduation" method="POST">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      name="graduationName"
+                      placeholder="Title "
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      name="graduationCourse"
+                      placeholder="Course "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow mb-4" id="post_graduation">
+          <div class="card-header">
+            <h3 class="m-0 font-weight-bold text-primary">Post Graduation</h3>
+          </div>
+          <form role="form" action="/extra/add-post-graduation" method="POST">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="postGraduationTitle"
+                      name="postGraduationTitle"
+                      placeholder="Title"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="postGraduationCourse"
+                      name="postGraduationCourse"
+                      placeholder="Course"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-md-6">
+        <div class="card shadow mb-4" id="prefered_industry">
+          <div class="card-header">
+            <h3 class="font-weight-bold text-primary m-0">Prefered Industry</h3>
+          </div>
+          <form role="form" action="/extra/add-post-industry" method="POST">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input
+                      type="text "
+                      class="form-control"
+                      id="name"
+                      name="name"
+                      placeholder="Title "
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow mb-4" id="language">
+          <div class="card-header">
+            <h3 class="m-0 font-weight-bold text-primary">Language</h3>
+          </div>
+          <form role="form" action="/extra/add-language" method="POST">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      name="name"
+                      placeholder="Title"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit " class="btn btn-primary">Submit</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px">
+      <div class="col-md-6">
+        <div class="card shadow mb-4" id="Prefered_job">
+          <div class="card-header">
+            <h3 class="m-0 font-weight-bold text-primary">
+              Upload Audio/Video/PDF
+            </h3>
+          </div>
+          <form
+            role="form"
+            action="/extra/uploadVideo"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        class="custom-file-input"
+                        name="videoGallery"
+                        id="videoGallery"
+                        accept="audio/*,video/*,.pdf"
+                        required
+                      />
+                      <label class="custom-file-label" for="videoGallery"
+                        >Choose file</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      class="form-control"
+                      placeholder="Title"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <textarea
+                      class="form-control"
+                      wrap="physical"
+                      name="description"
+                      placeholder="Description"
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Upload</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- <div class="col-md-6">
+        <form
+          role="form"
+          action="/extra/upload-pdf"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <div class="card shadow mb-4">
+            <div class="card-header">
+              <h3 class="font-weight-bold text-primary m-0">Upload Document</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        class="custom-file-input"
+                        id="pdfData"
+                        name="pdfData"
+                        accept="application/pdf"
+                        required
+                      />
+                      <label class="custom-file-label" for="customFile"
+                        >Choose file</label
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      class="form-control"
+                      placeholder="Title"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <textarea
+                      class="form-control"
+                      wrap="physical"
+                      name="description"
+                      placeholder="Description"
+                      required
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Upload</button>
+              <div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div> -->
+    </div>
+  </div>
+
+  <div
+    class="modal fade"
+    id="addModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button
+            class="close"
+            type="button"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Your data have added successfully!</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">
+            Okay
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('../includes/end.ejs') %>
+</body>

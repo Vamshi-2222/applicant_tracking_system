@@ -1,0 +1,893 @@
+<%- include('../includes/head.ejs') %>
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+
+            <div class="container-fluid">
+
+                <% if(table) {%>
+                    <a class="float-right shadow p-3 mb-2 bg-white rounded" href="#page-bottom">
+                        <i class="fas fa-angle-down"></i>
+                    </a>
+
+                    <%}%>
+
+                        <% if(formView) {%>
+
+                            <div class="row mx-2 mt-2">
+
+                                <div class="col-md-12">
+                                    <!-- Form 1 for Personal Info -->
+
+
+                                    <div class="card shadow mb-4" id="Form1">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">Personal Information</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+                                        <div class="card-body ">
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Source</label>
+                                                        <p>
+                                                            <%= personalData.source %>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Reference</label>
+                                                        <p>
+                                                            <%= personalData.reference==null ? 'None' :
+                                                                personalData.reference %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="name ">Full Name</label>
+                                                <p>
+                                                    <%= personalData.fullName==null ? 'None' : personalData.fullName %>
+                                                </p>
+
+                                            </div>
+                                            <label for="name ">Mobile</label>
+                                            <p>
+                                                <%= personalData.phoneNumberOne %>
+                                                    <%= personalData.phoneNumberTwo %>
+                                                        <%= personalData.phoneNumberthree %>
+                                                            <%= personalData.phoneNumberfour %>
+                                            </p>
+
+                                            <label for="name">Email</label>
+                                            <p>
+                                                <%= personalData.emailOne %>
+                                                    <%= personalData.emailTwo %>
+                                                        <%= personalData.emailThree %>
+                                                            <%= personalData.emailFour %>
+                                            </p>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Hometown</label>
+                                                        <p>
+                                                            <%= personalData.homeTown %>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Current Location</label>
+                                                        <p>
+                                                            <%= personalData.currentLocation %>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>DOB</label>
+                                                        <p>
+                                                            <%= personalData.dob %>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Prefered Location</label>
+                                                        <div class="s2-example">
+                                                            <p>
+                                                                <% for(let loc of location) {%>
+                                                                    <%= loc %> &nbsp;
+                                                                        <% } %>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- </form> -->
+                                    </div>
+
+
+                                    <!-- Form 2 for Education -->
+
+                                    <div class="card shadow mb-4 " id="Form2">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">Educational Information
+                                            </h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+                                        <div class="card-body ">
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Class 10</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+
+                                                        <p>
+                                                            <%= educationData.highscoolDate %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <p>
+                                                            <%= educationData.Intermediate %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <p>
+                                                            <%= educationData.IntermediateDate %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <p>
+                                                            <%= educationData.graduation %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <p>
+                                                            <%= educationData.graduationDate %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <p>
+                                                            <%= educationData.postGraduation %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <p>
+                                                            <%= educationData.postGraduationDate %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Skills set</label>
+
+                                                        <p>
+                                                            <% for(let loc of skillSet) {%>
+                                                                <%= loc %> &nbsp;
+                                                                    <% } %>
+                                                        </p>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Certificate</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Certification Number</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Typing Speed</label>
+                                                        <p>
+                                                            <%= educationData.typingSpeed %>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- </form> -->
+                                    </div>
+
+
+                                    <div class="card shadow mb-4 " id="Form3">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">Experience Information
+                                            </h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+
+                                        <div class="card-body ">
+                                            <div id="company">
+                                                <div class="row ">
+                                                    <div class="col-md-12 ">
+                                                        <div class="form-group ">
+                                                            <label>Company Name</label>
+                                                            <input type="organization-title" class="form-control"
+                                                                placeholder="Company Name" required name="company"
+                                                                autocomplete="on">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row ">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Company Industry</label>
+                                                            <select class="form-control select2" name="companyIndustry"
+                                                                required style="width: 100%; ">
+                                                                <option selected="selected ">Select</option>
+                                                                <option>ITI</option>
+                                                                <option>Diploma</option>
+                                                                <option>12</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Role</label>
+                                                            <select class="form-control select2" name="companyRole"
+                                                                style="width: 100%;" required>
+                                                                <option selected="selected ">Select</option>
+                                                                <option>ITI</option>
+                                                                <option>Diploma</option>
+                                                                <option>12</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row ">
+                                                    <div class="col-md-4 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Start year</label>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">End year</label>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 ">
+                                                        <div class="form-group ">
+                                                            <label>Salary</label>
+                                                            <p></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div id="prefer">
+                                                <div class="row ">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Prefered Industry</label>
+                                                            <select class="form-control select2" name="preferedIndustry"
+                                                                style="width: 100%;" required>
+                                                                <option selected="selected">Select</option>
+                                                                <option>MA</option>
+                                                                <option>M.Sc</option>
+                                                                <option>M.Com</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Prefered Job Role</label>
+                                                            <select class="form-control select2"
+                                                                name="preferedIndustryJobRole" style="width: 100%;"
+                                                                required>
+                                                                <option selected="selected">Select</option>
+                                                                <option>MA</option>
+                                                                <option>M.Sc</option>
+                                                                <option>M.Com</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Prefered Job Type</label>
+                                                        <p></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Prefered Shift</label>
+                                                        <p></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- </form> -->
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                            <% } %>
+
+                                <% if(table) {%>
+
+                                    <script type="text/javascript">
+                                        function toggle() {
+                                            var items = document.getElementsByName('assignCheck');
+                                            var exampleCheck = document.getElementById('exampleCheck1');
+                                            document.getElementById("exampleCheck200").checked = false;
+                                            document.getElementById("exampleCheck100").checked = false;
+                                            document.getElementById("exampleCheck50").checked = false;
+                                            for (var i = 0; i < items.length; i++) {
+                                                items[i].checked = false;
+                                            }
+
+                                            for (var i = 0; i < items.length; i++) {
+                                                items[i].checked = true;
+                                            }
+
+                                        }
+                                        function top50() {
+                                            var items = document.getElementsByName('assignCheck');
+                                            var exampleCheck = document.getElementById('exampleCheck50');
+                                            document.getElementById("exampleCheck1").checked = false;
+                                            document.getElementById("exampleCheck200").checked = false;
+                                            document.getElementById("exampleCheck100").checked = false;
+                                            for (var i = 0; i < items.length; i++) {
+                                                items[i].checked = false;
+                                            }
+                                            for (var i = 0; i < 50; i++) {
+                                                items[i].checked = true;
+                                            }
+
+                                        }
+
+                                        function top100() {
+                                            var items = document.getElementsByName('assignCheck');
+                                            var exampleCheck = document.getElementById('exampleCheck100');
+                                            document.getElementById("exampleCheck1").checked = false;
+                                            document.getElementById("exampleCheck200").checked = false;
+                                            document.getElementById("exampleCheck50").checked = false;
+                                            for (var i = 0; i < items.length; i++) {
+                                                items[i].checked = false;
+                                            }
+                                            for (var i = 0; i < 100; i++) {
+                                                items[i].checked = true;
+                                            }
+
+                                        }
+
+                                        function top200() {
+                                            var items = document.getElementsByName('assignCheck');
+                                            var exampleCheck = document.getElementById('exampleCheck200');
+                                            document.getElementById("exampleCheck1").checked = false;
+                                            document.getElementById("exampleCheck50").checked = false;
+                                            document.getElementById("exampleCheck100").checked = false;
+                                            for (var i = 0; i < items.length; i++) {
+                                                items[i].checked = false;
+                                            }
+                                            for (var i = 0; i < 200; i++) {
+                                                items[i].checked = true;
+                                            }
+
+                                        }
+                                        function customButton(){
+                                             document.getElementById("exampleCheck1").checked = false;
+                                             document.getElementById("exampleCheck50").checked = false;
+                                             document.getElementById("exampleCheck100").checked = false;
+                                             document.getElementById('exampleCheck200').checked = false;
+                                             var term = $('#exampleCheckCustom').val();
+                                             var items = document.getElementsByName('assignCheck');
+                                             for (var i = 0; i < items.length; i++) {
+                                                 items[i].checked = false;
+                                             }
+                                             for (var i = 0; i < term; i++) {
+                                                 items[i].checked = true;
+                                             }
+                                         }           
+                                    //    $('#exampleCheckCustomButton').click(function (event) {
+                                    //     console.log("gsdsahdhsa")
+                                    //     document.getElementById("exampleCheck1").checked = false;
+                                    //        document.getElementById("exampleCheck50").checked = false;
+                                    //        document.getElementById("exampleCheck100").checked = false;
+                                    //        document.getElementById('exampleCheck200').checked = false;
+                                    //         var term = $('#exampleCheckCustom').val();
+                                    //         var items = document.getElementsByName('assignCheck');
+                                    //         for (var i = 0; i < items.length; i++) {
+                                    //            items[i].checked = false;
+                                    //        }
+                                    //        for (var i = 0; i < term; i++) {
+                                    //            items[i].checked = true;
+                                    //        }
+                                    //     });
+                                        function _download(){
+                                            $.ajax
+                                                ({
+                                                    url: '/candidate/download',
+                                                    type: 'GET',
+                                                    success: function (data) {
+                                                        console.log(data)
+                                                        window.location = data; 
+                                                    },
+                                                    failure: function (errMsg) {
+                                                        alert(errMsg);
+                                                    }
+                                                });
+                                           }
+                                    </script>
+                                    <div class="row mb-4">
+                                        <div class="col-md-12">
+                                            <div class="card shadow mb-4">
+                                                <form method="POST" action="/candidate/assignment">
+                                                    <div class="table-responsive">
+                                                        <div class="table-wrapper">
+
+                                                            <div class="table-title">
+                                                                <div class="row">
+                                                                    <div class="col-md-12 col-sm-12">
+                                                                        <h2 class="m-0 font-weight-bold text-primary">
+                                                                            Assign
+                                                                            <b>Candidate</b>
+                                                                        </h2>
+                                                                    </div>
+                                                                    <div class="col-md-12 mt-2">
+                                                                        <div class="row">
+                                                                            <% if(user==='ADMIN' || user==='MANAGER' )
+                                                                                {%>
+                                                                                <div class="col-md-2 col-sm-12">
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input"
+                                                                                            id="exampleCheck1"
+                                                                                            onclick="toggle()" />
+                                                                                        <label class="form-check-label"
+                                                                                            for="exampleCheck1">
+                                                                                            All Candidate</label>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-2 col-sm-12">
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input"
+                                                                                            id="exampleCheck50"
+                                                                                            onclick="top50()" />
+                                                                                        <label class="form-check-label"
+                                                                                            for="exampleCheck50">
+                                                                                            Top 50</label>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <div class="col-md-2 col-sm-12">
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input"
+                                                                                            id="exampleCheck100"
+                                                                                            onclick="top100()" />
+                                                                                        <label class="form-check-label"
+                                                                                            for="exampleCheck100">
+                                                                                            Top 100</label>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-2 col-sm-12">
+                                                                                    <div class="form-check">
+                                                                                        <input type="checkbox"
+                                                                                            class="form-check-input"
+                                                                                            id="exampleCheck200"
+                                                                                            onclick="top200()" />
+                                                                                        <label class="form-check-label"
+                                                                                            for="exampleCheck200">
+                                                                                            Top 200</label>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-md-2 col-sm-12">
+                                                                                    <div class="input-group">
+                                                                                        <input type="text" class="form-control " id="exampleCheckCustom" name="exampleCheckCustom">
+                                                                                        <button class="btn btn-outline-secondary" type="button" id="exampleCheckCustomButton" name="exampleCheckCustomButton" onclick="customButton()">Go</button>
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <!-- <div class="col-md-2 col-sm-12">
+
+                                                                                    
+
+                                                                                     <div class="form-group ">
+                                                                                        <select
+                                                                                            class="form-control select2 "
+                                                                                            name="recruiter"
+                                                                                            onclick="return dataToggle();"
+                                                                                            required>
+                                                                                            <option selected="selected "
+                                                                                                value="">
+                                                                                                Select
+                                                                                                Recruiter</option>
+                                                                                            <% if(recruiter.length> 0)
+                                                                                                {%>
+                                                                                                <% for (let recruit of
+                                                                                                    recruiter) { %>
+                                                                                                    <option
+                                                                                                        value="<%=recruit.dataValues.id %>">
+                                                                                                        <%=recruit.dataValues.fullName
+                                                                                                            %>
+                                                                                                    </option>
+                                                                                                    <% } %>
+                                                                                                        <% } %>
+
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div> -->
+
+                                                                                <%}%>
+
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <% if(user==='ADMIN' || user==='MANAGER' )
+                                                                                {%>
+                                                                            <div class="col-md-6 col-sm-12">
+                                                                            <div class="input-group mb-3">
+                                                                                <input class="form-control" list="recriterList" id="recruiter" name="recruiter" placeholder="Select Recruiter..." style="width: 100%;"/>
+                                                                                <datalist id="recriterList">
+                                                                                    <% if(recruiter.length> 0){ for(let src of recruiter){%>
+                                                                                        <option value="<%= src.fullName  %>(<%= src.id  %>)">
+                                                                                        <%}}%>
+                                                                                
+                                                                                </datalist>
+                                                                                
+                                                                            </div>
+                                                                            <%}%>
+                                                                        </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-10 col-sm-12">
+                                                                                <h6
+                                                                                    class="m-0 font-weight-bold text-primary">
+                                                                                    Total Candidate:
+                                                                                    <b>
+                                                                                        <%= candidateData.length %>
+                                                                                    </b>
+                                                                                </h6>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-2 col-sm-12">
+                                                                                <span class="border">
+                                                                                    <style>
+                                                                                        .fa-download {
+                                                                                            color: #4e73df;
+                                                                                        }
+                                                                                    </style>
+                                                                                    <a type="button" onclick="_download()"><i class="fa fa-download" aria-hidden="true"></i><span
+                                                                                            class="m-0 font-weight-bold text-primary">&nbsp;DOWNLOAD</span></a>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <table
+                                                                class="table table-striped table-hover table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col">#</th>
+                                                                        <th scope="col">Employee</th>
+                                                                        <th scope="col">ASSIGNED</th>
+                                                                        <th scope="col">Candidate Name</th>
+                                                                        <th scope="col">Mobile 1</th>
+                                                                        <th scope="col">Mobile 2</th>
+                                                                        <th scope="col">Created Date</th>
+                                                                        <th scope="col">L1 Status</th>
+                                                                        <th scope="col">L1 Client</th>
+                                                                        <th scope="col">L1 Process</th>
+                                                                        <th scope="col">L1 Date</th>
+                                                                        <th scope="col">L2 Status</th>
+                                                                        <th scope="col">L2 Client</th>
+                                                                        <th scope="col">L2 Process</th>
+                                                                        <th scope="col">L2 Date</th>
+                                                                        <th scope="col">Interview Status</th>
+
+                                                                        <th scope="col">Action</th>
+                                                                        <!-- <th scope="col"></th> -->
+                                                                    </tr>
+
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+
+
+                                                                    <% if(candidateData.length> 0 ) {%>
+                                                                        <% let i=1; for (let src of candidateData) { %>
+                                                                            <tr>
+                                                                                <th scope="row" style="width: 5%;">
+                                                                                    <% if(user==='ADMIN' ||
+                                                                                        user==='MANAGER' ) {%>
+                                                                                        <div class="form-check">
+                                                                                            <input type="checkbox"
+                                                                                                value="<%= src.id %>"
+                                                                                                class="form-check-input"
+                                                                                                name="assignCheck"
+                                                                                                id="exampleCheck1">
+                                                                                        </div>
+                                                                                        <%}%>
+                                                                                </th>
+                                                                                <td style="width: 10%;">
+                                                                                    <%=src.eName ? src.eName: "" %>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <% for (let em of empList) {
+                                                                                        if(src.id===em.canId){%>
+                                                                                        <%=em.empName ? em.empName: ""
+                                                                                            %>
+                                                                                            <%}}%>
+                                                                                </td>
+                                                                                <td style="width: 10%;">
+                                                                                    <%=src.name ? src.name: "" %>
+                                                                                </td>
+                                                                                <td style="width: 5%;">
+                                                                                    <%=src.mobone ? src.mobone: "" %>
+                                                                                </td>
+                                                                                <td style="width: 5%;">
+                                                                                    <%=src.mobtwo ? src.mobtwo: "" %>
+                                                                                </td>
+                                                                                <td style="width: 10%;">
+                                                                                    <%=src.createdDate ?
+                                                                                        src.createdDate: "" %>
+                                                                                </td>
+                                                                                <td style="width: 5%;">
+                                                                                    <%=src.l_one_assessment ?
+                                                                                        src.l_one_assessment: "" %>
+                                                                                </td>
+                                                                                <td style="width: 10%;">
+                                                                                    <% var roless=[]; if(companyValue &&
+                                                                                        companyValue.length> 0){
+                                                                                        for(let sr of companyValue){
+                                                                                        if(sr.id ==
+                                                                                        src.l_one_assessment_client ){
+                                                                                        roless = sr.roleData; %>
+                                                                                        <%=sr.name ? sr.name : "" %>
+                                                                                            <%}}}%>
+
+                                                                                </td>
+                                                                                <td style="width: 5%;">
+                                                                                    <%if(roless && roless.length> 0){
+                                                                                        for(let s of roless){
+                                                                                        if(s.id ==
+                                                                                        src.l_one_assessment_process ){
+                                                                                        %>
+                                                                                        <%=s.pseudoName ? s.pseudoName
+                                                                                            : "" %>
+                                                                                            <%}}}%>
+                                                                                </td>
+
+                                                                                <td style="width: 2%;">
+                                                                                    <%=src.l_one_assessment_interview ?
+                                                                                        src.l_one_assessment_interview
+                                                                                        : "" %>
+                                                                                </td>
+
+                                                                                <td style="width: 2%;">
+                                                                                    <%=src.l_two_status ?
+                                                                                        src.l_two_status: "" %>
+                                                                                </td>
+                                                                                <td style="width: 2%;">
+                                                                                    <% var rolesss=[]; if(companyValue
+                                                                                        && companyValue.length> 0){
+                                                                                        for(let sr of companyValue){
+                                                                                        if(sr.id == src.l_two_client ){
+                                                                                        rolesss = sr.roleData; %>
+                                                                                        <%=sr.name ? sr.name : "" %>
+                                                                                            <%}}}%>
+                                                                                </td>
+                                                                                <td style="width: 2%;">
+                                                                                    <%if(rolesss && rolesss.length> 0){
+                                                                                        for(let s of rolesss){
+                                                                                        if(s.id == src.l_two_process ){
+                                                                                        %>
+                                                                                        <%=s.pseudoName ? s.pseudoName
+                                                                                            : "" %>
+                                                                                            <%}}}%>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <%=src.l_two_interviewDate ?
+                                                                                        src.l_two_interviewDate : "" %>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <%=src.l_two_InterviewStatus ?
+                                                                                        src.l_two_InterviewStatus : ""
+                                                                                        %>
+                                                                                </td>
+
+
+                                                                                <td>
+
+                                                                                    <a href="/candidate/candidate/<%= src.id %>/?view=true"
+                                                                                        class="edit" title="View"
+                                                                                        data-toggle="tooltip"><i
+                                                                                            class="fas fa-fw fa-eye"></i></a>
+
+                                                                                    <% if(user==='ADMIN' ||
+                                                                                        user==='MANAGER' ||
+                                                                                        user==='TEAM_LEADER'
+                                                                                        ||user==='SUPERVISIOR' ) {%>
+
+                                                                                        <a href="/candidate/candidate/<%= src.id %>/?edit=true"
+                                                                                            class="edit" title="Edit"
+                                                                                            data-toggle="tooltip"><i
+                                                                                                class="fas fa-fw fa-pen"></i></a>
+
+                                                                                        <%}%>
+
+                                                                                            <% if(user==='ADMIN' ||
+                                                                                                user==='MANAGER' ) {%>
+
+                                                                                                <a href="/candidate/candidate/<%= src.id %>/?delete=true"
+                                                                                                    class="edit"
+                                                                                                    title="Delete"
+                                                                                                    data-toggle="tooltip"><i
+                                                                                                        class="fas fa-fw fa-trash"></i></a>
+                                                                                                <%}%>
+                                                                                </td>
+
+                                                                                <!-- <td> </td> -->
+
+
+
+                                                                            </tr>
+                                                                        <% i++; } %>
+                                                                    <%} %>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="clearfix">
+                                                                <!-- <div class="hint-text">Showing
+                                                            <b><%= showingItem %></b> out of <b><%= totalCandidate %></b> entries
+                                                        </div> -->
+
+
+                                                                <!-- <ul class="pagination">
+                                                            <% if( currentPage !== 1 && previousPage !== 1) {%>
+                                                                <li class="page-item"><a href="?page=1"><i
+                                                    class="fa fa-angle-double-left"></i></a>
+                                                                </li>
+                                                                <% } else { %>
+                                                                    <li class="page-item disabled"><a href="#"><i
+                                                    class="fa fa-angle-double-left"></i></a>
+                                                                    </li>
+                                                                    <% } %>
+
+                                                                        <% if(hasPreviousPage) {%>
+                                                                            <li class="page-item">
+                                                                                <a href="?page=<%= previousPage %>" class="page-link">
+                                                                                    <%= previousPage %>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% } %>
+                                                                                <li class="page-item active">
+                                                                                    <a href="?page=<%= currentPage %>" class="page-link">
+                                                                                        <%= currentPage %>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <% if(hasNextPage) {%>
+                                                                                    <li class="page-item">
+                                                                                        <a href="?page=<%= nextPage %>" class="page-link">
+                                                                                            <%= nextPage %>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <% } %>
+
+                                                                                        <% if( lastPage !== currentPage && nextPage !== lastPage && lastPage !== 0) {%>
+                                                                                            <li class="page-item"><a href="?page=<%= lastPage %>" class="page-link"><i
+                                                    class="fa fa-angle-double-right"></i></a></li>
+                                                                                            <% } else { %>
+                                                                                                <li class="page-item disabled"><a href="#" class="page-link"><i
+                                                    class="fa fa-angle-double-right"></i></a>
+                                                                                                </li>
+                                                                                                <% } %>
+                                                        </ul> -->
+                                                            </div>
+                                                            <div>
+                                                                <% if(user==='ADMIN' || user==='MANAGER' ) {%>
+                                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                                    <input type="hidden" name="freshCandidate" value="<%= freshCandidate %>">
+                                                                    <input type="submit" class="btn btn-primary" value="Assign" />
+                                                                    <%}%>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+            </div>
+            <%- include('../includes/end.ejs') %>

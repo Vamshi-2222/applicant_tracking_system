@@ -1,0 +1,7 @@
+node_modules/
+.vscode
+.vs
+*.dev.js
+public/videos/
+*.txt
+package-lock.json

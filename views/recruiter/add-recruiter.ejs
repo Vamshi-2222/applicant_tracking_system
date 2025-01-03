@@ -1,0 +1,1006 @@
+<%- include('../includes/head.ejs') %>
+
+<link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<link href="/css/registrationForm.css" rel="stylesheet" type="text/css">
+<link href="/css/select2.css" rel="stylesheet" type="text/css">
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
+<script src='/js/addRecruiter.js'></script>
+
+</head>
+
+<body id="page-top">
+
+    <%- include('../includes/drawer.ejs') %>
+
+    <% if(addData) {%>
+    <div class="container-fluid">
+
+        <div class="row mx-2 mt-2">
+            <div class="col-md-12">
+                <!-- Form 1 for Personal Info -->
+                <div class="card shadow mb-4" id="hiddenForm1">
+                    <div class="card-header ">
+                        <h3 class="m-0 font-weight-bold text-primary">Recruiter</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="/recruiter/addRecruiter">
+                        <div class="card-body ">
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <div class="form-group ">
+                                        <label for="name ">Full Name</label>
+                                        <input type="text " class="form-control " id="name" name="fullname"
+                                            placeholder="Full Name " required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label for="name ">Mobile</label>
+
+                            <div class="row" id="files">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control" name="mobile1" placeholder="Mobile"
+                                            aria-label="Recipient 's username" aria-describedby="button-addon2"
+                                            required id="mobile1">
+                                            <p style="color: red;" id="mobile1err"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="add"><i
+                                            class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="first">
+                                <div class="col-md-6" id="files2">
+                                    <div class="form-group ">
+
+                                        <input type="number" class="form-control mobileInputCls" placeholder="Mobile"
+                                            name="mobile2" aria-label="Recipient's username" id="mobile2" 
+                                            aria-describedby="button-addon2" >
+
+                                        <p style="color: red;" id="mobile2err"></p>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="sub2"><i
+                                            class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="second">
+                                <div class="col-md-6" id="files3">
+                                    <div class="form-group ">
+
+                                        <input type="number" class="form-control mobileInputCls" placeholder="Mobile"
+                                            name="mobile4" aria-label="Recipient's username" id="mobile4" 
+                                            aria-describedby="button-addon2">
+
+                                        <p style="color: red;" id="mobile4err"></p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="sub3"><i
+                                            class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="third">
+                                <div class="col-md-6" id="files4">
+                                    <div class="form-group ">
+
+                                        <input type="number" class="form-control mobileInputCls" placeholder="Mobile"
+                                            name="mobile3" aria-label="Recipient's username" id="mobile3" 
+                                            aria-describedby="button-addon2">
+
+                                        <p style="color: red;" id="mobile3err"></p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="sub4"><i
+                                            class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+
+                            <label for="name">Email</label>
+                            <div class="row" id="emailfiles">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="email1" placeholder="Email"
+                                            aria-label="Recipient's username" id="email1" aria-describedby="button-addon2"
+                                            required>
+                                            <p style="color: red;" id="email1err"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" onclick="addEmail();"><i
+                                            class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="firstemail">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" name="email4"
+                                            id="email4" aria-label="Recipient's username"  
+                                            aria-describedby="button-addon2">
+                                        <p style="color: red;" id="email4err"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="subemail4"><i
+                                            class="fa fa-minus"></i> </span></button>
+                                </div>
+
+                            </div>
+
+                            <div class="row" id="secondemail">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" name="email2"
+                                            aria-label="Recipient's username"  id="email2" 
+                                            aria-describedby="button-addon2">
+                                        <p style="color: red;" id="email2err"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="subemail2"><i
+                                            class="fa fa-minus"></i> </span></button>
+                                </div>
+
+                            </div>
+
+                            <div class="row" id="thirdemail">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" id="email3" name="email3"
+                                            aria-label="Recipient's username"  aria-describedby="button-addon2" >
+                                        <p style="color: red;" id="email3err"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="subemail3"><i
+                                            class="fa fa-minus"></i> </span></button>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Address</label>
+                                        <input type="address" class="form-control" placeholder="Address" name="address"
+                                            required>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>DOB</label>
+                                        <input type="date" id="birthday " name="birthday" class="form-control "
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Recruiter Type</label>
+                                        <select class="form-control select2 " style="width: 100%;" name="recruiterType"
+                                            id="recruiterType" required>
+                                            <option selected="selected">SELECT</option>
+                                            <% for(let type of userType) {%>
+                                            <option value="<%= type %>"><%= type %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>DOJ</label>
+                                        <input type="date" id="birthday " name="doj" class="form-control " required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Account Access</label>
+                                        <select class="form-control select2 " name="accountAccess" style="width: 100%;"
+                                            required>
+                                            <option value="NONE" selected="selected">SELECT</option>
+                                            <option value="L1_ASSESSMENT">L1 ASSESSMENT</option>
+                                            <option value="L2_ASSESSMENT">L2 ASSESSMENT</option>
+                                            <option value="ALL">ALL</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="manager_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting Managers</label>
+                                            <select class="js-example-basic-multiple" name="reportingmanager"
+                                                id="reportingmanager" multiple="multiple" style="width: 100%;">
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="team_lead_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting TeamLead</label>
+                                            <select class="js-example-basic-multiple" name="reportingTeamLead"
+                                                id="reportingTeamLead" multiple="multiple" style="width: 100%;">
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="supervisior_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting Supervisior</label>
+                                            <select class="js-example-basic-multiple" name="reportingSupervisior"
+                                                id="reportingSupervisior" multiple="multiple" style="width: 100%;">
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>OnBoarding</label>
+                                        <select class="form-control select2 " style="width: 100%;" name="onboard"
+                                            id="onboard" required>
+                                            <option value="PENDING" selected="selected ">PENDING</option>
+                                            <option value="DONE">DONE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Documentation</label>
+                                        <select class="form-control select2 " style="width: 100%; " name="documentation"
+                                            required>
+                                            <option value="PENDING" selected="selected ">PENDING</option>
+                                            <option value="DONE">DONE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control select2 " style="width: 100%; " name="status" required>
+                                            <option value="ACTIVE" selected="selected">ACTIVE</option>
+                                            <option value="IN-ACTIVE">IN-ACTIVE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12" id="selectAll">
+                            
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="1" id="allCandidate" name="allCandidate">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            All Candidates
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer ">
+                            <div>
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="firstsubmit">Submit</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <%}%>
+
+            <% if(editData) {%>
+    <div class="container-fluid">
+
+        <div class="row mx-2 mt-2">
+            <div class="col-md-12">
+                <!-- Form 1 for Personal Info -->
+                <div class="card shadow mb-4" id="hiddenForm1">
+                    <div class="card-header ">
+                        <h3 class="m-0 font-weight-bold text-primary">Recruiter</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="/recruiter/updateRecruiter">
+                        <div class="card-body ">
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <div class="form-group ">
+                                        <label for="name ">Full Name</label>
+                                        <input type="text " class="form-control " id="name" name="fullname"
+                                            value="<%= empData.dataValues.fullName %>" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label for="name ">Mobile</label>
+
+                            <div class="row" id="files">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control " name="mobileOne"
+                                            value="<%= empData.dataValues.phoneNumberOne %>"
+                                            aria-label="Recipient 's username" aria-describedby="button-addon2"
+                                            required>
+                                    </div>
+                                    <% if(empData.dataValues.phoneNumberTwo){ %>
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control " name="mobileTwo"
+                                            value="<%= empData.dataValues.phoneNumberTwo %>"
+                                            aria-label="Recipient 's username" aria-describedby="button-addon2">
+                                    </div>
+                                    <%}%>
+                                </div>
+
+                                <div class="col-md-6">
+                                            <% if(empData.dataValues.phoneNumberthree){ %>
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control " name="mobileThree"
+                                            value="<%= empData.dataValues.phoneNumberthree %>"
+                                            aria-label="Recipient 's username" aria-describedby="button-addon2">
+                                    </div>
+                                    <%} if(empData.dataValues.phoneNumberfour){ %>
+
+                                    <div class="form-group">
+
+                                        <input type="text" class="form-control " name="mobileFour"
+                                            value="<%= empData.dataValues.phoneNumberfour %>"
+                                            aria-label="Recipient 's username" aria-describedby="button-addon2">
+                                    </div>
+                                    <%}%>
+                            
+                                </div>
+                                        
+                            </div>
+
+                                    <label for="name">Email</label>
+                                    <div class="row" id="emailfiles">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="emailOne" value="<%= empData.dataValues.emailOne %>"
+                                    aria-label="Recipient's username " aria-describedby="button-addon2 " required>
+                                </div>
+                                <% if(empData.dataValues.emailTwo){ %>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="emailTwo"
+                                        value="<%= empData.dataValues.emailTwo %>" aria-label="Recipient's username "
+                                        aria-describedby="button-addon2 ">
+                                </div>
+                                <%}%>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <% if(empData.dataValues.emailThree){ %>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="emailThree"
+                                        value="<%= empData.dataValues.emailThree %>" aria-label="Recipient's username "
+                                        aria-describedby="button-addon2 ">
+                                </div>
+                                <%} if(empData.dataValues.emailFour){ %>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="emailFour"
+                                        value="<%= empData.dataValues.emailFour %>" aria-label="Recipient's username "
+                                        aria-describedby="button-addon2">
+                                </div>
+                                <%}%>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-12 ">
+                                            <div class="form-group ">
+                                                <label>Address</label>
+                                                <input type="address" class="form-control" value="<%= empData.dataValues.address %>"
+                                name="address">
+                            </div>
+                        </div>
+
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-6 ">
+                        <div class="form-group ">
+                            <label>DOB</label>
+                            <input type="date" id="birthday " name="birthday" value="<%= empData.dataValues.dob %>"
+                                class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="form-group ">
+                            <label>Recruiter Type</label>
+                            <select class="form-control select2 " style="width: 100%;" name="recruiterType"
+                                id="recruiterType" onclick="getUserList();" required>
+                                <option selected="selected">Select</option>
+                                <% for(let type of userType) {%>
+                                    <% if(empData.dataValues.recruiterType !== 'ADMIN'){%>
+                                <option value="<%= type %>" <%= empData.dataValues.recruiterType === type ? 'selected' : '' %>><%= type %></option>
+                                <%}else{%>
+                                    <option value="<%= type %>"><%= type %></option>
+                                <% }} %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ">
+
+                    <div class="col-md-6 ">
+                        <div class="form-group ">
+                            <label>DOJ</label>
+                            <input type="date" id="birthday " name="doj" value="<%= empData.dataValues.doj %>"
+                                class="form-control " required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 ">
+                        <div class="form-group ">
+                            <label>Account Access</label>
+                            <select class="form-control select2 " name="accountAccess" style="width: 100%;" required>
+                                <!-- <option selected="selected ">Select</option> -->
+                                <option <%= (empData && empData.dataValues.accountAccess === 'L1_ASSESSMENT') ? 'selected': '' %>>L1 ASSESSMENT</option>
+                                <option  <%= (empData && empData.dataValues.accountAccess === 'L2_ASSESSMENT') ? 'selected': '' %>>L2 ASSESSMENT</option>
+                                <option  <%= (empData && empData.dataValues.accountAccess === 'ALL') ? 'selected': '' %>>ALL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                            <div class="row" id="manager_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting Managers</label>
+                                            <select class="js-example-basic-multiple" name="reportingmanager"
+                                                id="reportingmanager" multiple="multiple" style="width: 100%;">
+                                                <% if(managerList.length > 0){ for (let src of managerList){ %>
+                                                    <option value="<%= src.id %>" selected><%= src.name %></option>
+                                                    <%}}%>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="team_lead_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting TeamLead</label>
+                                            <select class="js-example-basic-multiple" name="reportingTeamLead"
+                                                id="reportingTeamLead" multiple="multiple" style="width: 100%;">
+                                                <% if(teamLeadList.length > 0){ for (let src of teamLeadList){ %>
+                                                    <option value="<%= src.id %>" selected><%= src.name %></option>
+                                                    <%}}%>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="supervisior_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting Supervisior</label>
+                                            <select class="js-example-basic-multiple" name="reportingSupervisior"
+                                                id="reportingSupervisior" multiple="multiple" style="width: 100%;">
+                                                <% if(supervisiorList.length > 0){ for (let src of supervisiorList){ %>
+                                                    <option value="<%= src.id %>" selected><%= src.name %></option>
+                                                    <%}}%>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>OnBoarding</label>
+                                        <select class="form-control select2 " style="width: 100%;" name="onboard"
+                                            id="onboard" required>
+                                            <option value="PENDING" <%= (empData && empData.dataValues.onboarding === 'PENDING') ? 'selected': '' %>>PENDING</option>
+                                            <option value="DONE" <%= (empData && empData.dataValues.onboarding === 'DONE') ? 'selected': '' %>>DONE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Documentation</label>
+                                        <select class="form-control select2 " style="width: 100%; " name="documentation"
+                                            required>
+                                            <option value="PENDING" <%= (empData && empData.dataValues.documentation === 'PENDING') ? 'selected': '' %>>PENDING</option>
+                                            <option value="DONE" <%= (empData && empData.dataValues.documentation === 'DONE') ? 'selected': '' %>>DONE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control select2 " style="width: 100%; " name="status"
+                                            required>
+                                            <option value="ACTIVE" <%= (empData && empData.dataValues.status === 'ACTIVE') ? 'selected': '' %>>ACTIVE</option>
+                                            <option value="IN-ACTIVE" <%= (empData && empData.dataValues.status === 'IN-ACTIVE') ? 'selected': '' %>>IN-ACTIVE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer ">
+                <div>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <input type="hidden" name="employeeID" value="<%= empData.dataValues.id %>">
+                </div>
+                <button type="submit" class="btn btn-primary ">Submit</button>
+            </div>
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+    </div>
+    </div>
+    <%}%>
+
+        <script type="text/javascript">
+
+         $(document).ready(function () {
+
+            $("#selectAll").hide();
+            $("#allCandidate").prop('checked', false);
+            $("#firstemail").hide();
+            $("#secondemail").hide();
+            $("#thirdemail").hide();
+            $("#first").hide();
+            $("#second").hide();
+            $("#third").hide();
+
+            $("#firstsubmit").attr("disabled", true);
+         })
+
+         $(document).ready(function () {
+
+               $("#add").click(function() {
+               if(!$('#first').is(':visible'))
+               {
+               $("#first").show();
+               }
+               else if(!$('#second').is(':visible'))
+               {
+               $("#second").show();
+               }
+               else if(!$('#third').is(':visible'))
+               {
+               $("#third").show();
+               }
+               })
+
+               $("#sub2").click(function(){
+                   $("#first").hide();
+               })
+
+               $("#sub3").click(function(){
+                   $("#second").hide();
+               })
+
+               $("#sub4").click(function(){
+                   $("#third").hide();
+               })
+
+               $("#addEmail").click(function() {
+               if(!$('#firstemail').is(':visible'))
+               {
+               $("#firstemail").show();
+               }
+               else if(!$('#secondemail').is(':visible'))
+               {
+               $("#secondemail").show();
+               }
+               else if(!$('#thirdemail').is(':visible'))
+               {
+               $("#thirdemail").show();
+               }
+               })
+
+               $("#subemail4").click(function(){
+                   $("#firstemail").hide();
+               })
+
+               $("#subemail2").click(function(){
+                   $("#secondemail").hide();
+               })
+
+               $("#subemail3").click(function(){
+                   $("#thirdemail").hide();
+               })
+         })
+
+
+        $(document).ready(function () {
+            $("#mobile1").on("keyup",function () {
+                console.log("#mobile1")
+                let inputValue = $(this).val();
+                    getMobile(inputValue,"#mobile1")
+                
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mobile2").on("keyup",function (event) {
+                let inputValue = $(this).val();
+                    getMobile(inputValue, "#mobile2")
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mobile4").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getMobile(inputValue, "#mobile4") 
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mobile3").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getMobile(inputValue,"#mobile3")
+            
+            });
+        });
+
+        $(document).ready(function () {
+            $("#email4").on("keyup",function () {
+                let inputValue = $(this).val();
+                getEmail(inputValue,"#email4")
+                
+            });
+        });
+
+        $(document).ready(function () {
+            $("#email1").on("keyup",function (event) {
+                let inputValue = $(this).val();
+                    getEmail(inputValue, "#email1")
+            });
+        });
+
+        $(document).ready(function () {
+            $("#email2").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getEmail(inputValue, "#email2") 
+            });
+        });
+
+        $(document).ready(function () {
+            $("#email3").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getEmail(inputValue,"#email3")
+            
+            });
+        });
+
+        function getMobile(inputValue, divId)
+        {
+            var temp, divCId;
+            $.ajax({
+            type: "GET",
+            url: "/ajax/checkmobileuser/",
+            data: "value="+inputValue,
+            //dataType: "html", //expect html to be returned
+            success: function (response) {
+                console.log(response);
+            if(response === 'YES')
+                temp = 'YES';
+            else
+                temp = 'NO';
+
+            if(temp && temp === 'YES')
+            {
+                if(divId === "#mobile1")
+                {
+                $("#mobile1err").html("Mobile already exist!");
+                }
+                if(divId === "#mobile2")
+                {
+                $("#mobile2err").html("Mobile already exist!");
+                }
+                if(divId === "#mobile3")
+                {
+                $("#mobile3err").html("Mobile already exist!");
+                }
+                if(divId === "#mobileone")
+                {
+                $("#mobileoneerr").html("Mobile already exist!");
+                }
+
+                $("#firstsubmit").attr('disabled',true);   
+            }
+            else if(temp && temp === 'NO' && inputValue.length < 10){
+                console.log(temp);
+                 if(divId === "#mobile1")
+                {
+                $("#mobile1err").html("Mobile should be 10 digit!");
+                }
+                if(divId === "#mobile2")
+                {
+                $("#mobile2err").html("Mobile should be 10 digit!");
+                }
+                if(divId === "#mobile3")
+                {
+                $("#mobile3err").html("Mobile should be 10 digit!");
+                }
+                if(divId === "#mobileone")
+                {
+                $("#mobileoneerr").html("Mobile should be 10 digit!");
+                }
+                $("#firstsubmit").attr('disabled',true);   
+
+            }
+            else if(inputValue.length === 10)
+            {
+               
+                if(divId === "#mobile1")
+                {
+                $("#mobile1err").hide();
+                }
+                if(divId === "#mobile2")
+                {
+                $("#mobile2err").hide();
+                }
+                if(divId === "#mobile3")
+                {
+                $("#mobile3err").hide();
+                }
+                if(divId === "#mobileone")
+                {
+                $("#mobileoneerr").hide();
+                }
+                $("#firstsubmit").attr('disabled',false); 
+
+                
+            }
+            }
+            });
+        }
+
+        function getEmail(inputValue, divId)
+        {
+            var temp, divCId;
+            $.ajax({
+            type: "GET",
+            url: "/ajax/checkemailuser/",
+            data: "value="+inputValue,
+            //dataType: "html", //expect html to be returned
+            success: function (response) {
+                console.log(response);
+            if(response === 'YES')
+                temp = 'YES';
+            else
+                temp = 'NO';
+
+            if(temp && temp === 'YES')
+            {
+                if(divId === "#email1")
+                {
+                    $("#email1err").show();
+                    $("#email1err").html("Email already exist!");
+                }
+                if(divId === "#email2")
+                {
+                    $("#email2err").show();
+                    $("#email2err").html("Email already exist!");
+                }
+                if(divId === "#email3")
+                {
+                    $("#email3err").show();
+                    $("#email3err").html("Email already exist!");
+                }
+                if(divId === "#emailone")
+                {
+                    $("#emailoneerr").show();
+                    $("#emailoneerr").html("Email already exist!");
+                
+                }
+
+                $("#firstsubmit").attr('disabled',true);   
+            }
+            else if(temp && temp === 'NO'){
+                console.log(temp);
+                if(divId === "#email1")
+                {
+                $("#email1err").hide();
+                }
+                if(divId === "#email2")
+                {
+                $("#email2err").hide();
+                }
+                if(divId === "#email3")
+                {
+                $("#email3err").hide();
+                }
+                if(divId === "#emailone")
+                {
+                $("#emailoneerr").hide();
+                }
+
+                $("#firstsubmit").attr('disabled',false);   
+
+            }
+            
+            }
+            });
+        }
+
+
+
+
+
+
+
+        $(document).ready(function () {
+            $('#recruiterType').on('change', function (event) {
+                event.preventDefault();
+                var UserID = $(this).val();
+                if (UserID) {
+
+                    $.ajax({
+                        type: 'GET',
+                        url: '/ajax/getUserType/',
+                        success: function (res) {
+
+                            var len = res.supervisior.length;
+                            var length = res.teamLead.length;
+                            var mlength = res.manager.length;
+                            
+                            if (UserID === 'TEAM_LEADER' || UserID === 'SUPERVISIOR') {
+                                $("#team_lead_div").slideUp();
+                                $("#supervisior_div").slideUp();
+                                $("#manager_div").slideDown();
+                                $("#selectAll").hide();
+                            } else if (UserID === 'MANAGER') {
+                                $("#team_lead_div").slideUp();
+                                $("#supervisior_div").slideUp();
+                                $("#manager_div").slideUp();
+                                $("#selectAll").show();
+                            }else{
+                                $("#team_lead_div").slideDown();
+                                $("#supervisior_div").slideDown();
+                                $("#manager_div").slideDown();
+                                $("#selectAll").hide();
+                            }
+                            $("#allCandidate").prop('checked', false);
+                            if (len > 0) {
+                                $("#reportingSupervisior").empty();
+                                for (var i = 0; i < len; i++) {
+                                    var id = res.supervisior[i];
+                                    $("#reportingSupervisior").append(
+                                        "<option value='" + id.id + "'>" + id
+                                        .data +
+                                        "</option>");
+                                }
+                            } else {
+                                $('#reportingSupervisior').html(
+                                    '<option value="0">NONE</option>');
+                            }
+
+                            if (length > 0) {
+                                $("#reportingTeamLead").empty();
+                                for (var i = 0; i < length; i++) {
+                                    var id = res.teamLead[i];
+                                    $("#reportingTeamLead").append(
+                                        "<option value='" + id.id + "'>" + id.data +
+                                        "</option>");
+                                }
+                            } else {
+                                $('#reportingTeamLead').html(
+                                    '<option value="0">NONE</option>');
+                            }
+
+                            if (mlength > 0) {
+                                $("#reportingmanager").empty();
+                                for (var i = 0; i < mlength; i++) {
+                                    var id = res.manager[i];
+                                    $("#reportingmanager").append(
+                                        "<option value='" + id.id + "'>" + id.data +
+                                        "</option>");
+                                }
+                            } else {
+                                $('#reportingmanager').html(
+                                    '<option value="0">NONE</option>');
+                            }
+                        }
+                    });
+
+                }
+            });
+        });
+    </script>
+
+            <%- include('../includes/end2.ejs') %>

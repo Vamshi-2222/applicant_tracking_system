@@ -1,0 +1,48 @@
+<!-- Header -->
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>The Placement Park</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <header id="header" class="alt">
+            <a href="/home/index" class="logo"><strong>The Placement Park</strong></a>
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <nav id="menu">
+            <ul class="links">
+                <li class="<%= path === 'home' || path === 'index' ?  'active' : ''  %>"><a href="/">Home</a> </li>
+
+                <li class="<%= path === 'job' ?  'active' : '' %>"><a href="/home/job">Jobs</a> </li>
+
+                <li class="<%= path === 'blog' ?  'active' : '' %>"><a href="/home/blog">Blog</a> </li>
+
+                <li class="<%= path === 'about' ?  'active' : '' %>"><a href="/home/about">About Us</a> </li>
+
+                <li class="<%= path === 'team' ?  'active' : '' %>"><a href="/home/team">Team</a></li>
+
+                <li class="<%= path === 'testimonials' ?  'active' : '' %>"><a href="/home/testimonials">Testimonials</a>
+                </li>
+
+                <li class="<%= path === 'terms' ?  'active' : '' %>"><a href="/home/terms">Terms</a></li>
+
+                <li class="<%= path === 'contact' ?  'active' : '' %>"><a href="/home/contact">Contact Us</a></li>
+
+                <li class="<%= path === 'login' ?  'active' : '' %>"><a href="/home/login">Team Login</a></li>
+            </ul>
+        </nav>

@@ -1,0 +1,685 @@
+<%- include('../includes/head.ejs') %>
+<link href="/css/company.css" rel="stylesheet" type="text/css">
+<link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+</head>
+
+<body id="page-top">
+
+    <%- include('../includes/drawer.ejs') %>
+
+    <div class="container-fluid">
+
+        <form action="/candidate/final-assessment" method="POST">
+            <div class="card shadow mb-4" id="Form3">
+                <div class="card-header">
+                    <h3 class="m-0 font-weight-bold text-primary">InterView Schedule
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <% if(take){%>
+                    <div id="visible">
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label>Recruiter</label>
+                                    <input type="text" class="form-control select2" name="recruiter" id="recruiter"
+                                        value="<%=data && data.dataValues.Recruiter ? data.dataValues.Recruiter : '' %>" required />
+
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label>On-Boarding Status</label>
+                                    <select class="form-control select2" name="onBoardStatus" id="onBoardStatus"
+                                        required style="width: 100%;" required>
+                                        <option value="" >--Select--</option>
+                                        <option value="YTD" <%=data && data.dataValues.onBoardingDateStatus && data.dataValues.onBoardingDateStatus === 'YTD' ? 'selected' : '' %>>YTD</option>
+                                        <option value="DATE" <%=data && data.dataValues.onBoardingDateStatus && data.dataValues.onBoardingDateStatus === 'DATE' ? 'selected' : '' %>>SELECT DATE</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label for="onBoradingDate">On-Boarding Select</label>
+                                    <input type="date" id="onBoardingDate" name="onBoardingDate" class="form-control"
+                                       value="<%=data && data.dataValues.onBoardingSelect ? data.dataValues.onBoardingSelect : '' %>" required disabled>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="hidden" class="mt-2">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Days</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="onBoardingSelect">On-Boarding Date</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Status</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="15_day" id="15_day" value="15" class="form-control"
+                                            placeholder="15 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="fifteen_day_onboard" name="fifteen_day_onboard" value="<%=data && data.dataValues.onFifteenBoardingDate ? data.dataValues.onFifteenBoardingDate : '' %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="fifteen_radio" value="DONE" <%=data && data.dataValues.onFifteenStatus === 'DONE' ? 'checked' : '' %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="fifteen_radio" value="PENDING" <%=data && data.dataValues.onFifteenStatus === 'PENDING' ? 'checked' : '' %>>
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="30_day" id="30_day" value="30" class="form-control"
+                                            placeholder="30 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="thirty_day_onboard" name="thirty_day_onboard" value="<%=data && data.dataValues.onThirtyBoardingDate ? data.dataValues.onThirtyBoardingDate : '' %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="thirty_radio" value="DONE" <%=data && data.dataValues.onThirtyStatus === 'DONE' ? 'checked' : '' %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="thirty_radio" value="PENDING" <%=data && data.dataValues.onThirtyStatus === 'PENDING' ? 'checked' : '' %>
+                                                >
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="45_day" id="45_day" value="45" class="form-control"
+                                            placeholder="45 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="fortyfive_day_onboard" name="fortyfive_day_onboard" value="<%=data && data.dataValues.onFortyfiveBoardingDate ? data.dataValues.onFortyfiveBoardingDate : '' %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="fortyfive_radio" value="DONE" <%=data && data.dataValues.onFortyfiveStatus === 'DONE' ? 'checked' : '' %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="fortyfive_radio" value="PENDING" <%=data && data.dataValues.onFortyfiveStatus === 'PENDING' ? 'checked' : '' %>
+                                                >
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="60_day" id="60_day" value="60" class="form-control"
+                                            placeholder="60 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="sixty_day_onboard" name="sixty_day_onboard" value="<%=data && data.dataValues.onSixtyBoardingDate ? data.dataValues.onSixtyBoardingDate : '' %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="sixty_radio" value="DONE" <%=data && data.dataValues.onSixtyStatus === 'DONE' ? 'checked' : '' %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="sixty_radio" value="PENDING"  <%=data && data.dataValues.onSixtyStatus === 'PENDING' ? 'checked' : '' %>
+                                                >
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="75_day" id="75_day" class="form-control" value="75"
+                                            placeholder="75 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="seventyfive_day_onboard" name="seventyfive_day_onboard" value="<%=data && data.dataValues.onSeventyFiveBoardingDate ? data.dataValues.onSeventyFiveBoardingDate : '' %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="seventyfive_radio" value="DONE" <%=data && data.dataValues.onSeventyFiveStatus === 'DONE' ? 'checked' : '' %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="seventyfive_radio" value="PENDING" <%=data && data.dataValues.onSeventyFiveStatus === 'PENDING' ? 'checked' : '' %>
+                                                >
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="90_day" id="90_day" class="form-control" value="90" 
+                                            placeholder="90 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="ninety_day_onboard" name="ninety_day_onboard" value="<%=data && data.dataValues.onNinetyBoardingDate ? data.dataValues.onNinetyBoardingDate : '' %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="ninety_radio" value="DONE" <%=data && data.dataValues.onNinetyStatus === 'DONE' ? 'checked' : '' %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="ninety_radio" value="PENDING" <%=data && data.dataValues.onNinetyStatus === 'PENDING' ? 'checked' : '' %>
+                                                >
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group ">
+                                    <label>EMP ID</label>
+                                    <input type="text" class="form-control" name="empid" value="<%= data && data.dataValues.EMPID? data.dataValues.EMPID: ''  %>">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group ">
+                                    <label for="Reference">Billing Status</label>
+                                    <select class="form-control select2" name="billinStatus" id="billinStatus"
+                                        style="width: 100%;">
+                                        <option value="">--Select--</option>
+                                        <option value="NON_TENURE" <%= data && data.dataValues.BilingStatus === 'NON_TENURE' ? 'selected': ''  %>>NON TENURE</option>
+                                        <option value="TRACKING" <%= data && data.dataValues.BilingStatus === 'TRACKING' ? 'selected': ''  %>>TRACKING</option>
+                                        <option value="NEED_TO_BILL" <%= data && data.dataValues.BilingStatus === 'NEED_TO_BILL' ? 'selected': ''  %>>NEED TO BILL</option>
+                                        <option value="BILLED" <%= data && data.dataValues.BilingStatus === 'BILLED' ? 'selected': ''  %>>BILLED</option>
+                                        <option value="RAMPDOWN" <%= data && data.dataValues.BilingStatus === 'RAMPDOWN' ? 'selected': ''  %>>RAMPDOWN</option>
+                                    </select>
+                                </div>
+                            </div>
+                            </div>
+
+
+                            <div class="row">
+                            <div class="col-md-12 col-sm-12 ">
+                                <div class="form-group ">
+                                    <label>Billing Remark</label>
+                                    <textarea class="form-control" rows="5" id="billremark" name='billremark'
+                                        style="resize: none;"><%= data && data.dataValues.BillingRemark ? data.dataValues.BillingRemark: ''  %></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 ">
+                                <div class="form-group ">
+                                    <label>Courier Details</label>
+                                    <textarea class="form-control" rows="5" id="courierremark" name='courierremark'
+                                        style="resize: none;"><%= data && data.dataValues.CourierDetail ? data.dataValues.CourierDetail: ''  %></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 ">
+                                <div class="form-group ">
+                                    <label>On- Boarding Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark" name='remark'
+                                        style="resize: none;" required><%= data && data.dataValues.onBoardingRemark ? data.dataValues.onBoardingRemark: ''  %></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                    <input type="hidden" name="candidateId" value="<%= candidateId%>">
+                    <input type="hidden" name="levelId" value="<%= levelId%>">
+                    <input type="hidden" name="finalId" value="<%= data && data.dataValues.id? data.dataValues.id : '0' %>">
+                    <input type="submit" class="btn btn-primary" id="third" value="SUBMIT">
+
+                    <%}else{%>
+                    <div id="visibles">
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label>Recruiter</label>
+                                    <input type="text" value="<%= data.dataValues.Recruiter %>" class="form-control select2" name="recruiter" id="recruiter" disabled/>
+                                        
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label>On-Boarding Status</label>
+                                    <select class="form-control select2" name="onBoardStatus" id="onBoardStatus"
+                                        disabled style="width: 100%; ">
+                                        <option selected="selected">
+                                            <%= data.dataValues.onBoardingDateStatus %></option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group ">
+                                    <label for="onBoradingDate">On-Boarding Select</label>
+                                    <input type="date" id="onBoardingDate" name="onBoardingDate" class="form-control"
+                                        value="<%= data.dataValues.onBoardingSelect ? data.dataValues.onBoardingSelect: ''  %>"
+                                        disabled>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="visible" class="mt-2" aria-readonly="true" >
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Days</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="onBoardingSelect">On-Boarding Date</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label>Status</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="15_day" id="15_day" value="15" class="form-control"
+                                            placeholder="15 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="15_day_onboard" name="15_day_onboard"
+                                        value="<%= data.dataValues.onFifteenBoardingDate ? data.dataValues.onFifteenBoardingDate: ''  %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                     <div class="form-group ">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="fifteen_radio" value="DONE"  <%=data && data.dataValues.onFifteenStatus === 'DONE' ? 'checked' : '' %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="fifteen_radio" value="PENDING" <%=data && data.dataValues.onFifteenStatus === 'PENDING' ? 'checked' : '' %>>
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="30_day" id="30_day" value="30" class="form-control"
+                                            placeholder="30 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="30_day_onboard" name="30_day_onboard"
+                                        value="<%= data.dataValues.onThirtyBoardingDate ? data.dataValues.onThirtyBoardingDate: ''  %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="30_radio" value="DONE"
+                                            <%= data.dataValues.onThirtyStatus === 'DONE'? 'checked': "" %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="30_radio" value="PENDING"
+                                                <%= data.dataValues.onThirtyStatus === 'PENDING'? 'checked': "" %>>
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="45_day" id="45_day" value="45" class="form-control"
+                                            placeholder="45 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="45_day_onboard" name="45_day_onboard"
+                                        value="<%= data.dataValues.onFortyfiveBoardingDate ? data.dataValues.onFortyfiveBoardingDate: ''  %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="45_radio" value="DONE"
+                                            <%= data.dataValues.onFortyfiveStatus === 'DONE'? 'checked': "" %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="45_radio" value="PENDING"
+                                                <%= data.dataValues.onFortyfiveStatus === 'PENDING'? 'checked': "" %>>
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="60_day" id="60_day" value="60" class="form-control"
+                                            placeholder="60 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="60_day_onboard" name="60_day_onboard"
+                                        value="<%= data.dataValues.onSixtyBoardingDate ? data.dataValues.onSixtyBoardingDate: ''  %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="60_radio" value="DONE"
+                                            <%= data.dataValues.onSixtyStatus === 'DONE'? 'checked': "" %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="60_radio" value="PENDING"
+                                                <%= data.dataValues.onSixtyStatus === 'PENDING'? 'checked': "" %>>
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="75_day" id="75_day" class="form-control" value="75"
+                                            placeholder="75 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="75_day_onboard" name="75_day_onboard"
+                                        value="<%= data.dataValues.onSeventyFiveBoardingDate ? data.dataValues.onSeventyFiveBoardingDate: ''  %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="75_radio" value="DONE"
+                                            <%= data.dataValues.onSeventyFiveStatus === 'DONE'? 'checked': "" %> >
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="75_radio" value="PENDING"
+                                                <%= data.dataValues.onSeventyFiveStatus === 'PENDING'? 'checked': "" %>>
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" name="90_day" id="90_day" class="form-control" value="90"
+                                            placeholder="90 Days" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <input type="text" id="90_day_onboard" name="90_day_onboard"
+                                        value="<%= data.dataValues.onNinetyBoardingDate ? data.dataValues.onNinetyBoardingDate: ''  %>"
+                                            class="form-control" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="90_radio" value="DONE"
+                                            <%= data.dataValues.onNinetyStatus === 'DONE'? 'checked': "" %>>
+                                            <label class="form-check-label">DONE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="90_radio" value="PENDING"
+                                                <%= data.dataValues.onNinetyStatus === 'PENDING'? 'checked': "" %>>
+                                            <label class="form-check-label">PENDING</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group ">
+                                    <label>EMP ID</label>
+                                    <input type="text" class="form-control" name="empid"
+                                        value="<%= data.dataValues.EMPID ? data.dataValues.EMPID: ''  %>" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <div class="form-group ">
+                                    <label for="Reference">Billing Status</label>
+                                    <select class="form-control select2" name="billinStatus" id="billinStatus"
+                                        style="width: 100%;" disabled>
+                                        <%if(data.dataValues.BilingStatus ) %>
+                                        <option><%= data.dataValues.BilingStatus  %></option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 ">
+                                <div class="form-group ">
+                                    <label>Billing Remark</label>
+                                    <textarea class="form-control" rows="5" id="billremark" name='billremark'
+                                        style="resize: none;" disabled>
+                                    <%= data.dataValues.BillingRemark ? data.dataValues.BillingRemark: ''  %>
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 ">
+                                <div class="form-group ">
+                                    <label>Courier Details</label>
+                                    <textarea class="form-control" rows="5" id="courierremark" name='courierremark'
+                                        style="resize: none;" disabled>
+                                    <%= data.dataValues.CourierDetail ? data.dataValues.CourierDetail: ''  %>
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 ">
+                                <div class="form-group ">
+                                    <label>On- Boarding Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark" name='remark'
+                                        style="resize: none;" disabled>
+                                    <%= data.dataValues.onBoardingRemark ? data.dataValues.onBoardingRemark: ''  %>
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <%}%>
+                </div>
+                <!-- </form> -->
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+            
+        $(document).ready(function () {
+
+            $('#hidden').slideUp;
+           
+            $("#onBoardStatus").on("change", function (e) {
+                var type = $(this).val();
+                if (type === 'DATE') {
+                    $("#onBoardingDate").removeAttr('disabled');
+                    $('#hidden').slideDown();
+                    
+                } else {
+                    $("#onBoardingDate").attr('disabled', true);
+                    $('#hidden').slideUp();
+                    
+                }
+            })
+
+           
+            $("#onBoardingDate").change(function () {
+                var dateList = [15, 30, 45, 60, 75, 90];
+
+                for(var i = 0; i < dateList.length; i++ )
+                {
+                    var startDateVal = $("#onBoardingDate").val();
+                    dateValue = new Date(startDateVal);
+                    dateValue.setDate(dateValue.getDate() + +dateList[i])
+                    if (dateValue != "Invalid Date")
+                    {
+                        if(dateList[i] == 15)
+                        $("#fifteen_day_onboard").val(setDateFormat(dateValue));
+                        else if(dateList[i] == 30)
+                        $("#thirty_day_onboard").val(setDateFormat(dateValue));
+                        else if(dateList[i] == 45)
+                        $("#fortyfive_day_onboard").val(setDateFormat(dateValue));
+                        else if(dateList[i] == 60)
+                        $("#sixty_day_onboard").val(setDateFormat(dateValue));
+                        else if(dateList[i] == 75)
+                        $("#seventyfive_day_onboard").val(setDateFormat(dateValue));
+                        else if(dateList[i] == 90)
+                        $("#ninety_day_onboard").val(setDateFormat(dateValue));
+                    }
+                }
+                
+
+            });
+
+        })
+
+        function setDateFormat(DateObj) {
+            var day = DateObj.getDate();
+            var month = DateObj.getMonth() + 1;
+            var fullYear = DateObj.getFullYear().toString();
+            var setformattedDate = '';
+            setformattedDate = getDigitToFormat(day) + '-' + getDigitToFormat(month) + '-'+ fullYear;
+            console.log(setformattedDate)
+            return setformattedDate;
+        }
+
+        function getDigitToFormat(val) {
+            if (val < 10) {
+                val = '0' + val;
+            }
+            return val.toString();
+        }
+    </script>
+
+    <%- include('../includes/end.ejs') %>

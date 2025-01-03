@@ -1,0 +1,240 @@
+<%- include('../includes/head.ejs') %>
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card shadow mb-4">
+                            <div class="table-responsive">
+                                <div class="table-wrapper">
+
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <h2 class="m-0 font-weight-bold text-primary">
+                                                    Candidate
+                                                    <b>Details</b>
+                                                </h2>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="input-group">
+                                                            <input type="text"
+                                                                class="form-control bg-light border-0 small"
+                                                                placeholder="Search for company..." aria-label="Search"
+                                                                aria-describedby="basic-addon2">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-primary" type="button">
+                                                                    <i class="fas fa-search fa-sm"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <table class="table table-striped table-bordered table-sm" cellspacing="0"
+                                        width="100%" id="dtHorizontalExample">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">EMP ID</th>
+                                                <th scope="col">ASSIGN TO</th>
+                                                <th scope="col">Candidate Name</th>
+                                                <th scope="col">Mobile 1</th>
+                                                <th scope="col">Mobile 2</th>
+                                                <th scope="col">Created Date</th>
+                                                <th scope="col">L1 Status</th>
+                                                <th scope="col">L1 Client</th>
+                                                <th scope="col">L1 Process</th>
+                                                <th scope="col">L1 Date</th>
+                                                <th scope="col">L2 Status</th>
+                                                <th scope="col">L2 Client</th>
+                                                <th scope="col">L2 Process</th>
+                                                <th scope="col">L2 Date</th>
+                                                <th scope="col">Interview Status</th>
+                                                <th scope="col">On Boarding Date</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if(candidateData.length> 0 ) {%>
+                                                <% let i=1; for (let src of candidateData) { %>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%=i%>
+                                                        </th>
+                                                        <td>
+                                                            <%=src.eName ? src.eName: "" %>
+                                                        </td>
+                                                        <td>
+                                                            <% for (let em of empList) { if(src.id===em.canId){%>
+                                                                <%=em.empName ? em.empName: "" %>
+                                                                    <%}}%>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.name ? src.name: "" %>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.mobone ? src.mobone: "" %>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.mobtwo ? src.mobtwo: "" %>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.createdDate ? src.createdDate: "" %>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.l_one_assessment ? src.l_one_assessment: "" %>
+                                                        </td>
+                                                        <td>
+                                                            <% var roless=[]; if(companyValue && companyValue.length>
+                                                                0){
+                                                                for(let sr of companyValue){
+                                                                if(sr.id == src.l_one_assessment_client ){
+                                                                roless = sr.roleData; %>
+                                                                <%=sr.name ? sr.name : "" %>
+                                                                    <%}}}%>
+
+                                                        </td>
+                                                        <td>
+                                                            <%if(roless && roless.length> 0){
+                                                                for(let s of roless){
+                                                                if(s.id == src.l_one_assessment_process ){ %>
+                                                                <%=s.pseudoName ? s.pseudoName : "" %>
+                                                                    <%}}}%>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.l_one_assessment_interview ?
+                                                                src.l_one_assessment_interview : "" %>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.l_two_status ? src.l_two_status: "" %>
+                                                        </td>
+                                                        <td>
+                                                            <% var rolesss=[]; if(companyValue && companyValue.length>
+                                                                0){
+                                                                for(let sr of companyValue){
+                                                                if(sr.id == src.l_two_client ){
+                                                                rolesss = sr.roleData; %>
+                                                                <%=sr.name ? sr.name : "" %>
+                                                                    <%}}}%>
+                                                        </td>
+                                                        <td>
+                                                            <%if(rolesss && rolesss.length> 0){
+                                                                for(let s of rolesss){
+                                                                if(s.id == src.l_two_process ){ %>
+                                                                <%=s.pseudoName ? s.pseudoName : "" %>
+                                                                    <%}}}%>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.l_two_interviewDate ? src.l_two_interviewDate : "" %>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.l_two_InterviewStatus ? src.l_two_InterviewStatus
+                                                                : "" %>
+                                                        </td>
+                                                        <td>
+                                                            <%=src.onBoardDate ? src.onBoardDate : "" %>
+                                                        </td>
+                                                        <td>
+
+                                                            <a href="/candidate/getInterview/<%= src.id %>/<%= src.l_two_Id %>/?view=true"
+                                                                class="edit" title="View" data-toggle="tooltip"><i
+                                                                    class="fas fa-fw fa-eye"></i></a>
+
+                                                            <a href="/candidate/getInterview/<%= src.id %>/<%= src.l_two_Id %>/?edit=true"
+                                                                class="edit" title="Edit" data-toggle="tooltip"><i
+                                                                    class="fas fa-fw fa-pen"></i></a>
+
+                                                        </td>
+
+                                                    </tr>
+                                                    <% i++; } %>
+                                                        <%} %>
+                                        </tbody>
+                                    </table>
+                                    <div class="clearfix">
+                                        <div class="hint-text">Showing
+                                            <b>
+                                                <%= showingItem %>
+                                            </b> out of
+                                            <b>
+                                                <%= totalCandidate%>
+                                            </b>
+                                            entries
+                                        </div>
+                                        <ul class="pagination">
+                                            <% if( currentPage !==1 && previousPage !==1) {%>
+                                                <li class="page-item"><a href="?page=1"><i
+                                                            class="fa fa-angle-double-left"></i></a>
+                                                </li>
+                                                <% } else { %>
+                                                    <li class="page-item disabled"><a href="#"><i
+                                                                class="fa fa-angle-double-left"></i></a>
+                                                    </li>
+                                                    <% } %>
+
+                                                        <% if(hasPreviousPage) {%>
+                                                            <li class="page-item">
+                                                                <a href="?page=<%= previousPage %>" class="page-link">
+                                                                    <%= previousPage %>
+                                                                </a>
+                                                            </li>
+                                                            <% } %>
+                                                                <li class="page-item active">
+                                                                    <a href="?page=<%= currentPage %>"
+                                                                        class="page-link">
+                                                                        <%= currentPage %>
+                                                                    </a>
+                                                                </li>
+                                                                <% if(hasNextPage) {%>
+                                                                    <li class="page-item">
+                                                                        <a href="?page=<%= nextPage %>"
+                                                                            class="page-link">
+                                                                            <%= nextPage %>
+                                                                        </a>
+                                                                    </li>
+                                                                    <% } %>
+
+                                                                        <% if( lastPage !==currentPage && nextPage
+                                                                            !==lastPage) {%>
+                                                                            <li class="page-item"><a
+                                                                                    href="?page=<%= lastPage %>"
+                                                                                    class="page-link"><i
+                                                                                        class="fa fa-angle-double-right"></i></a>
+                                                                            </li>
+                                                                            <% } else { %>
+                                                                                <li class="page-item disabled"><a
+                                                                                        href="#" class="page-link"><i
+                                                                                            class="fa fa-angle-double-right"></i></a>
+                                                                                </li>
+                                                                                <% } %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#dtHorizontalExample').DataTable({
+                        "scrollX": true
+                    });
+                    $('.dataTables_length').addClass('bs-select');
+                });
+            </script>
+            <%- include('../includes/end.ejs') %>

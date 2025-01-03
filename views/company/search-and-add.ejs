@@ -1,0 +1,697 @@
+<%- include('../includes/head.ejs') %>
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    <link href="/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="/css/tag.css" rel="stylesheet" type="text/css">
+
+    <link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script src='/js/registration.js'></script>
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <% if(addCompany) {%>
+                    <div class="row mb-4">
+
+                        <div class="col-md-12">
+                            <!-- Company Info -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header ">
+                                    <h3 class="card-title m-0 font-weight-bold text-primary">Add Company</h3>
+                                </div>
+                                <form role="form" action="/company/newCompany" method="POST">
+                                    <div class="card-body ">
+                                        <div class="row ">
+                                            <div class="col-md-12 ">
+                                                <div class="form-group ">
+                                                    <label>Company Name</label>
+                                                    <input type="text" class="form-control" id="Reference"
+                                                        name="companyName" placeholder="Company Name" required>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group ">
+                                                    <label>HR Name</label>
+                                                    <input type="text" class="form-control" id="hrName" name="hrName"
+                                                        placeholder="HR Name">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group ">
+                                                    <label>HR Mobile</label>
+                                                    <input type="tel" class="form-control" id="hrMobile" name="hrMobile"
+                                                        placeholder="HR Mobile">
+                                                    <p style="color: red;" id="mobileoneerr"></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group ">
+                                                    <label>HR Email</label>
+                                                    <input type="email" class="form-control" id="hrEmail" name="hrEmail"
+                                                        placeholder="HR Email">
+                                                    <p style="color: red;" id="emailoneerr"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-md-12 ">
+                                                <div class="form-group">
+                                                    <label for="comment">Designation Detail</label>
+                                                    <textarea class="form-control" rows="3" id="designation"
+                                                        name='designationDescription' style="resize: none;"
+                                                        required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-md-12 ">
+                                                <div class="form-group">
+                                                    <label for="comment">Description</label>
+                                                    <textarea class="form-control" rows="3" id="comment"
+                                                        name='companyDescription' style="resize: none;"
+                                                        required></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row ">
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label for="comment">Response</label>
+                                                    <select class="form-control select2" name="companyResponse"
+                                                        id="companyResponse" style="width: 100%;" required>
+                                                        <option selected value="">--SELECT--</option>
+                                                        <option value="NEED_TO_APPROACH">NEED TO APPROACH</option>
+                                                        <option value="IN_PROCESS">IN PROCESS</option>
+                                                        <option value="FUTURE">FUTURE</option>
+                                                        <option value="NOT_INTERESTED">NOT INTERESTED</option>
+                                                        <option value="EMPANELLED">EMPANELLED</option>
+                                                        <option value="REJECTED">REJECTED</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+
+                                                <div class="form-group">
+                                                    <label for="comment">Status</label>
+                                                    <select class="form-control select2" style="width: 100%; "
+                                                        name="companyStatus" id="companyStatus" required disabled>
+                                                        <option value="">--SELECT--</option>
+                                                        <option value="IN_ACTIVE">IN ACTIVE</option>
+                                                        <option value="ACTIVE">ACTIVE</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+
+                                    <div class="card-footer ">
+                                        <div>
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" id="firstsubmit">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <% } %>
+
+                        <% if(table) {%>
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div class="card shadow mb-4">
+                                        <div class="table-responsive">
+                                            <div class="table-wrapper">
+
+                                                <div class="table-title">
+                                                    <div class="row">
+                                                        <div class="col-md-6 col-sm-12">
+                                                            <h2 class="m-0 font-weight-bold text-primary">Company
+                                                                <b>Details</b>
+                                                            </h2>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-12">
+                                                                <!-- <div class="input-group">
+                                                                    <div class="form-outline">
+                                                                        <input type="search" id="form1" class="form-control" />
+                                                                        <label class="form-label" for="form1">Search</label>
+                                                                    </div>
+                                                                    <button type="button" class="btn btn-primary">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </button>
+                                                                </div>  -->
+                                                                <form role="form" action="/company/search" method="POST">
+                                                                    <div class="input-group">
+                                                                        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                                                                            aria-describedby="search-addon" id="searchData" name="searchData" />
+                                                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                                        <input type="hidden" id="response" name="response" />
+                                                                        <button type="submit" class="btn btn-outline-primary" id="searchDataButton">search</button>
+                                                                    </div>
+                                                                </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table table-striped table-hover table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Company Name</th>
+                                                            <th scope="col">Company ID</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <% let i=1; for (let src of companyData) { var
+                                                            text=src.dataValues.company_name+'---'+src.dataValues.hr_name+'---'+src.dataValues.hr_mobile
+                                                            +'---'+src.dataValues.hr_emal+'---'+src.dataValues.company_description+'---'+src.dataValues.job_detail_description
+                                                            %>
+                                                            <tr>
+                                                                <!-- <th scope="row" style="width: 15%;">
+                                                                    <%=i%>
+                                                                </th> -->
+                                                                <th scope="row">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary btn-circle"
+                                                                        onclick="show(`<%=text%>`, `<%=user%>`)">
+                                                                        <%=i%>
+                                                                    </button>
+                                                                </th>
+                                                                <td style="width: 25%;">
+                                                                    <%=src.dataValues.company_name %>
+                                                                </td>
+                                                                <td style="width: 25%;">
+                                                                    <%=src.dataValues.company_id%>
+                                                                </td>
+                                                                <td style="width: 20%;">
+                                                                    <%=src.dataValues.company_status%>
+                                                                </td>
+                                                                <input type="hidden" id="responses" name="responses" value="<%= src.dataValues.company_response %>" />
+
+                                                                <td style="width: 15%;">
+
+                                                                    <a href="/company/companyId/<%= src.dataValues.id %>/?view=true"
+                                                                        class="edit" title="View"
+                                                                        data-toggle="tooltip"><i
+                                                                            class="fas fa-fw fa-eye"></i></a>
+                                                                    <%if( user !=="TEAM_LEADER" && user !=="SUPERVISIOR"
+                                                                        && user !=="FULLTIME_RECRUITER" && user
+                                                                        !=="INTERN_OFF" && user !=="INTERN_ON" && user
+                                                                        !=="FREELANCER" && user !=="SUB_VENDOR" ){ %>
+
+                                                                        <a href="/company/companyId/<%= src.dataValues.id %>/?edit=true"
+                                                                            class="edit" title="Edit"
+                                                                            data-toggle="tooltip"><i
+                                                                                class="fas fa-fw fa-pen"></i></a>
+                                                                        <%if( user !=="BUSSINESS_DEVELOPMENT" ) {%>
+                                                                            <a href="/company/companyId/<%= src.dataValues.id %>/?delete=true"
+                                                                                class="edit" title="Delete"
+                                                                                data-toggle="tooltip"><i
+                                                                                    class="fas fa-fw fa-trash"></i></a>
+
+                                                                            <%}}%>
+                                                                </td>
+
+                                                            </tr>
+                                                            <% i++; } %>
+                                                    </tbody>
+                                                </table>
+
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div id="one">
+                                                                <span class="badge badge-primary">Company: </span>
+                                                                <p class="text-dark" id="company"></p>
+                                                                </div>
+                                                                <div id="two">
+                                                                <span class="badge badge-primary">HR Name: </span>
+                                                                <p class="text-info" id="hr_name"></p>
+                                                                </div>
+                                                                <div id="three">
+                                                                <span class="badge badge-primary">HR Mobile: </span>
+                                                                <p class="text-dark" id="hr_mobile"></p>
+                                                                </div>
+                                                                <div id="four">
+                                                                <span class="badge badge-primary">HR Email: </span>
+                                                                <p class="text-info" id="hr_email"></p>
+                                                                </div>
+                                                                <div id="five">
+                                                                <span class="badge badge-primary">Company Description: </span>
+                                                                <p class="text-dark" id="company_des"></p>
+                                                                </div>
+                                                                <div id="six">
+                                                                <span class="badge badge-primary">Job Description: </span>
+                                                                <p class="text-dark" id="job_des"></p>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="clearfix">
+                                                    <div class="hint-text">Showing
+                                                        <b>
+                                                            <%= totalCompany %>
+                                                        </b> out of <b>
+                                                            <%= showingItem %>
+                                                        </b> entries
+                                                    </div>
+                                                    <ul class="pagination">
+                                                        <% if( currentPage !==1 && previousPage !==1) {%>
+                                                            <li class="page-item"><a href="?page=1"><i
+                                                                        class="fa fa-angle-double-left"></i></a>
+                                                            </li>
+                                                            <% } else { %>
+                                                                <li class="page-item disabled"><a href="#"><i
+                                                                            class="fa fa-angle-double-left"></i></a>
+                                                                </li>
+                                                                <% } %>
+
+                                                                    <!-- <li class="page-item"><a href="#" class="page-link">1</a></li> -->
+                                                                    <% if(hasPreviousPage) {%>
+                                                                        <li class="page-item">
+                                                                            <a href="?page=<%= previousPage %>"
+                                                                                class="page-link">
+                                                                                <%= previousPage %>
+                                                                            </a>
+                                                                        </li>
+                                                                        <% } %>
+                                                                            <li class="page-item active">
+                                                                                <a href="?page=<%= currentPage %>"
+                                                                                    class="page-link">
+                                                                                    <%= currentPage %>
+                                                                                </a>
+                                                                            </li>
+                                                                            <% if(hasNextPage) {%>
+                                                                                <li class="page-item">
+                                                                                    <a href="?page=<%= nextPage %>"
+                                                                                        class="page-link">
+                                                                                        <%= nextPage %>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <% } %>
+                                                                                    <!-- <li class="page-item"><a href="#" class="page-link">5</a></li> -->
+
+                                                                                    <% if( lastPage !==currentPage &&
+                                                                                        nextPage !==lastPage && lastPage
+                                                                                        !==0) {%>
+                                                                                        <li class="page-item"><a
+                                                                                                href="?page=<%= lastPage %>"
+                                                                                                class="page-link"><i
+                                                                                                    class="fa fa-angle-double-right"></i></a>
+                                                                                        </li>
+                                                                                        <% } else { %>
+                                                                                            <li
+                                                                                                class="page-item disabled">
+                                                                                                <a href="#"
+                                                                                                    class="page-link"><i
+                                                                                                        class="fa fa-angle-double-right"></i></a>
+                                                                                            </li>
+                                                                                            <% } %>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+
+
+                                <% if(updateCompany) {%>
+                                    <div class="row mb-4">
+
+                                        <div class="col-md-12">
+                                            <!-- Company Info -->
+                                            <div class="card shadow mb-4">
+                                                <div class="card-header ">
+                                                    <h3 class="card-title m-0 font-weight-bold text-primary">Update
+                                                        Company</h3>
+                                                </div>
+                                                <form role="form" action="/company/updateCompany" method="POST">
+                                                    <!-- <div class="card-body ">
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label>Company Name</label>
+                                                                    <input type="text" class="form-control " id="Reference " name="companyName" placeholder="Company Name" value="<%= company.dataValues.company_name%>" required>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group">
+                                                                    <label for="comment">Description</label>
+                                                                    <textarea class="form-control" rows="5" id="comment" name='companyDescription' style="resize: none;" required>
+                                                                    <%= company.dataValues.company_description %>
+                                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-6">
+
+                                                                <div class="form-group">
+                                                                    <label for="comment">Response</label>
+                                                                    <select class="form-control select2" name="companyResponse" style="width: 100%; " required>
+                                            <option selected="selected">Select</option>
+                                            <option>Need to approach</option>
+                                            <option>In process</option>
+                                            <option>Future</option>
+                                            <option>Not Interested</option>
+                                        </select>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-6">
+
+                                                                <div class="form-group">
+                                                                    <label for="comment">Status</label>
+                                                                    <select class="form-control select2 " style="width: 100%; " name="companyStatus" required>
+                                            <option selected="selected ">Select</option>
+                                            <option>In-Active</option>
+                                            <option>Active</option>
+                                        </select>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div> -->
+                                                    <!-- /.card-body -->
+
+                                                    <div class="card-body ">
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label>Company Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="Reference" name="companyName"
+                                                                        value="<%= company && company.dataValues.company_name ? company.dataValues.company_name : null %>"
+                                                                        placeholder="Company Name" required>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="form-group ">
+                                                                    <label>HR Name</label>
+                                                                    <input type="text" class="form-control" id="hrName"
+                                                                        name="hrName"
+                                                                        value="<%= company && company.dataValues.hr_name ? company.dataValues.hr_name : null %>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-6 col-sm-12">
+                                                                <div class="form-group ">
+                                                                    <label>HR Mobile</label>
+                                                                    <input type="tel" class="form-control" id="hrMobile"
+                                                                        name="hrMobile"
+                                                                        value="<%= company && company.dataValues.hr_mobile ? company.dataValues.hr_mobile : null %>">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6 col-sm-12">
+                                                                <div class="form-group ">
+                                                                    <label>HR Email</label>
+                                                                    <input type="email" class="form-control"
+                                                                        id="hrEmail" name="hrEmail"
+                                                                        value="<%= company && company.dataValues.hr_emal ? company.dataValues.hr_emal : null %>">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group">
+                                                                    <label for="comment">Designation Detail</label>
+                                                                    <textarea class="form-control" rows="3"
+                                                                        style="resize: none;" id="designation"
+                                                                        name='designationDescription'>
+                                                        <%= company && company.dataValues.job_detail_description ? company.dataValues.job_detail_description : null %>
+                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group">
+                                                                    <label for="comment">Description</label>
+                                                                    <textarea class="form-control" rows="3"
+                                                                        style="resize: none;" id="comment"
+                                                                        name='companyDescription'>
+                                                        <%= company && company.dataValues.company_description ? company.dataValues.company_description : null %>
+                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row ">
+                                                            <div class="col-md-6">
+
+                                                                <div class="form-group">
+                                                                    <label for="comment">Response</label>
+                                                                    <select class="form-control select2"
+                                                                        style="width: 100%;" name="companyResponse"
+                                                                        id="companyResponse" required>
+                                                                        <option value="">--SELECT--</option>
+                                                                        <option value="NEED_TO_APPROACH" <%=company &&
+                                                                            company.dataValues.company_response &&
+                                                                            company.dataValues.company_response==='NEED_TO_APPROACH'
+                                                                            ? 'selected' : '' %>>NEED TO APPROACH
+                                                                        </option>
+                                                                        <option value="IN_PROCESS" <%=company &&
+                                                                            company.dataValues.company_response &&
+                                                                            company.dataValues.company_response==='IN_PROCESS'
+                                                                            ? 'selected' : '' %>>IN PROCESS</option>
+                                                                        <option value="FUTURE" <%=company &&
+                                                                            company.dataValues.company_response &&
+                                                                            company.dataValues.company_response==='FUTURE'
+                                                                            ? 'selected' : '' %>>FUTURE</option>
+                                                                        <option value="NOT_INTERESTED" <%=company &&
+                                                                            company.dataValues.company_response &&
+                                                                            company.dataValues.company_response==='NOT_INTERESTED'
+                                                                            ? 'selected' : '' %>>NOT INTERESTED</option>
+                                                                        <option value="EMPANELLED" <%=company &&
+                                                                            company.dataValues.company_response &&
+                                                                            company.dataValues.company_response==='EMPANELLED'
+                                                                            ? 'selected' : '' %>>EMPANELLED</option>
+                                                                        <option value="REJECTED" <%=company &&
+                                                                            company.dataValues.company_response &&
+                                                                            company.dataValues.company_response==='REJECTED'
+                                                                            ? 'selected' : '' %>>REJECTED</option>
+
+                                                                    </select>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-6">
+
+                                                                <div class="form-group">
+                                                                    <label for="comment">Status</label>
+                                                                    <select class="form-control select2"
+                                                                        name="companyStatus" id="companyStatus"
+                                                                        style="width: 100%;" disabled>
+                                                                        <option value="">--SELECT--</option>
+                                                                        <option value="IN_ACTIVE" <%=company &&
+                                                                            company.dataValues.company_status &&
+                                                                            company.dataValues.company_status==='IN_ACTIVE'
+                                                                            ? 'selected' : '' %>>IN ACTIVE</option>
+                                                                        <option value="ACTIVE" <%=company &&
+                                                                            company.dataValues.company_status &&
+                                                                            company.dataValues.company_status==='ACTIVE'
+                                                                            ? 'selected' : '' %>>ACTIVE</option>
+
+                                                                    </select>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="card-footer ">
+                                                        <div>
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                            <input type="hidden" name="companyID"
+                                                                value="<%= company && company.dataValues.id ? company.dataValues.id : 0 %>">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <% } %>
+
+
+            </div>
+            <script type="text/javascript">
+                $("#companyResponse").on("change", function (e) {
+
+                    console.log("INSIDE");
+                    e.preventDefault();
+                    var type = $(this).val();
+                    if (type === 'EMPANELLED') {
+                        $("#companyStatus").removeAttr('disabled');
+                    } else {
+                        $("#companyStatus").attr('disabled', true);
+                    }
+                })
+                function show(text, type) {
+                    var data = text.split("---")
+                    document.getElementById("company").innerHTML = data[0];
+                    document.getElementById("hr_name").textContent = data[1];
+                    document.getElementById("hr_mobile").innerHTML = data[2];
+                    document.getElementById("hr_email").textContent = data[3];
+                    document.getElementById("company_des").textContent = data[4];
+                    document.getElementById("job_des").textContent = data[5];
+                    if (type !== 'ADMIN') {
+                        document.getElementById("two").style.display = 'none';
+                        document.getElementById("three").style.display = 'none';
+                        document.getElementById("four").style.display = 'none';
+                    }
+                    $('#exampleModalCenter').modal({
+                        keyboard: false
+                    })
+                }
+                $(document).ready(function () {
+                        $("#hrMobile").on("keyup", function () {
+                            let inputValue = $(this).val();
+                            getMobile(inputValue, "#hrMobile")
+
+                        });
+                });
+                $(document).ready(function () {
+                        $("#hrEmail").on("keyup", function () {
+                            let inputValue = $(this).val();
+                            getEmail(inputValue, "#hrEmail")
+
+                        });
+                });
+
+                $(document).ready(function () {
+                        $("#searchData").on("keyup", function(){
+                            document.getElementById("response").value = $('#responses').val();
+                     });
+                });
+        
+
+                function getMobile(inputValue, divId) {
+                        var temp, divCId;
+                        $.ajax({
+                            type: "GET",
+                            url: "/ajax/checkHrMobile/",
+                            data: "value=" + inputValue,
+                            //dataType: "html", //expect html to be returned
+                            success: function (response) {
+                                console.log(response);
+                                if (response === 'YES')
+                                    temp = 'YES';
+                                else
+                                    temp = 'NO';
+
+                                if (temp && temp === 'YES') {
+                                    $("#mobileoneerr").html("Mobile already exist!");
+                                    $("#firstsubmit").attr('disabled', true);
+                                }
+                                else if (temp && temp === 'NO' && (inputValue.length < 10 || inputValue.length > 10 || inputValue.length !== 10)) {
+                                    $("#mobileoneerr").show()
+                                    $("#mobileoneerr").html("Mobile should be 10 digit!");
+                                    $("#firstsubmit").attr('disabled', true);
+
+                                }
+                                else if (inputValue.length === 10) {
+                                    $("#mobileoneerr").hide();
+                                    $("#firstsubmit").attr('disabled', false);
+                                }
+                            }
+                        });
+                    }
+
+                    function getEmail(inputValue, divId) {
+                        var temp, divCId;
+                        $.ajax({
+                            type: "GET",
+                            url: "/ajax/checkHrEmail/",
+                            data: "value=" + inputValue,
+                            success: function (response) {
+                                console.log(response);
+                                if (response === 'YES')
+                                    temp = 'YES';
+                                else
+                                    temp = 'NO';
+
+                                if (temp && temp === 'YES') {
+                                    $("#emailoneerr").show();
+                                    $("#emailoneerr").html("Email already exist!");
+                                    $("#firstsubmit").attr('disabled', true);
+                                }
+                                else if (temp && temp === 'NO') {
+                                    $("#emailoneerr").hide();
+                                    $("#firstsubmit").attr('disabled', false);
+
+                                }
+
+                            }
+                        });
+                    }
+
+    
+            </script>
+            <%- include('../includes/end.ejs') %>

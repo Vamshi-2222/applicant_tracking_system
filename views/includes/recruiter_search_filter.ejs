@@ -1,0 +1,224 @@
+<%- include('../includes/head.ejs') %>
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- <div class="row mx-2 mt-2"> -->
+
+                <form method="POST" action="/candidate/getRecruiterSearch">
+                    <div class="card shadow mb-4 mx-2 mt-4">
+
+                        <div class="card-header ">
+                            <h3 class="m-0 font-weight-bold text-primary ">Search Filter
+                            </h3>
+                        </div>
+
+                        <div class="card-body ">
+
+                            <div class="col-md-12">
+
+                                <div class="row">
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <input id="myName" type="text" name="myName" class="form-control"
+                                                placeholder="Full Name">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <input id="mobile" type="text" name="mymobile" class="form-control"
+                                                placeholder="Mobile">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" id="email" name="myemail" class="form-control"
+                                                placeholder="Email">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="text-center">
+                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    <input type="submit" class="alert alert-success" style="width: 150px"
+                                        value="Search">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+                <% if(window) {%>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Employee</th>
+                                    <th scope="col">ASSIGNED</th>
+                                    <th scope="col">Candidate Name</th>
+                                    <th scope="col">Mobile 1</th>
+                                    <th scope="col">Mobile 2</th>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">L1 Status</th>
+                                    <th scope="col">L1 Client</th>
+                                    <th scope="col">L1 Process</th>
+                                    <th scope="col">L1 Date</th>
+                                    <th scope="col">L2 Status</th>
+                                    <th scope="col">L2 Client</th>
+                                    <th scope="col">L2 Process</th>
+                                    <th scope="col">L2 Date</th>
+                                    <th scope="col">Interview Status</th>
+
+                                    <th scope="col">Action</th>
+                                    <!-- <th scope="col"></th> -->
+                                </tr>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                <% if(candidateData.length> 0 ) {%>
+                                    <% let i=1; for (let src of candidateData) { %>
+                                        <tr>
+                                            <th scope="row" style="width: 5%;">
+                                                <%=i %>
+                                            </th>
+                                            <td style="width: 10%;">
+                                                <%=src.eName ? src.eName: "" %>
+                                            </td>
+                                            <td>
+                                                <% for (let em of empList) { if(src.id===em.canId){%>
+                                                    <%=em.empName ? em.empName: "" %>
+                                                        <%}}%>
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <%=src.name ? src.name: "" %>
+                                            </td>
+                                            <td style="width: 5%;">
+                                                <%=src.mobone ? src.mobone: "" %>
+                                            </td>
+                                            <td style="width: 5%;">
+                                                <%=src.mobtwo ? src.mobtwo: "" %>
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <%=src.createdDate ? src.createdDate: "" %>
+                                            </td>
+                                            <td style="width: 5%;">
+                                                <%=src.l_one_assessment ? src.l_one_assessment: "" %>
+                                            </td>
+                                            <td style="width: 10%;">
+                                                <% var roless=[]; if(companyValue && companyValue.length> 0){
+                                                    for(let sr of companyValue){
+                                                    if(sr.id ==
+                                                    src.l_one_assessment_client ){
+                                                    roless = sr.roleData; %>
+                                                    <%=sr.name ? sr.name : "" %>
+                                                        <%}}}%>
+
+                                            </td>
+                                            <td style="width: 5%;">
+                                                <%if(roless && roless.length> 0){
+                                                    for(let s of roless){
+                                                    if(s.id ==
+                                                    src.l_one_assessment_process ){
+                                                    %>
+                                                    <%=s.pseudoName ? s.pseudoName : "" %>
+                                                        <%}}}%>
+                                            </td>
+
+                                            <td style="width: 2%;">
+                                                <%=src.l_one_assessment_interview ? src.l_one_assessment_interview : ""
+                                                    %>
+                                            </td>
+
+                                            <td style="width: 2%;">
+                                                <%=src.l_two_status ? src.l_two_status: "" %>
+                                            </td>
+                                            <td style="width: 2%;">
+                                                <% var rolesss=[]; if(companyValue && companyValue.length> 0){
+                                                    for(let sr of companyValue){
+                                                    if(sr.id == src.l_two_client ){
+                                                    rolesss = sr.roleData; %>
+                                                    <%=sr.name ? sr.name : "" %>
+                                                        <%}}}%>
+                                            </td>
+                                            <td style="width: 2%;">
+                                                <%if(rolesss && rolesss.length> 0){
+                                                    for(let s of rolesss){
+                                                    if(s.id == src.l_two_process ){
+                                                    %>
+                                                    <%=s.pseudoName ? s.pseudoName : "" %>
+                                                        <%}}}%>
+                                            </td>
+                                            <td>
+                                                <%=src.l_two_interviewDate ? src.l_two_interviewDate : "" %>
+                                            </td>
+
+                                            <td>
+                                                <%=src.l_two_InterviewStatus ? src.l_two_InterviewStatus : "" %>
+                                            </td>
+
+
+                                            <td>
+
+                                                <a href="/candidate/candidate/<%= src.id %>/?view=true" class="edit"
+                                                    title="View" data-toggle="tooltip"><i
+                                                        class="fas fa-fw fa-eye"></i></a>
+
+                                                <% if(src.ediatble){ %>
+                                                <a href="/candidate/candidate/<%= src.id %>/?edit=true" class="edit"
+                                                    title="Edit" data-toggle="tooltip"><i
+                                                        class="fas fa-fw fa-pen"></i></a>
+                                                        <%}%>
+                                               
+
+                                                            <!-- <a href="/candidate/candidate/<%= src.id %>/?delete=true"
+                                                                class="edit" title="Delete" data-toggle="tooltip"><i
+                                                                    class="fas fa-fw fa-trash"></i></a> -->
+                                            </td>
+
+                                            <!-- <td> </td> -->
+
+
+
+                                        </tr>
+                                        <% i++; } %>
+                                            <%} %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <% } else {%>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2 class="m-0 font-weight-bold text-primary">
+                                    <%=text%>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <% } %>
+
+                            <!-- </div> -->
+            </div>
+
+            <%- include('../includes/end.ejs') %>

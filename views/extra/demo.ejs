@@ -1,0 +1,404 @@
+<%if(levelOneAssesssment){%>
+
+<form>
+    <div class="card shadow mb-4" id="Form3">
+        <div class="card-header">
+            <h3 class="m-0 font-weight-bold text-primary">L1 Assessment </h3>
+        </div>
+        <div class="card-body">
+            <div id="assessmentone">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <select class="form-control select2" name="l1assessment" id="l1assessment" required
+                                style="width:100%;">
+
+                                <option selected="selected"><%= levelOneAssesssment.Assessment %>
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <% if(levelOneAssesssment.Assessment && (levelOneAssesssment.Assessment === 'wd' 
+                                || levelOneAssesssment.Assessment === 'tac' || levelOneAssesssment.Assessment === 'good')) {%>
+                
+
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group ">
+                                <label>Client</label>
+                                <select class="form-control select2" name="client" id="client" required
+                                    style="width: 100%; ">
+
+                                    <option selected="selected "><%= levelOneAssesssment.client %>
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group ">
+                                <label for="Reference ">Process</label>
+                                <select class="form-control select2" name="process" style="width: 100%;" required>
+                                    <option selected="selected "><%= levelOneAssesssment.process %>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12 ">
+                            <div class="form-group ">
+                                <label for="Reference ">Interview</label>
+                                <input type="date" id="startDate" name="startDate" class="form-control"
+                                    value="<%= levelOneAssesssment.interview %>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="form-group ">
+                                <label>Remark</label>
+                                <textarea class="form-control" rows="5" id="remark" name='remarkDescription'
+                                    style="resize: none;" required>
+                                            <%= levelOneAssesssment.remark %>
+                                </textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+                <%}%>
+            </div>
+        </div>
+                        <!-- </form> -->
+    </div>
+</form>
+<%}%>
+
+                <%if(accountAccess && accountAccess === 'L1_ASSESSMENT'){%>
+                <% if(!levelOneAssesssment)
+	            { if(!levelOneTake){ %>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <form method="GET" action="/candidate/ajax/<%=candidateId %>">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" id="addL1Assessment" name="addL1Assessment"
+                                    value="Add L1 Assessment">
+
+                                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <% }else{ %>
+                <form action="/candidate/level-one-assessment" method="POST">
+                    <div class="card shadow mb-4" id="Form3">
+                        <div class="card-header">
+                            <h3 class="m-0 font-weight-bold text-primary">L1 Assessment </h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="assessmentone">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <select class="form-control select2" name="l1assessment" id="l1assessment"
+                                                required style="width:100%;" onclick="getNewData();">
+
+                                                <option selected="selected">Select</option>
+
+                                                <option value="number_not_reachable">NUMBER NOT
+                                                    REACHABLE</option>
+                                                <option value="did_not_pick">DIDN'T PICK</option>
+                                                <option value="wrong_number">WRONG NUMBER</option>
+                                                <option value="call_back">CALLBACK</option>
+                                                <option value="other_client">OTHER CLIENT</option>
+                                                <option value="wd">WD</option>
+                                                <option value="good">GOOD</option>
+                                                <option value="tac">TAC</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="visible"></div>
+                            </div>
+
+                            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                            <input type="hidden" name="candidateId" value="<%= candidateId%>">
+                            <input type="submit" class="btn btn-primary" id="third" value="Next">
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </form>
+                <% }}%>
+
+
+                <%  if (user !== "FULLTIME_RECRUITER" ||user !== "INTERN_OFF" ||
+                        user !== "INTERN_ON" ||user !== "FREELANCER") {%>
+                <% if(levelOneAssesssment != null && levelOneAssesssment != undefined && (levelOneAssesssment.dataValues.Assessment === 'wd' ||
+                                        levelOneAssesssment.dataValues.Assessment === 'good' || levelOneAssesssment.dataValues.Assessment === 'tac'))  {%>
+                <% if(leveltwoAssessment === null && leveltwoAssessment === undefined && !levelTwoTake ) { %>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <form method="GET" action="/candidate/ajaxSecond/<%=candidateId %>">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" id="addL2Assessment" name="addL2Assessment"
+                                    value="Add L2 Assessment">
+
+                                <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <% } else  {%>
+                <form action="/candidate/level-two-assessment" method="POST">
+                    <div class="card shadow mb-4 " id="Form3">
+                        <div class="card-header ">
+                            <h3 class="m-0 font-weight-bold text-primary ">L2 Assessment
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <!-- <form role="form "> -->
+
+                        <div class="card-body ">
+                            <div id="assessmentone">
+                                <div class="row ">
+                                    <div class="col-md-6 col-sm-12 ">
+                                        <div class="form-group ">
+                                            <label>L2 Assessment</label>
+                                            <select class="form-control select2" name="l2assessment" id="l2assessment"
+                                                required style="width: 100%;" onclick="getData();">
+
+
+                                                <option selected="selected">Select</option>
+                                                <option value="number_not_reachable">NUMBER NOT
+                                                    REACHABLE</option>
+                                                <option value="did_not_pick">DIDN'T PICK</option>
+                                                <option value="wrong_number">WRONG NUMBER</option>
+                                                <option value="call_back">CALLBACK</option>
+                                                <option value="other_client">OTHER CLIENT</option>
+                                                <option value="wd">WD</option>
+                                                <option value="new">NEW</option>
+                                                <option value="show">NOT SHOW</option>
+                                                <option value="good">GOOD</option>
+                                                <option value="tac">TAC</option>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div id="visible"></div>
+                            </div>
+
+                        </div>
+
+                        <!-- /.card-body -->
+
+                        <div class="card-footer ">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="hidden" name="candidateId" value="<%= candidateId%>">
+                            <input type="submit" class="btn btn-primary" id="third" value="Next">
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </form>
+                <% }}}%>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <%  if (accountAccess && (accountAccess === 'ALL' || accountAccess === 'L2_ASSESSMENT')){%>
+                                                <% if(levelOneAssesssment){ %>
+                                                <% if (levelOneAssesssment.dataValues.Assessment === 'wd' ||
+                                                        levelOneAssesssment.dataValues.Assessment === 'good' || 
+                                                        levelOneAssesssment.dataValues.Assessment === 'tac') {%>
+                                                <% if(!leveltwoAssessment && !levelTwoTake ) { %>
+
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <form method="GET"
+                                                            action="/candidate/ajaxSecond/<%=candidateId %>">
+                                                            <div class="form-group">
+                                                                <input type="submit" class="btn btn-primary"
+                                                                    id="addL2Assessment" name="addL2Assessment"
+                                                                    value="Add L2 Assessment">
+
+                                                                <input type="hidden" name="_csrf"
+                                                                    value="<%=csrfToken%>">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <% } else  {%>
+                                                <form action="/candidate/level-two-assessment" method="POST">
+                                                    <div class="card shadow mb-4 " id="Form3">
+                                                        <div class="card-header ">
+                                                            <h3 class="m-0 font-weight-bold text-primary ">L2 Assessment
+                                                            </h3>
+                                                        </div>
+                                                        <!-- /.card-header -->
+                                                        <!-- form start -->
+                                                        <!-- <form role="form "> -->
+
+                                                        <div class="card-body ">
+                                                            <div id="assessmentone">
+                                                                <div class="row ">
+                                                                    <div class="col-md-6 col-sm-12 ">
+                                                                        <div class="form-group ">
+                                                                            <label>L2 Assessment</label>
+                                                                            <select class="form-control select2"
+                                                                                name="l2assessment" id="l2assessment"
+                                                                                required style="width: 100%;"
+                                                                                onclick="getData();">
+
+
+                                                                                <option selected="selected">Select
+                                                                                </option>
+                                                                                <option value="number_not_reachable">
+                                                                                    NUMBER NOT
+                                                                                    REACHABLE</option>
+                                                                                <option value="did_not_pick">DIDN'T PICK
+                                                                                </option>
+                                                                                <option value="wrong_number">WRONG
+                                                                                    NUMBER</option>
+                                                                                <option value="call_back">CALLBACK
+                                                                                </option>
+                                                                                <option value="other_client">OTHER
+                                                                                    CLIENT</option>
+                                                                                <option value="wd">WD</option>
+                                                                                <option value="new">NEW</option>
+                                                                                <option value="show">NOT SHOW</option>
+                                                                                <option value="good">GOOD</option>
+                                                                                <option value="tac">TAC</option>
+
+
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div id="visible"></div>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <!-- /.card-body -->
+
+                                                        <div class="card-footer ">
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                            <input type="hidden" name="candidateId"
+                                                                value="<%= candidateId%>">
+                                                            <input type="submit" class="btn btn-primary" id="third"
+                                                                value="Next">
+                                                        </div>
+                                                        <!-- </form> -->
+                                                    </div>
+                                                </form>
+                                                <% }}else{%>
+
+                                                <% if(!levelOneAssesssment)
+	                                    { if(!levelOneTake){ %>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <form method="GET" action="/candidate/ajax/<%=candidateId %>">
+                                                            <div class="form-group">
+                                                                <input type="submit" class="btn btn-primary"
+                                                                    id="addL1Assessment" name="addL1Assessment"
+                                                                    value="Add L1 Assessment">
+
+                                                                <input type="hidden" name="_csrf"
+                                                                    value="<%=csrfToken%>">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <% }else{ %>
+                                                <form action="/candidate/level-one-assessment" method="POST">
+                                                    <div class="card shadow mb-4" id="Form3">
+                                                        <div class="card-header">
+                                                            <h3 class="m-0 font-weight-bold text-primary">L1 Assessment
+                                                            </h3>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="assessmentone">
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <select class="form-control select2"
+                                                                                name="l1assessment" id="l1assessment"
+                                                                                required style="width:100%;"
+                                                                                onclick="getNewData();">
+
+                                                                                <option selected="selected">Select
+                                                                                </option>
+
+                                                                                <option value="number_not_reachable">
+                                                                                    NUMBER NOT
+                                                                                    REACHABLE</option>
+                                                                                <option value="did_not_pick">DIDN'T PICK
+                                                                                </option>
+                                                                                <option value="wrong_number">WRONG
+                                                                                    NUMBER</option>
+                                                                                <option value="call_back">CALLBACK
+                                                                                </option>
+                                                                                <option value="other_client">OTHER
+                                                                                    CLIENT</option>
+                                                                                <option value="wd">WD</option>
+                                                                                <option value="good">GOOD</option>
+                                                                                <option value="tac">TAC</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="visible"></div>
+                                                            </div>
+
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                                                            <input type="hidden" name="candidateId"
+                                                                value="<%= candidateId%>">
+                                                            <input type="submit" class="btn btn-primary" id="third"
+                                                                value="Next">
+                                                        </div>
+                                                        <!-- </form> -->
+                                                    </div>
+                                                </form>
+
+                                                <%}}}%>
+
+                                            </div>
+
+                                        </div>
+
+
+
+       

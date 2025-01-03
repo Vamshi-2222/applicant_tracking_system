@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="/css/tag.css" rel="stylesheet" type="text/css">
+    <link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src='/js/registration.js'></script>
+</head>
+
+<body style="margin: 10px;">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <!-- Company Info -->
+                <div class="card card-primary " id="hiddenForm1">
+                    <div class="card-header ">
+                        <h3 class="card-title" style="text-align: center;">Company Role</h3>
+                    </div>
+                    <div role="form ">
+                        <div class="card-body ">
+                            <div class="row ">
+                                <div class="col-md-10 ">
+                                    <div class="form-group ">
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 ">
+                                    <div class="form-group ">
+                                        <button type="submit" class="btn btn-primary "><i class="fa fa-search"></i>
+                                            &ensp;Search&ensp;</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9 ">
+                                    <div class="form-check form-check-inline">
+
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios1" value="option1" checked>
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            All
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios1" value="option1">
+                                        <label class="form-check-label" for="exampleRadios1">
+                                            Active
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="exampleRadios"
+                                            id="exampleRadios2" value="option2">
+                                        <label class="form-check-label" for="exampleRadios2">
+                                            In-Active
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <hr>
+                            <div class="row ">
+                                <div class="col-md-3 ">
+                                    <button type="button" class="btn btn-primary "><i class="fa fa-plus"></i> &ensp;Add
+                                        Role &ensp;</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+
+
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="row" style="margin-top: 10vh;">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <!-- Company Info -->
+                <div class="card card-primary " id="hiddenForm1">
+                    <div class="card-header ">
+                        <h3 class="card-title" style="text-align: center;">New Role</h3>
+                    </div>
+                    <div role="form ">
+                        <div class="card-body ">
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Role</label>
+
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Status</label>
+                                        <select class="form-control select2 " style="width: 100%; " disabled>
+                                            <option selected="selected ">Select</option>
+                                            <option>In-Active</option>
+                                            <option>Active</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Designation</label>
+
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Role</label>
+
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Psuedo Name</label>
+
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-md-12">
+
+                                    <label for="comment">Qualification</label>
+
+                                    <!-- <input id="form-tags-3" name="states" type="text" value=""> -->
+                                    <textarea class="form-control" rows="2" name="states" style="resize: none;"></textarea>
+                                    <!-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple"
+                                        style="width: 100%;">
+                                        <option value="AL">10th</option>
+                                        <option value="WY">12th</option>
+                                        <option value="WY">B.Sc</option>
+                                        <option value="WY">M.Sc</option>
+
+                                    </select> -->
+                                </div>
+
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Job Location</label>
+
+                                        <select class="form-control select2 " style="width: 100%; ">
+                                            <option selected="selected ">Select</option>
+                                            <option>Allahabad</option>
+                                            <option>New Delhi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Salary</label>
+
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <fieldset class="form-group">
+                                <div class="row">
+
+                                    <div class="col-md-12 ">
+                                        <label for="comment" style="margin-right: 10px;">Cab Facility</label>
+
+                                        <div class="form-check form-check-inline">
+
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                id="exampleRadios1" value="option1" checked>
+                                            <label class="form-check-label" for="exampleRadios1">
+                                                All
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                id="exampleRadios1" value="option1">
+                                            <label class="form-check-label" for="exampleRadios1">
+                                                Active
+                                            </label>
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="exampleRadios"
+                                                id="exampleRadios2" value="option2">
+                                            <label class="form-check-label" for="exampleRadios2">
+                                                In-Active
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+
+                            <div class="row ">
+                                <div class="col-md-12">
+
+                                    <label for="comment">Required Document</label>
+
+                                    <select class="js-example-basic-multiple" name="states[]" multiple="multiple"
+                                        style="width: 100%;">
+                                        <option value="AL">Aadhaar</option>
+                                        <option value="WY">Pan card</option>
+                                        <option value="WY">Voter ID</option>
+                                        <option value="WY">Passport</option>
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Eligibility</label>
+
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label for="comment">Experience</label>
+
+                                        <input type="text " class="form-control " id="Reference "
+                                            placeholder="Company Name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-12 ">
+
+                                    <div class="form-group">
+                                        <label for="comment">Description</label>
+                                        <textarea class="form-control" rows="5" id="comment"
+                                            style="resize: none;"></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <hr>
+                            
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer ">
+                            <button type="submit" class="btn btn-primary ">Submit</button>
+                        </div>
+
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

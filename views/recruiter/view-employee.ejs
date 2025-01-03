@@ -1,0 +1,260 @@
+<%- include('../includes/head.ejs') %>
+    <link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <link href="/css/registrationForm.css" rel="stylesheet" type="text/css">
+    <link href="/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+
+            <div class="container-fluid">
+
+                <div class="row mx-2 mt-2">
+                    <div class="col-md-12">
+                        <!-- Form 1 for Personal Info -->
+                        <div class="card shadow mb-4" id="hiddenForm1">
+                            <div class="card-header ">
+                                <h3 class="m-0 font-weight-bold text-primary">Recruiter</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form role="form" >
+                                <div class="card-body ">
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <div class="form-group ">
+                                                <label for="name ">Full Name</label>
+                                                <input type="text" disabled class="form-control " id="name" name="fullname" value="<%= empData.dataValues.fullName %>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <label for="name ">Mobile</label>
+
+                                    <div class="row" id="files">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <input type="text" class="form-control " name="mobile" value="<%= empData.dataValues.phoneNumberOne %>" aria-label="Recipient 's username" aria-describedby="button-addon2" disabled>
+                                            </div>
+                                            <% if(empData.dataValues.phoneNumberTwo){ %>
+                                            <div class="form-group">
+
+                                                <input type="text" class="form-control " name="mobile" value="<%= empData.dataValues.phoneNumberTwo %>" aria-label="Recipient 's username" aria-describedby="button-addon2" disabled>
+                                            </div>
+                                            <%}%>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <% if(empData.dataValues.phoneNumberthree){ %>
+                                            <div class="form-group">
+
+                                                <input type="text" class="form-control " name="mobile" value="<%= empData.dataValues.phoneNumberthree %>" aria-label="Recipient 's username" aria-describedby="button-addon2" disabled>
+                                            </div>
+                                            <%} if(empData.dataValues.phoneNumberfour){ %>
+
+                                            <div class="form-group">
+
+                                                <input type="text" class="form-control " name="mobile" value="<%= empData.dataValues.phoneNumberfour %>" aria-label="Recipient 's username" aria-describedby="button-addon2" disabled>
+                                            </div>
+                                            <%}%>
+                            
+                                        </div>
+                                        
+                                    </div>
+
+                                    <label for="name">Email</label>
+                                    <div class="row" id="emailfiles">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="email" disabled value="<%= empData.dataValues.emailOne %>" aria-label="Recipient's username " aria-describedby="button-addon2 " >
+                                            </div>
+                                            <% if(empData.dataValues.emailTwo){ %>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="email" disabled value="<%= empData.dataValues.emailTwo %>" aria-label="Recipient's username " aria-describedby="button-addon2 " >
+                                            </div>
+                                            <%}%>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <% if(empData.dataValues.emailThree){ %>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="email" disabled value="<%= empData.dataValues.emailThree %>" aria-label="Recipient's username " aria-describedby="button-addon2 " >
+                                            </div>
+                                            <%} if(empData.dataValues.emailFour){ %>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" name="email" disabled value="<%= empData.dataValues.emailFour %>" aria-label="Recipient's username " aria-describedby="button-addon2 " >
+                                            </div>
+                                            <%}%>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-12 ">
+                                            <div class="form-group ">
+                                                <label>Address</label>
+                                                <input type="address" class="form-control" disabled value="<%= empData.dataValues.address %>" name="address">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label>DOB</label>
+                                                <input type="date" id="birthday " disabled name="birthday" value="<%= empData.dataValues.dob %>" class="form-control ">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label>Recruiter Type</label>
+                                                <select class="form-control select2 " style="width: 100%;" name="recruiterType" id="recruiterType" onclick="getUserList();" disabled>
+                                                <option selected><%= empData.dataValues.recruiterType %></option>
+                                                
+                                            
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label>DOJ</label>
+                                                <input type="date" id="birthday " name="doj" value="<%= empData.dataValues.doj %>" class="form-control " disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label>Account Access</label>
+                                                <select class="form-control select2" disabled name="accountAccess" style="width: 100%;" >
+                                                <option <%= (empData && empData.dataValues.accountAccess === 'L1_ASSESSMENT') ? 'selected': '' %>>L1 ASSESSMENT</option>
+                                <option  <%= (empData && empData.dataValues.accountAccess === 'L2_ASSESSMENT') ? 'selected': '' %>>L2 ASSESSMENT</option>
+                                <option  <%= (empData && empData.dataValues.accountAccess === 'ALL') ? 'selected': '' %>>ALL</option>                                            
+                                        </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" id="manager_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting Managers</label>
+                                            <select class="js-example-basic-multiple" name="reportingmanager"
+                                                id="reportingmanager" multiple="multiple" style="width: 100%;" disabled>
+                                                <% if(managerList.length > 0){ for (let src of managerList){ %>
+                                                    
+                                                    <option selected><%= src.name %></option>
+                                                    <%}}%>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="team_lead_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting TeamLead</label>
+                                            <select class="js-example-basic-multiple" name="reportingTeamLead"
+                                                id="reportingTeamLead" multiple="multiple" style="width: 100%;" disabled>
+                                                <% if(teamLeadList.length > 0){ for (let src of teamLeadList){ %>
+                                                    <option selected><%= src.name %></option>
+                                                    <%}}%>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="supervisior_div">
+                                <div class="col-md-12 col-sm-12 col-xl-12 mt-1">
+                                    <div class="s2-example">
+                                        <p>
+                                            <label>Reporting Supervisior</label>
+                                            <select class="js-example-basic-multiple" name="reportingSupervisior"
+                                                id="reportingSupervisior" multiple="multiple" style="width: 100%;" disabled>
+                                                <% if(supervisiorList.length > 0){ for (let src of supervisiorList){ %>
+                                                    <option selected><%= src.name %></option>
+                                                    <%}}%>
+                                            </select>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>OnBoarding</label>
+                                        <select disabled class="form-control select2 " style="width: 100%;" name="onboard"
+                                            id="onboard" >
+                                            <option value="PENDING" <%= (empData && empData.dataValues.onboarding === 'PENDING') ? 'selected': '' %>>PENDING</option>
+                                            <option value="DONE" <%= (empData && empData.dataValues.onboarding === 'DONE') ? 'selected': '' %>>DONE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Documentation</label>
+                                        <select disabled class="form-control select2 " style="width: 100%; " name="documentation"
+                                            >
+                                            <option value="PENDING" <%= (empData && empData.dataValues.documentation === 'PENDING') ? 'selected': '' %>>PENDING</option>
+                                            <option value="DONE" <%= (empData && empData.dataValues.documentation === 'DONE') ? 'selected': '' %>>DONE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select class="form-control select2 " style="width: 100%; " name="status"
+                                             disabled>
+                                            <option value="ACTIVE" <%= (empData && empData.dataValues.status === 'ACTIVE') ? 'selected': '' %>>ACTIVE</option>
+                                            <option value="IN-ACTIVE" <%= (empData && empData.dataValues.status === 'IN-ACTIVE') ? 'selected': '' %>>IN-ACTIVE</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer ">
+                                    <div>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <%- include('../includes/end2.ejs') %>

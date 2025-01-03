@@ -1,0 +1,794 @@
+<%- include('../includes/head.ejs') %>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+ <!-- <script type="text/javascript">
+        $(document).ready(function(){
+            $("#interviewschedule").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#leveltwoselect").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#getTotalLevelTwoDnd").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#getTotatLevelTwoWd").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#getNoShowLineUp").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#getTotalNoShow").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#getTotalAwaitJoin").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#getTotalTenureTracking").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#totalNonTenure").on('click', function(e){
+                e.preventDefault();
+            })
+            $("#getOfferDrop").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#needToBill").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#totalBilled").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getTotalHold").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getFSRReject").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getTotalAMCATReject").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getTotalGATReject").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getTotalVersantReject").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getTypingReject").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getRejectOPS").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getClientReject").on('click', function(e){
+                e.preventDefault();
+            })
+             $("#getRejectGroupDiscussion").on('click', function(e){
+                e.preventDefault();
+            })
+            
+
+            
+        })
+    </script> -->
+</head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs', {name: 'Amit', firstCharacter: 'A'}) %>
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+                </div>
+
+                <!-- Content Row -->
+                <div class="row">
+
+                    <!-- <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <a href="/candidate/callAssignCandidate/?page=1" style="text-decoration: none !important;" class="custom-card">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Assigned Candidates
+                                            </div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                <%= assignTask %>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div> -->
+
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <a href="/candidate/callFreshCandidate/?page=1" style="text-decoration: none !important;" class="custom-card">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Fresh Candidates
+                                            </div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                <%= totalFreshCandidateCount ? totalFreshCandidateCount : 0 %>
+                                            </div>
+                    
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <a href="/candidate/getTotalLevelOneDnd/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            L1 DND</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <%= totalLevelOneDnd ? totalLevelOneDnd : 0 %>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fa fa-tasks fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-primary text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalLevelOneWd/?page=1" style="text-decoration: none; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                L1 Will Decide
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalLevelOneWd? totalLevelOneWd : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="leveltwoselect">
+                        <div class="card bg-primary text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/levelTwoSelect/?page=1" style="text-decoration: none; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                L2 Awaiting
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalLevelTwoCount? totalLevelTwoCount : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalLevelTwoDnd">
+                        <div class="card bg-primary text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalLevelTwoDnd/?page=1" style="text-decoration: none; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                L2 DND
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalLevelTwoDnd? totalLevelTwoDnd : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotatLevelTwoWd">
+                        <div class="card bg-primary text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotatLevelTwoWd/?page=1" style="text-decoration: none; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                L2 Will Decide
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totatLevelTwoWd? totatLevelTwoWd : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getNoShowLineUp">
+                        <div class="card bg-info text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getNoShowLineUp/?page=1" style="text-decoration: none !important;  color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                No Show: Line up
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalL2NoShow ? totalL2NoShow : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalNoShow">
+                        <div class="card bg-danger text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalNoShow/?page=1" style="text-decoration: none !important;  color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                No Show : Interview
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalNoShow !== null ? totalNoShow : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="interviewschedule">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getInterviewList/?page=1" style="text-decoration: none!important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    Interview Scheduled
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalSelected ? totalSelected : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalInterScheduleTelephonic/?page=1"
+                                style="text-decoration: none!important; color: aliceblue;" class="custom-card">
+                                <div class="card-body">
+                                    Interview Schedule(Tel)
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalInterScheduleTelephonic ? totalInterScheduleTelephonic : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalInProcessI/?page=1" style="text-decoration: none!important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    Interview In Process
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalInProcessI ? totalInProcessI : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalTrainAndHired/?page=1" style="text-decoration: none!important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    Train And Hire
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalTrainAndHired ? totalTrainAndHired : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalRampdown/?page=1" style="text-decoration: none!important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    Rampdown
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalRampdown ? totalRampdown : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLOneBlackList/?page=1" style="text-decoration: none!important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    L1 Blacklist
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLOneBlackList ? totalLOneBlackList : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLTwoBlackList/?page=1" style="text-decoration: none!important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    L2 Blacklist
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLTwoBlackList ? totalLTwoBlackList : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalAwaitJoin">
+                        <div class="card bg-light text-black shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalAwaitJoin/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                Awaiting Join
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalAwaitJoin !== null ? totalAwaitJoin : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalTenureTracking">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <a href="/candidate/getTotalTenureTracking/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Tenure Tracking</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <%= totalTracking? totalTracking : 0 %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  -->
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="totalNonTenure">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <a href="/candidate/totalNonTenure/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Non Tenure</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <%= totalNonTenure? totalNonTenure: 0 %>  
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                
+
+                <!-- <div class="row"> -->
+
+                    <!-- Earnings (Monthly) Card Example -->
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4" id="needToBill">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <a href="/candidate/needToBill/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Need to Bill</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <%= totalNeedToBilled? totalNeedToBilled: 0 %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4" id="totalBilled">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <a href="/candidate/totalBilled/?page=1" style="text-decoration: none !important;" class="custom-card">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Billed
+                                            </div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                <%= totalBilled? totalBilled : 0 %>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Pending Requests Card Example -->
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalHold">
+                        <div class="card bg-dark text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalHold/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Process Hold
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalHold !== null ? totalHold : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                <!-- </div> -->
+
+                <!-- <div class="row"> -->
+
+                    
+
+                    <!-- <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-primary text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getOfferDrop/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Offer Drop
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalOfferDrop !== null ? totalOfferDrop : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div> -->
+
+
+
+
+
+
+                    <!-- <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalL1Reject/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Reject:L1
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalL1Reject ? totalL1Reject : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4" id="totalL2Reject">
+                        <div class="card bg-info text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalL2Reject/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Reject:L2
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalL2Reject ? totalL2Reject : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div> -->
+
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalL1Reject/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NE-L1
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalL1Reject ? totalL1Reject : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-info text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalL2Reject/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NE-L2
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalL2Reject ? totalL2Reject : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLOneInJob/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NI-IN-JOB:L1
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLOneInJob ? totalLOneInJob : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-info text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLOneExperienced/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NI-EXPERIENCED:L1
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLOneExperienced ? totalLOneExperienced : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLOneFresher/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NI-CONVINCING:L1
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLOneFresher ? totalLOneFresher : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-info text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLtwoInJob/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NI-IN-JOB:L2
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLtwoInJob ? totalLtwoInJob : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-success text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLtwoExperienced/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NI-EXPERIENCED:L2
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLtwoExperienced ? totalLtwoExperienced : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card bg-info text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/totalLTwoFresher/?page=1" style="text-decoration: none !important; color: aliceblue;"
+                                class="custom-card">
+                                <div class="card-body">
+                                    NI-CONVINCING:L2
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                        <%= totalLTwoFresher ? totalLTwoFresher : 0 %>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getFSRReject">
+                        <div class="card bg-warning text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getFSRReject/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Reject:FSR
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalGetFSRReject !== null ? totalGetFSRReject : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalAMCATReject">
+                        <div class="card bg-danger text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalAMCATReject/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Reject:AMCAT
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalAMCATReject !== null ? totalAMCATReject : 0 %> 
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalGATReject">
+                        <div class="card bg-secondary text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalGATReject/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Reject:GAT
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                   <%= totalGATReject !== null ? totalGATReject : 0 %> 
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTotalVersantReject">
+                        <div class="card bg-light text-black shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTotalVersantReject/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                Reject:Versant
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                   <%= totalVersantReject !== null ? totalVersantReject : 0 %> 
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4" id="getTypingReject">
+                        <div class="card bg-dark text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getTypingReject/?page=1" style="text-decoration: none !important;  color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Reject:Typing
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalTypingReject !== null ? totalTypingReject : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getRejectOPS">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <a href="/candidate/getRejectOPS/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Reject:Ops</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <%= totalOpsReject !== null ? totalOpsReject : 0 %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    
+                <!-- </div> -->
+
+                <!-- <div class="row"> -->
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4" id="getClientReject">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <a href="/candidate/getClientReject/?page=1" style="text-decoration: none !important;" class="custom-card">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Reject:Client</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <%= totalClientReject !== null ? totalClientReject : 0 %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Earnings (Monthly) Card Example -->
+                    <div class="col-xl-3 col-md-6 mb-4" id="getRejectGroupDiscussion" >
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <a href="/candidate/getRejectGroupDiscussion/?page=1" style="text-decoration: none !important;" class="custom-card">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Reject:Group Discussion
+                                            </div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                <%= groupReject !== null ? groupReject : 0 %>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4" id="getOfferDrop">
+                        <div class="card bg-primary text-white shadow border-left-secondary h-100 py-2">
+                            <a href="/candidate/getOfferDrop/?page=1" style="text-decoration: none !important; color: aliceblue;" class="custom-card">
+                            <div class="card-body">
+                                Offer Drop
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">
+                                    <%= totalOfferDrop !== null ? totalOfferDrop : 0 %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <a href="/candidate/totalWrongNumber/?page=1" style="text-decoration: none !important;" class="custom-card">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">WRONG NUMBER : L1 </div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                <%= totalWrongNumber !== null ? totalWrongNumber : 0 %>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <!-- Pending Requests Card Example -->
+                <!-- </div> -->
+
+                <!-- Content Row -->
+
+            </div>
+
+
+   
+            <!-- /.container-fluid -->
+            <%- include('../includes/end.ejs') %>

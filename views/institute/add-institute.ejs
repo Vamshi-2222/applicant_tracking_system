@@ -1,0 +1,501 @@
+<%- include('../includes/head.ejs') %>
+
+    <link href="/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="/css/tag.css" rel="stylesheet" type="text/css">
+    <link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src='/js/registration.js'></script>
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+
+            <div class="container-fluid">
+            
+                <div class="row mx-2 mt-2">
+            
+                    <div class="col-md-12">
+            
+                        <div class="card shadow mb-4">
+            
+                            <div class="card-body ">
+            
+            
+                                <div class="tab-content" id="nav-tabContent">
+            
+                                    <form action="/institute/new-institute-add" method="POST">
+            
+                                        <div class="tab-pane fade show active" id="nav-personal" role="tabpanel"
+                                            aria-labelledby="nav-personal-tab">
+            
+                                            <div>
+                                                <div class="card shadow mb-4" id="Form1">
+                                                    <div class="card-header ">
+                                                        <h3 class="m-0 font-weight-bold text-primary ">
+                                                            Add Institute
+                                                        </h3>
+                                                    </div>
+                                                    <!-- /.card-header -->
+                                                    <!-- form start -->
+                                                    <!-- <form role="form "> -->
+                                                    <div class="card-body">
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label for="name ">Institute Name</label>
+                                                                    <input type="text " class="form-control " id="institute_name"
+                                                                        name="institute_name" placeholder="Institute Name" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="row ">
+                                                            <div class="col-md-6 ">
+                                                                <div class="form-group ">
+                                                                    <label>City</label>
+                                                                    <select class="form-control select2 " style="width: 100%; "
+                                                                        name="city" id="city" required>
+                                                                        <option selected value="">SELECT</option>
+                                                                        <% if(locationData.length> 0) {%>
+                                                                            <% for (let src of locationData) {%>
+                                                                                <option value="<%=src %>">
+                                                                                    <%=src %>
+                                                                                </option>
+                                                                                <%}%>
+                                                                                    <% } %>
+                                                                    </select>
+                                                                    
+                                                                </div>
+            
+                                                            </div>
+                                                        </div>
+            
+            
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label for="name ">Timing</label>
+                                                                    <input type="text " class="form-control " id="timing"
+                                                                        name="timimg" placeholder="Timing" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+            
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label for="name ">Strength</label>
+                                                                    <input type="text " class="form-control " id="strength"
+                                                                        name="strength" placeholder="Strength" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label for="name ">Course Offered</label>
+                                                                    <input type="text " class="form-control " id="course_offered"
+                                                                        name="course_offered" placeholder="Course Offered" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="row ">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label for="name ">Address</label>
+                                                                    <input type="text " class="form-control " id="address"
+                                                                        name="address" placeholder="Address" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+            
+                                                        <div id="source">
+                                                            <hr>
+                                                            <div class="row ">
+                                                                <div class="col-md-12 ">
+                                                                    <div class="form-group ">
+                                                                        <label>POC Name</label>
+                                                                        <input type="text " class="form-control " id="poc_name1"
+                                                                            name="poc_name1" placeholder="POC Name" required>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+            
+                                                            <div class="row ">
+                                                                <div class="col-md-12 ">
+                                                                    <div class="form-group ">
+                                                                        <label>Designation</label>
+                                                                        <input type="text " class="form-control " id="designation1"
+                                                                            name="designation1" placeholder="Designation" >
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row ">
+                                                                <div class="col-md-6 ">
+                                                                    <div class="form-group ">
+                                                                        <label>Email</label>
+                                                                        <input type="text " class="form-control " id="email1"
+                                                                            name="email1" placeholder="Email">
+            
+                                                                    </div>
+                                                                </div>
+            
+                                                                <div class="col-md-6 ">
+                                                                    <div class="form-group ">
+                                                                        <label>Mobile</label>
+                                                                        <input type="text " class="form-control " id="mobile1"
+                                                                            name="mobile1" placeholder="Mobile">
+            
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+            
+                                                        
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group ">
+                                                                    <label>Add more</label>
+                                                                    <button type="button" class="btn btn-primary" id="addRow"
+                                                                        onclick="addInstitute();">
+                                                                        <i class="fa fa-plus">
+                                                                        </i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <input type="hidden" name="instituteCount" id="instituteCount">
+
+
+                                                        <div class="row ">
+                                                            <div class="col-md-4 ">
+                                                                <div class="form-group ">
+                                                                    <label>Degree</label>
+                                                                    <select class="form-control select2 " style="width: 100%; " name="degree" id="degree" required>
+                                                                        <option selected value="">SELECT</option>
+                                                                        <option value="B.Tech">B.Tech</option>
+                                                                        <option value="B.Tech + M">B.Tech + M</option>
+                                                                        <option value="Degree">Degree</option>
+                                                                        <option value="Degree + M">Degree + M</option>
+                                                                        <option value="Hotel Management">Hotel Management</option>
+                                                                        <option value="Management">Management</option>
+                                                                        <option value="Skill Development">Skill Development</option>
+                                                                        <option value="Pharma">Pharma</option>
+                                                                        <option value="Pharma + M">Pharma + M</option>
+                                                                        <option value="Aviation">Aviation</option>
+                                                                        <option value="CA">CA</option>
+                                                                        <option value="Softskills">Softskills</option>
+                                                                        <option value="IT Skill Center">IT Skill Center</option>
+                                                                        <option value="Consultancy">Consultancy</option>
+                                                                                
+                                                                    </select>
+                                                                    
+                                                                </div>
+                                                        
+                                                            </div>
+
+                                                            <div class="col-md-4 ">
+                                                                <div class="form-group ">
+                                                                    <label>Internship</label>
+                                                                    <select class="form-control select2 " style="width: 100%; " name="internship" id="internship" required>
+                                                                        <option selected value="">SELECT</option>
+                                                                        <option value="YES">YES</option>
+                                                                        <option value="N2A">N2A</option>
+                                                                        <option value="NO">NO</option>
+                                                                        <option value="FOLLOW-UP">FOLLOW-UP</option>
+                                                                        
+                                                            
+                                                                    </select>
+                                                            
+                                                                </div>
+                                                            
+                                                            </div>
+
+                                                            <div class="col-md-4 ">
+                                                                <div class="form-group ">
+                                                                    <label>CRT</label>
+                                                                    <select class="form-control select2 " style="width: 100%; " name="crt" id="crt" required>
+                                                                        <option selected value="">SELECT</option>
+                                                                        <option value="N2A">N2A</option>
+                                                                        <option value="NOT INTERESTED">NOT INTERESTED</option>
+                                                                        <option value="IN PROCESS">IN PROCESS</option>
+                                                                        <option value="FOLLOW-UP">FOLLOW-UP</option>
+                                                            
+                                                            
+                                                                    </select>
+                                                            
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+            
+                                                        <div class="row ">
+                                                            <div class="col-md-6 ">
+                                                                <div class="form-group ">
+                                                                    <label>Drive Report</label>
+                                                                    <select class="form-control select2 " style="width: 100%; " name="drive_report" id="drive_report" required>
+                                                                        <option selected value="">SELECT</option>
+                                                                        <option value="YES">YES</option>
+                                                                        <option value="NO">NO</option>
+                                                                    </select>
+                                                            
+                                                                </div>
+                                                            
+                                                            </div>
+
+                                                            <div class="col-md-6 ">
+                                                                <div class="form-group ">
+                                                                    <label>Institute Status</label>
+                                                                    <select class="form-control select2 " style="width: 100%; " name="institute_status" id="institute_status" required>
+                                                                        <option selected value="">SELECT</option>
+                                                                        <option value="N2A">N2A</option>
+                                                                        <option value="DRIVE DONE">DRIVE DONE</option>
+                                                                        <option value="AWAITING DRIVE">AWAITING DRIVE</option>
+                                                                        <option value="FOLLOW-UP">FOLLOW-UP</option>
+                                                                        <option value="NI">NI</option>
+                                                                        <option value="CALLBACK">CALLBACK</option>
+                                                            
+                                                            
+                                                                    </select>
+                                                            
+                                                                </div>
+                                                            
+                                                            </div>
+
+                                                        </div>
+            
+                                                        <div class="row ">
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="form-group ">
+                                                                    <label>Remarks</label>
+                                                                    <textarea class="form-control" rows="5" id="remark" name='remark' style="resize: none;" required
+                                                                        ></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+            
+                                                    </div>
+                                                    <!-- /.card-body -->
+
+                                                    <div class="card-footer" id="button_hide_two">
+                                                        <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                                                        <input type="submit" class="btn btn-primary" value="Submit">
+                                                    </div>
+                                                </div>
+                                            </div>
+            
+                                        </div>
+            
+            
+                                    </form>
+                                </div>
+            
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $("#mobile1").on("keyup", function () {
+                        console.log("#mobile1")
+                        let inputValue = $(this).val();
+                        getMobile(inputValue, "#mobile1")
+
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#mobile2").on("keyup", function (event) {
+                        let inputValue = $(this).val();
+                        getMobile(inputValue, "#mobile2")
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#mobileone").on("keyup", function () {
+                        let inputValue = $(this).val();
+                        getMobile(inputValue, "#mobileone")
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#mobile3").on("keyup", function () {
+                        let inputValue = $(this).val();
+                        getMobile(inputValue, "#mobile3")
+
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#emailone").on("keyup", function () {
+                        let inputValue = $(this).val();
+                        getEmail(inputValue, "#emailone")
+
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#email1").on("keyup", function (event) {
+                        let inputValue = $(this).val();
+                        getEmail(inputValue, "#email1")
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#email2").on("keyup", function () {
+                        let inputValue = $(this).val();
+                        getEmail(inputValue, "#email2")
+                    });
+                });
+
+                $(document).ready(function () {
+                    $("#email3").on("keyup", function () {
+                        let inputValue = $(this).val();
+                        getEmail(inputValue, "#email3")
+
+                    });
+                });
+
+                function getMobile(inputValue, divId) {
+                    var temp, divCId;
+                    $.ajax({
+                        type: "GET",
+                        url: "/ajax/checkmobile/",
+                        data: "value=" + inputValue,
+                        //dataType: "html", //expect html to be returned
+                        success: function (response) {
+                            console.log(response);
+                            if (response === 'YES')
+                                temp = 'YES';
+                            else
+                                temp = 'NO';
+
+                            if (temp && temp === 'YES') {
+                                if (divId === "#mobile1") {
+                                    $("#mobile1err").html("Mobile already exist!");
+                                }
+                                if (divId === "#mobile2") {
+                                    $("#mobile2err").html("Mobile already exist!");
+                                }
+                                if (divId === "#mobile3") {
+                                    $("#mobile3err").html("Mobile already exist!");
+                                }
+                                if (divId === "#mobileone") {
+                                    $("#mobileoneerr").html("Mobile already exist!");
+                                }
+
+                                $("#firstsubmit").attr('disabled', true);
+                            }
+                            else if (temp && temp === 'NO' && (inputValue.length < 10 || inputValue.length > 10 || inputValue.length !== 10)) {
+                                console.log(temp);
+                                if (divId === "#mobile1") {
+                                    $("#mobile1err").show()
+                                    $("#mobile1err").html("Mobile should be 10 digit!");
+                                }
+                                if (divId === "#mobile2") {
+                                    $("#mobile2err").show()
+                                    $("#mobile2err").html("Mobile should be 10 digit!");
+                                }
+                                if (divId === "#mobile3") {
+                                    $("#mobile3err").show()
+                                    $("#mobile3err").html("Mobile should be 10 digit!");
+                                }
+                                if (divId === "#mobileone") {
+                                    $("#mobileoneerr").show()
+                                    $("#mobileoneerr").html("Mobile should be 10 digit!");
+                                }
+                                $("#firstsubmit").attr('disabled', true);
+
+                            }
+                            else if (inputValue.length === 10) {
+
+                                if (divId === "#mobile1") {
+                                    $("#mobile1err").hide();
+                                }
+                                if (divId === "#mobile2") {
+                                    $("#mobile2err").hide();
+                                }
+                                if (divId === "#mobile3") {
+                                    $("#mobile3err").hide();
+                                }
+                                if (divId === "#mobileone") {
+                                    $("#mobileoneerr").hide();
+                                }
+                                $("#firstsubmit").attr('disabled', false);
+
+
+                            }
+                        }
+                    });
+                }
+
+                function getEmail(inputValue, divId) {
+                    var temp, divCId;
+                    $.ajax({
+                        type: "GET",
+                        url: "/ajax/checkemail/",
+                        data: "value=" + inputValue,
+                        //dataType: "html", //expect html to be returned
+                        success: function (response) {
+                            console.log(response);
+                            if (response === 'YES')
+                                temp = 'YES';
+                            else
+                                temp = 'NO';
+
+                            if (temp && temp === 'YES') {
+                                if (divId === "#email1") {
+                                    $("#email1err").show();
+                                    $("#email1err").html("Email already exist!");
+                                }
+                                if (divId === "#email2") {
+                                    $("#email2err").show();
+                                    $("#email2err").html("Email already exist!");
+                                }
+                                if (divId === "#email3") {
+                                    $("#email3err").show();
+                                    $("#email3err").html("Email already exist!");
+                                }
+                                if (divId === "#emailone") {
+                                    $("#emailoneerr").show();
+                                    $("#emailoneerr").html("Email already exist!");
+
+                                }
+
+                                $("#firstsubmit").attr('disabled', true);
+                            }
+                            else if (temp && temp === 'NO') {
+                                console.log(temp);
+                                if (divId === "#email1") {
+                                    $("#email1err").hide();
+                                }
+                                if (divId === "#email2") {
+                                    $("#email2err").hide();
+                                }
+                                if (divId === "#email3") {
+                                    $("#email3err").hide();
+                                }
+                                if (divId === "#emailone") {
+                                    $("#emailoneerr").hide();
+                                }
+
+                                $("#firstsubmit").attr('disabled', false);
+
+                            }
+
+                        }
+                    });
+                }
+            </script>
+            <%- include('../includes/end2.ejs') %>

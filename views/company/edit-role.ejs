@@ -1,0 +1,385 @@
+<%- include('../includes/head.ejs') %>
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    <link href="/css/select2.css" rel="stylesheet" type="text/css">
+        <link href="/css/tag.css" rel="stylesheet" type="text/css">
+
+
+    <link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script src='/js/registration.js'></script>
+
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+
+            <div class="container-fluid">
+
+                <% if(view) {%>
+                    <div class="row mx-2 mt-2">
+                        <div class="col-md-12">
+                            <!-- Company Info -->
+                            <div class="card shadow mb-4 ">
+                                <div class="card-header ">
+                                    <h3 class="m-0 font-weight-bold text-primary" style="text-align: center;">New Role</h3>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row ">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label for="companyName">Company Name</label>
+
+                                                <input type="text" class="form-control" name="role" id="Reference " placeholder="Company Name" value="<%= name %>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label for="comment">Status</label>
+                                                <select class="form-control select2" name="status" style="width: 100%; " disabled>
+                                            
+                                            <option selected="selected "><%= role.dataValues.status %></option>
+                                            
+                                        </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label for="designation">Designation</label>
+
+                                                <input type="text" class="form-control" name="designation" id="designation" value="<%= role.dataValues.designation%>" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group">
+                                                <label for="role">Role</label>
+
+                                                <input type="text" class="form-control " id="role" name="role" value="<%= role.dataValues.role%>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-12 ">
+                                            <div class="form-group ">
+                                                <label for="psuedoname">Psuedo Name</label>
+
+                                                <input type="text" class="form-control" id="psuedoname" name="psuedoname" value="<%= role.dataValues.pseudoName%>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <div class="form-group ">
+                                                <div class="s2-example">
+
+                                                    <label for="comment">Qualification</label>
+                                                    <textarea class="form-control" rows="2" name="qualification" style="resize: none;" disabled><%= qualification ? qualification: '' %> </textarea>
+
+                                                    <!-- <select class="js-example-basic-multiple" name="qualification" multiple="multiple" style="width: 100%;" disabled>
+                                                        
+
+                                                   </select> -->
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label for="comment">Job Location</label>
+
+                                                <select class="form-control select2" name="jobLocation" style="width: 100%;" disabled>
+                                            <option selected="selected"><%= role.dataValues.jobLocation%></option>
+                                            
+                                        </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <div class="form-group ">
+                                                <label for="salary">Salary</label>
+
+                                                <input type="text" class="form-control " id="salary" name="salary" placeholder="Salary" value="<%= role.dataValues.salary%>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <fieldset class="form-group" disabled>
+                                        <div class="row">
+
+                                            <div class="col-md-12 ">
+                                                <label for="comment" style="margin-right: 10px;">Cab Facility</label>
+
+                                                <div class="form-check form-check-inline">
+
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Yes" checked="<%= role.dataValues.cabFacility === 'Yes'?true:false %>">
+                                                    <label class="form-check-label" for="Yes">
+                                                Yes
+                                            </label>
+                                                </div>
+
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="no" checked="<%= role.dataValues.cabFacility === 'no'?true:false %>">
+                                                    <label class="form-check-label" for="no">
+                                                No
+                                            </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+
+                                    <div class="row ">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+
+                                                <label for="comment">Required Document</label>
+
+                                                <input type="text" class="form-control " id="documents" name="documents" value="<%= role.dataValues.documents%>" disabled>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-12 ">
+                                            <div class="form-group ">
+                                                <label for="eligibility">Eligibility</label>
+                                                <input type="text" class="form-control " id="eligibility" name="eligibility" placeholder="Eligibility" value="<%= role.dataValues.eligibility%>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-12 ">
+                                            <div class="form-group ">
+                                                <label for="experience">Experience</label>
+
+                                                <input type="text" class="form-control " id="experience" name="experience" placeholder="Experience" value="<%= role.dataValues.experience%>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row ">
+                                        <div class="col-md-12 ">
+
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea class="form-control" rows="5" id="description" name="description" style="resize: none;" disabled>
+                                                <%= role.dataValues.jobDescription%>
+                                                </textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+
+
+
+                                <!-- /.card-body -->
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+
+                        <% if(edit) {%>
+                            <div class="row mx-2 mt-2">
+                                <div class="col-md-12">
+                                    <!-- Company Info -->
+                                    <div class="card shadow mb-4 ">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary" style="text-align: center;">New Role</h3>
+                                        </div>
+                                        <form action="/company/updateRoleID" method="POST">
+                                            <div class="card-body">
+                                                <div class="row ">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label for="companyName">Company Name</label>
+
+                                                            <input type="text" class="form-control" name="role" id="Reference " placeholder="Company Name" value="<%= name %>" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label for="comment">Status</label>
+                                                            <select class="form-control select2" name="status" style="width: 100%; " required>
+                                            <option>Select</option>
+                                            <option selected="selected ">In-Active</option>
+                                            <option>Active</option>
+                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row ">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label for="designation">Designation</label>
+
+                                                            <input type="text" class="form-control" name="designation" id="designation" placeholder="Designation" value="<%= role.dataValues.designation%>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group">
+                                                            <label for="role">Role</label>
+
+                                                            <input type="text" class="form-control " id="role" name="role" placeholder="Role" value="<%= role.dataValues.role%>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-md-12 ">
+                                                        <div class="form-group ">
+                                                            <label for="psuedoname">Psuedo Name</label>
+
+                                                            <input type="text" class="form-control" id="psuedoname" name="psuedoname" placeholder="Psuedo Name" value="<%= role.dataValues.pseudoName%>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group ">
+                                                            <div class="s2-example">
+
+                                                                <label for="comment">Qualification</label>
+                                                                <!-- <input id="form-tags-3" name="qualification" type="text" value=""> -->
+                                                                <textarea class="form-control" rows="2" name="qualification" style="resize: none;" ></textarea>
+                                                                <!-- <select class="js-example-basic-multiple" name="qualification" multiple="multiple" style="width: 100%;" required>
+                                        <option>10th</option>
+                                        <option>12th</option>
+                                        <option>B.Sc</option>
+                                        <option>M.Sc</option>
+
+                                    </select> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row ">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label for="comment">Job Location</label>
+
+                                                            <select class="form-control select2" name="jobLocation" style="width: 100%;" required>
+                                            <option value="">Select</option>
+                                            <%if(location.length > 0) {for(let src of location){%>
+                                                <option value="<%=src%>"><%=src%></option>
+                                            <%}}%>
+                                        </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label for="salary">Salary</label>
+
+                                                            <input type="text" class="form-control " id="salary" name="salary" placeholder="Salary" value="<%= role.dataValues.salary%>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <fieldset class="form-group">
+                                                    <div class="row">
+
+                                                        <div class="col-md-12 ">
+                                                            <label for="comment" style="margin-right: 10px;">Cab Facility</label>
+
+                                                            <div class="form-check form-check-inline">
+
+                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Yes" checked>
+                                                                <label class="form-check-label" for="Yes">
+                                                Yes
+                                            </label>
+                                                            </div>
+
+                                                            <div class="form-check form-check-inline">
+                                                                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="no">
+                                                                <label class="form-check-label" for="no">
+                                                No
+                                            </label>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </fieldset>
+
+                                                <div class="row ">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+
+                                                            <label for="comment">Required Document</label>
+
+                                                            <input type="text" class="form-control " id="documents" name="documents" placeholder="Document" value="<%= role.dataValues.documents%>" required>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row ">
+                                                    <div class="col-md-12 ">
+                                                        <div class="form-group ">
+                                                            <label for="eligibility">Eligibility</label>
+                                                            <input type="text" class="form-control " id="eligibility" name="eligibility" placeholder="Eligibility" value="<%= role.dataValues.eligibility%>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row ">
+                                                    <div class="col-md-12 ">
+                                                        <div class="form-group ">
+                                                            <label for="experience">Experience</label>
+
+                                                            <input type="text" class="form-control " id="experience" name="experience" placeholder="Experience" value="<%= role.dataValues.experience%>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row ">
+                                                    <div class="col-md-12 ">
+
+                                                        <div class="form-group">
+                                                            <label for="description">Description</label>
+                                                            <textarea class="form-control" rows="5" id="description" name="description" style="resize: none;" required>
+                                                            <%= role.dataValues.jobDescription%>
+                                                            </textarea>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                            </div>
+
+                                            <div class="card-footer ">
+                                                <div>
+                                                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                </div>
+                                                <input type="hidden" name="companyID" value="<%= companyID%>">
+                                                <input type="hidden" name="roleID" value="<%= roleID %>">
+                                                <button type="submit" class="btn btn-primary ">Submit</button>
+                                            </div>
+
+                                        </form>
+                                        <!-- /.card-body -->
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+
+            </div>
+
+            <%- include('../includes/end2.ejs') %>

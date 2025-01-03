@@ -1,0 +1,258 @@
+<%- include('../includes/head.ejs') %>
+<link href="/css/company.css" rel="stylesheet" type="text/css">
+</head>
+
+<body id="page-top">
+
+    <%- include('../includes/drawer.ejs') %>
+
+    <a class="float-right shadow p-3 mb-2 bg-white rounded" href="#page-bottom">
+        <i class="fas fa-angle-down"></i>
+    </a>
+
+    <div class="container-fluid">
+        <% if(table) {%>
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card shadow mb-4">
+                    <div class="table-responsive">
+                        <div class="table-wrapper">
+
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <h2 class="m-0 font-weight-bold text-primary">
+                                            Candidate
+                                            <b>Details</b>
+                                        </h2>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <table class="table table-striped table-bordered table-sm" cellspacing="0"
+                                  width="100%" id="dtHorizontalExample" name="dtHorizontalExample" style="margin-right: 10px;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">EMP ID</th>
+                                        <% if(!fresh) {%>
+                                        <th scope="col">ASSIGNED</th>
+                                        <% } %>
+                                        <th scope="col">Candidate Name</th>
+                                        <th scope="col">Mobile 1</th>
+                                        <th scope="col">Mobile 2</th>
+                                        <th scope="col">Created Date</th>
+                                        <th scope="col">L1 Status</th>
+                                        <th scope="col">L1 Client</th>
+                                        <th scope="col">L1 Process</th>
+                                        <th scope="col">L1 Date</th>
+                                        <th scope="col">L2 Status</th>
+                                        <th scope="col">L2 Client</th>
+                                        <th scope="col">L2 Process</th>
+                                        <th scope="col">L2 Date</th>
+                                        <th scope="col">Interview Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(candidateData.length > 0 )   {%>
+                                    <% let i=1; for (let src of candidateData) { 
+                                        var text = src.l_one_remark+'---'+src.l_one_modified+'---'+src.l_two_remark+'---'+src.l_two_modified+'---'+src.l_two_i_remark %>
+                                    <tr>
+                                        <th scope="row">
+                                            <button type="button" class="btn btn-primary btn-circle" onclick="show(`<%=text%>`)"><%=i%></button>
+                                        </th> 
+                                        <td>
+                                            <%=src.eName ? src.eName: "" %>
+                                        </td>
+                                        <%if(!fresh){%>
+                                        <td>
+                                            <% for (let em of empList) { if(src.id === em.canId){%>
+                                            <%=em.empName ? em.empName: "" %>
+                                            <%}}%>
+                                        </td>
+                                        <%}%>
+                                        <td>
+                                            <%=src.name ? src.name: "" %>
+                                        </td>
+                                        <td>
+                                            <%=src.mobone ? src.mobone: "" %>
+                                        </td>
+                                        <td>
+                                            <%=src.mobtwo ? src.mobtwo: "" %>
+                                        </td>
+                                        <td>
+                                            <%=src.createdDate ? src.createdDate: "" %>
+                                        </td>
+                                        <td>
+                                            <%=src.l_one_assessment ? src.l_one_assessment: "" %>
+                                        </td>
+                                        <td>
+                                             <% var roless = []; if(companyValue && companyValue.length > 0){ 
+                                                                for(let sr of companyValue){
+                                                                    if(sr.id == src.l_one_assessment_client ){
+                                                                        roless = sr.roleData; %>    
+                                                                <%=sr.name ? sr.name : "" %>
+                                             <%}}}%>
+                                            
+                                        </td>
+                                        <td>
+                                            <%if(roless && roless.length > 0){
+                                                                    for(let s of roless){
+                                                                       if(s.id == src.l_one_assessment_process ){ %>  
+                                                                <%=s.pseudoName ? s.pseudoName : "" %>
+                                                                        <%}}}%>
+                                        </td>
+                                       
+                                        <td>
+                                            <%=src.l_one_assessment_interview ? src.l_one_assessment_interview : ""%>
+                                        </td>
+
+                                         <td>
+                                            <%=src.l_two_status ? src.l_two_status: "" %>
+                                        </td>
+                                        <td>
+                                            <% var rolesss = []; if(companyValue && companyValue.length > 0){ 
+                                                                for(let sr of companyValue){
+                                                                    if(sr.id == src.l_two_client ){
+                                                                        rolesss = sr.roleData; %>    
+                                                                <%=sr.name ? sr.name : "" %>
+                                             <%}}}%>
+                                        </td>
+                                        <td>
+                                            <%if(rolesss && rolesss.length > 0){
+                                                                    for(let s of rolesss){
+                                                                       if(s.id == src.l_two_process ){ %>  
+                                                                <%=s.pseudoName ? s.pseudoName : "" %>
+                                                                        <%}}}%>
+                                        </td>
+                                        <td>
+                                            <%=src.l_two_interviewDate ? src.l_two_interviewDate : ""%>
+                                        </td>
+                                        <td>
+                                            <%=src.l_two_InterviewStatus ? src.l_two_InterviewStatus : ""%>
+                                        </td>
+
+                                        <td>
+
+                                            <a href="/candidate/candidate/<%= src.id %>/?view=true" class="edit"
+                                                title="View" data-toggle="tooltip"><i class="fas fa-fw fa-eye"></i></a>
+
+                                            <a href="/candidate/candidate/<%= src.id %>/?edit=true" class="edit"
+                                                title="Edit" data-toggle="tooltip"><i class="fas fa-fw fa-pen"></i></a>
+                                            <% if(type && type === "l_two" && (user==='ADMIN' || user==='MANAGER')){ %>
+                                            <a href="/candidate/deleteLevelOne/<%= src.id %>/?delete=true" class="edit"
+                                                title="Delete" data-toggle="tooltip"><i
+                                                    class="fas fa-fw fa-trash"></i></a>
+                                                    <%}%>
+
+                                        </td>
+
+
+
+                                    </tr>
+                                    <% i++; } %>
+                                    <%} %>
+                                </tbody>
+                            </table>
+
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <!-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> -->
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <span class="badge badge-primary">L1 Remark</span>
+                                            <p class="text-dark" id="l1_remark"></p><br>
+                                            <p class="text-info">Updated Time: <span id="l1_updated_time"></span></p><br>
+                                            <span class="badge badge-primary">L2 Remark</span>
+                                            <p class="text-dark" id="l2_remark"></p><br>
+                                            <p class="text-info">Updated Time: <span id="l2_updated_time"></span></p>
+                                            <span class="badge badge-primary">Interview Remark</span>
+                                            <p class="text-dark" id="I_remark"></p><br>
+                                        </div>
+                                        <!-- <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <div class="hint-text">Showing
+                                    <b><%= showingItem%></b> out of
+                                    <b><%= totalCandidate%></b>
+                                    entries
+                                </div>
+                                <ul class="pagination">
+                                    <% if( currentPage !== 1 && previousPage !== 1) {%>
+                                    <li class="page-item"><a href="?page=1"><i class="fa fa-angle-double-left"></i></a>
+                                    </li>
+                                    <% } else { %>
+                                    <li class="page-item disabled"><a href="#"><i
+                                                class="fa fa-angle-double-left"></i></a>
+                                    </li>
+                                    <% } %>
+
+                                    <% if(hasPreviousPage) {%>
+                                    <li class="page-item">
+                                        <a href="?page=<%= previousPage %>" class="page-link">
+                                            <%= previousPage %>
+                                        </a>
+                                    </li>
+                                    <% } %>
+                                    <li class="page-item active">
+                                        <a href="?page=<%= currentPage %>" class="page-link">
+                                            <%= currentPage %>
+                                        </a>
+                                    </li>
+                                    <% if(hasNextPage) {%>
+                                    <li class="page-item">
+                                        <a href="?page=<%= nextPage %>" class="page-link">
+                                            <%= nextPage %>
+                                        </a>
+                                    </li>
+                                    <% } %>
+
+                                    <% if(lastPage !== 0 && lastPage !== currentPage && nextPage !== lastPage) {
+                                        console.log(lastPage, currentPage, nextPage) %>
+                                    <li class="page-item"><a href="?page=<%= lastPage %>" class="page-link"><i
+                                                class="fa fa-angle-double-right"></i></a>
+                                    </li>
+                                    <% } else {
+                                        console.log(lastPage, currentPage, nextPage) %>
+                                    <li class="page-item disabled"><a href="#" class="page-link"><i
+                                                class="fa fa-angle-double-right"></i></a>
+                                    </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <script type="text/javascript">
+        function show(text) {
+            console.log(text)
+            var data = text.split("---")
+            document.getElementById("l1_remark").innerHTML = data[0];
+            document.getElementById("l1_updated_time").textContent = data[1];
+            document.getElementById("l2_remark").innerHTML = data[2];
+            document.getElementById("l2_updated_time").textContent = data[3];
+            document.getElementById("I_remark").textContent = data[4];
+            $('#exampleModalCenter').modal({
+                keyboard: false
+            })
+        }
+    </script>
+    <%- include('../includes/end.ejs') %>

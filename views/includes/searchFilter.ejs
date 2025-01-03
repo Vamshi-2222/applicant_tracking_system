@@ -1,0 +1,748 @@
+<%- include('../includes/head.ejs') %>
+
+    <link href="/css/company.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/virtual-select.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
+    </head>
+
+    <body id="page-top">
+
+        <%- include('../includes/drawer.ejs') %>
+
+            <div class="container-fluid">
+
+
+                <form method="POST" action="/candidate/getFilter">
+                    <div class="card shadow mb-4 mx-2 mt-4">
+
+                        <div class="card-header ">
+                            <h3 class="m-0 font-weight-bold text-primary ">Search Filter
+                            </h3>
+                        </div>
+
+                        <div class="card-body ">
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+
+                                        <div class="form-group">
+                                            <select id="multi_option" name="any" multiple
+                                                data-silent-initial-value-set="false" placeholder="ANY...">
+
+                                                <% if(skillData && skillData.length> 0){
+                                                    for(let src of skillData){ %>
+                                                    <option value="<%= src%>">
+                                                        <%= src %>
+                                                    </option>
+                                                    <%}}%>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <select id="multi_option" name="all" multiple
+                                                data-silent-initial-value-set="false" placeholder="ALL...">
+
+                                                <% if(skillData && skillData.length> 0){
+                                                    for(let src of skillData){ %>
+                                                    <option value="<%= src%>">
+                                                        <%= src %>
+                                                    </option>
+                                                    <%}}%>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-group">
+                                            <select id="multi_option" name="exclude" multiple
+                                                data-silent-initial-value-set="false" placeholder="Exclude...">
+
+                                                <% console.log(skillData.length+"----"); if(skillData &&
+                                                    skillData.length> 0){
+                                                    for(let src of skillData){%>
+
+                                                    <option value="<%= src%>">
+                                                        <%= src %>
+                                                    </option>
+                                                    <%}}%>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input id="myInput" type="text" name="candidateID"
+                                                        class="form-control" placeholder="candidate ID">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">DOB</span>
+                                                    </div>
+                                                    <input type="date" id="birthday " name="birthday"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12" style="border-width: 2px">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" name="preferedIndustry"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                placeholder="Prefered Industry">
+
+                                            <input type="text" class="form-control" name="preferedJobRole"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                placeholder="Prefered Job">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input id="myInput" type="text" name="source" class="form-control"
+                                                        placeholder="Source">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="hometown" name="Hometown"
+                                                        class="form-control" placeholder="Hometown">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12" style="border-width: 2px">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" aria-label="Username" name="Company"
+                                                placeholder="Company" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" aria-label="Username"
+                                                name="CompanySector" placeholder="Company Sector"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">DATE</span>
+                                                    </div>
+                                                    <input id="myInput" type="Date" name="createdDate"
+                                                        class="form-control" placeholder="Created Date">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="currentLocation" name="currentLocation"
+                                                        class="form-control" placeholder="Current Location">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12" style="border-width: 2px">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" aria-label="Username"
+                                                name="preferedJobType" placeholder="Job Type"
+                                                aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" aria-label="Username"
+                                                name="preferedJobShift" placeholder="Job Shift"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input id="myName" type="text" name="myName" class="form-control"
+                                                        placeholder="Full Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="preferedLocation" name="preferedLocation"
+                                                        placeholder="Prefered Location" class="form-control">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12" style="border-width: 2px">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" aria-label="Username"
+                                                name="salarymin" placeholder="Min salary"
+                                                aria-describedby="basic-addon1">
+
+                                            <input type="text" class="form-control" aria-label="Username"
+                                                name="salarymax" placeholder="Max salary"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">10th</span>
+                                                    </div>
+                                                    <input id="myten" type="date" name="myten" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group">
+                                                    <input type="text" id="ug " name="ug" class="form-control"
+                                                        placeholder="UG">
+                                                    <input type="date" id="ugdate " name="ugdate" class="form-control">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-4 col-sm-12" style="border-width: 2px">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" aria-label="Username"
+                                                aria-describedby="basic-addon1" name="language" placeholder="Language">
+
+                                            <input type="text" class="form-control" aria-label="Username"
+                                                aria-describedby="basic-addon1" name="languagelevel"
+                                                placeholder="Level">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input id="mobile" type="text" name="mymobile" class="form-control"
+                                                        placeholder="Mobile">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="email" name="myemail" class="form-control"
+                                                        placeholder="Email">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12" style="border-width: 2px">
+
+                                        <div class="input-group">
+                                            <input type="text" id="minage" name="minage" class="form-control"
+                                                placeholder="Min Age">
+                                            <input type="text" id="maxage" name="maxage" class="form-control"
+                                                placeholder="Max Age">
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input id="type" type="text" name="mytype" class="form-control"
+                                                        placeholder="Typing Speed">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="certificate" name="myCertificate"
+                                                        class="form-control" placeholder="Certificate">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" aria-label="Username"
+                                                        placeholder="Graduation" name="graduation"
+                                                        aria-describedby="basic-addon1">
+
+                                                    <input type="date" class="form-control" aria-label="Username"
+                                                        aria-describedby="basic-addon1" name="graduationDate">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" aria-label="Username"
+                                                        aria-describedby="basic-addon1" name="pg" placeholder="PG">
+
+                                                    <input type="date" class="form-control" aria-label="Username"
+                                                        aria-describedby="basic-addon1" name="pgdate">
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="input-group mb-3">
+                                                    <select id="multi_option" multiple
+                                                        data-silent-initial-value-set="false" placeholder="L1 Companies"
+                                                        name="client">
+                                                        <% var roles=[]; if(companyValue && companyValue.length> 0){
+                                                            for(let src of companyValue){ %>
+                                                            <option value="<%= src.id %>">
+                                                                <%= src.name %>
+                                                            </option>
+                                                            <%}}%>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="input-group mb-3">
+                                                    <select id="multi_option" multiple
+                                                        data-silent-initial-value-set="false" placeholder="L2 Companies"
+                                                        name="clients">
+                                                        <% var roles=[]; if(companyValue && companyValue.length> 0){
+                                                            for(let src of companyValue){ %>
+                                                            <option value="<%= src.id %>">
+                                                                <%= src.name %>
+                                                            </option>
+                                                            <%}}%>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group">
+                                                    <input type="date" id="from" name="from" placeholder="From"
+                                                        class="form-control">
+                                                    <input type="date" id="to" name="to" placeholder="To"
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="input-group mb-3">
+
+                                                    <select id="multi_option" multiple
+                                                        data-silent-initial-value-set="false" placeholder="DATA-TYPES"
+                                                        name="dataTypes">
+                                                        <% if(dataT.length> 0 ) {%>
+                                                            <% for (let src of dataT) { %>
+                                                                <option value="<%= src %>">
+                                                                    <%= src %>
+                                                                </option>
+                                                                <%}%>
+                                                                    <%}%>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-md-6">
+                                        <div class="form-group">
+                                            <select id="multi_option" name="levelone" multiple
+                                                data-silent-initial-value-set="false" placeholder="L1 ASSESSMENT">
+                                                <option value="none">
+                                                    NONE</option>
+                                                <option value="number_not_reachable">
+                                                    NUMBER NOT
+                                                    REACHABLE</option>
+                                                <option value="did_not_pick">DIDN'T PICK
+                                                </option>
+                                                <option value="wrong_number">WRONG
+                                                    NUMBER</option>
+                                                <option value="call_back">CALLBACK
+                                                </option>
+                                                <option value="black_list">BLACKLIST
+                                                </option>
+                                                <option value="other_client">NE-FRESHER</option>
+                                                <option value="ni_in_job">NI-IN-JOB</option>
+                                                <option value="ni_experienced">NI-EXPERIENCED</option>
+                                                <option value="ni_convincing">NI-CONVINCING</option>
+                                                <option value="wd">WD</option>
+                                                <option value="good">GOOD</option>
+                                                <option value="tac">TAC</option>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-md-6">
+                                        <div class="form-group">
+                                            <select id="multi_option" name="leveltwo" multiple
+                                                data-silent-initial-value-set="false" placeholder="L2 ASSESSMENT">
+                                                <option value="number_not_reachable">
+                                                    NUMBER NOT
+                                                    REACHABLE</option>
+                                                <option value="did_not_pick">DIDN'T PICK
+                                                </option>
+                                                <option value="wrong_number">WRONG
+                                                    NUMBER</option>
+                                                <option value="call_back">CALLBACK
+                                                </option>
+                                                <option value="black_list">BLACKLIST
+                                                </option>
+                                                <option value="other_client">NE-FRESHER</option>
+                                                <option value="ni_in_job">NI-IN-JOB</option>
+                                                <option value="ni_experienced">NI-EXPERIENCED</option>
+                                                <option value="ni_convincing">NI-CONVINCING</option>
+                                                <option value="wd">WD</option>
+                                                <option value="new">NEW</option>
+                                                <option value="no_show">NOT SHOW</option>
+                                                <option value="good">GOOD</option>
+                                                <option value="tac">TAC</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 col-md-6">
+                                        <div class="form-group">
+                                            <select id="multi_option" name="InterviewStatus" multiple
+                                                data-silent-initial-value-set="false" placeholder="Interview Status">
+                                                <option value="FSR">Reject: FSR</option>
+                                                <option value="AMCAT">Reject: AMCAT</option>
+                                                <option value="AMCAT_COOLING">AMCAT_COOLING</option>
+                                                <option value="GAT">Reject: GAT</option>
+                                                <option value="VERSANT">Reject: VERSANT</option>
+                                                <option value="TYPING">Reject: TYPING</option>
+                                                <option value="OPS">Reject: OPS</option>
+                                                <option value="CLIENT">Reject: CLIENT</option>
+                                                <option value="GROUP_DISCUSSION">Reject: GROUP
+                                                    DISCUSSION
+                                                </option>
+                                                <option value="NO_SHOW">No Show - IM</option>
+                                                <option value="OFFER_DROP">Offer Drop</option>
+                                                <option value="HOLD">Hold</option>
+                                                <option value="NO_SHOW_LINE_UP">No Show Line Up</option>
+                                                <option value="HR(P)">HR(P)</option>
+                                                <option value="AMCAT(P)">AMCAT(P)</option>
+                                                <option value="GROUP_DISCUSSION(P)">GROUP DISCUSSION(P)
+                                                </option>
+                                                <option value="JAM(P)">JAM(P)</option>
+                                                <option value="VERSANT(P)">VERSANT(P)</option>
+                                                <option value="OPS(P)">OPS(P)</option>
+                                                <option value="CLIENT(P)">CLIENT(P)</option>
+                                                <option value="TYPING(P)">TYPING(P)</option>
+                                                <option value="GAT(P)">GAT(P)</option>
+                                                <option value="ONLINE_TEST(P)">ONLINE TEST(P)</option>
+                                                <option value="MEDICAL(P)">MEDICAL(P)</option>
+                                                <option value="WRITTEN_TEST(P)">WRITTEN_TEST(P)</option>
+                                                <option value="CODING(P)">CODING(P)</option>
+                                                <option value="TECHNICAL(P)">TECHNICAL(P)</option>
+                                                <option value="PRE_ASSESSMENT(P)">PRE ASSESSMENT(P)
+                                                </option>
+                                                <option value="MID_ASSESSMENT(P)">MID ASSESSMENT(P)
+                                                </option>
+                                                <option value="POST_ASSESSMENT(P)">POST_ASSESSMENT(P)
+                                                </option>
+
+
+                                                <option value="CLIENT_VENUE">CLIENT VENUE</option>
+                                                <option value="TPP_VENUE">TPP VENUE</option>
+                                                <option value="TELEPHONIC">TELEPHONIC</option>
+
+                                                <option value="SVVR:DONE">SVVR:DONE</option>
+                                                <option value="SVVR:NI">SVVR:NI</option>
+
+                                                <option value="SVVR:SEND EMAIL">SVVR:SEND EMAIL</option>
+                                                <option value="SVVR:MAIL CONFIRMATION">SVVR:MAIL
+                                                    CONFIRMATION
+                                                </option>
+                                                <option value="SVVR:AWAITING ONBOARDING">SVVR:AWAITING
+                                                    ONBOARDING</option>
+                                                <option value="SVVR:L3 CHECK">SVVR:L3 CHECK</option>
+                                                <option value="SVVR:TRAINING">SVVR:TRAINING</option>
+                                                <option value="SVVR:ADD TO GROUP">SVVR:ADD TO GROUP
+                                                </option>
+                                                <option value="SVVR:LOGIN CREATION">SVVR:LOGIN CREATION
+                                                </option>
+
+                                                <option value="INTERNSHIP IN PROCESS">INTERNSHIP IN
+                                                    PROCESS
+                                                </option>
+                                                <option value="INTERNSHIP DROP">INTERNSHIP DROP</option>
+                                                <option value="INTERNSHIP JOINED">INTERNSHIP JOINED
+                                                </option>
+
+                                                <option value="FINAL_FEEDBACK">Final Feedback</option>
+                                                <option value="SELECTED">Select</option>
+
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+
+                                        <div class="input-group mb-3"> 
+                                            <input class="form-control" list="recriterList" id="Recruiter" name="Recruiter" placeholder="Select Recruiter..." style="width: 100%;"/>
+                                            <datalist id="recriterList">
+                                                <% if(listValue.length> 0){ for(let src of listValue){%>
+                                                    <option value="<%= src.fullName  %>(<%= src.id  %>)">
+                                                    <%}}%>
+                                              
+                                              </datalist>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="input-group mb-3">
+                                            <input type="date" name="dateCreated" placeholder="Date"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="input-group mb-3">
+                                            <input class="form-control" list="recriterList" id="assignersname" name="assignersname" placeholder="Select Assigner..." style="width: 100%;"/>
+                                            <datalist id="recriterList">
+                                                <% if(listValue.length> 0){ for(let src of listValue){%>
+                                                    <option value="<%= src.fullName  %>(<%= src.id  %>)">
+                                                    <%}}%>
+                                            
+                                            </datalist>
+                                            
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group ">
+                                            <select id="multi_option" multiple data-silent-initial-value-set="false"
+                                                placeholder="Select Billing Status" name="billinStatus">
+                                                <option value="NON_TENURE">NON TENURE</option>
+                                                <option value="TRACKING">TRACKING</option>
+                                                <option value="NEED_TO_BILL">NEED TO BILL</option>
+                                                <option value="BILLED">BILLED</option>
+                                                <option value="RAMPDOWN">RAMPDOWN</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-12 col-sm-12">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="candidateOption"
+                                                id="allcandidate" value="ALL" checked>
+                                            <label class="form-check-label" for="allcandidate">ALL CANDIDATE</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="candidateOption"
+                                                id="freshcandidate" value="FRESH">
+                                            <label class="form-check-label" for="freshcandidate">FRESH CANDIDATE</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <input type="submit" class="alert alert-success" style="width: 250px"
+                                                value="SUBMIT">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <script>
+                $(".js-example-theme-single").select2({
+                    theme: "classic"
+                });
+            </script>
+            <script type="text/javascript" src="/js/virtual-select.min.js"></script>
+            <script type="text/javascript">
+                VirtualSelect.init({
+                    ele: '#multi_option'
+                });
+            </script>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $("#client").on("change", function (e) {
+                        var type = $(this).val();
+                        console.log(type);
+                        if (type && type !== '-1') {
+                            $.ajax({
+                                type: 'GET',
+                                url: '/ajax/getCompanyRole/' + type,
+                                success: function (res) {
+                                    var len = res.companyRoleName.length;
+                                    $("#process").empty();
+                                    if (len > 0) {
+
+                                        for (var i = 0; i < len; i++) {
+                                            var name = res.companyRoleName[i].name;
+                                            var id = res.companyRoleName[i].id;
+
+                                            $("#process").append(
+                                                "<option value='" + id + "'>" + name +
+                                                "</option>");
+
+                                        }
+                                    } else {
+                                        $("#process").append(
+                                            `<option value="">None</option>`);
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+
+
+                    $("#clients").on("change", function (e) {
+                        var type = $(this).val();
+                        console.log(type);
+                        if (type && type !== '-1') {
+                            $.ajax({
+                                type: 'GET',
+                                url: '/ajax/getCompanyRole/' + type,
+                                success: function (res) {
+                                    var len = res.companyRoleName.length;
+                                    $("#processs").empty();
+                                    if (len > 0) {
+
+                                        for (var i = 0; i < len; i++) {
+                                            var name = res.companyRoleName[i].name;
+                                            var id = res.companyRoleName[i].id;
+
+                                            $("#processs").append(
+                                                "<option value='" + id + "'>" + name +
+                                                "</option>");
+
+                                        }
+                                    } else {
+                                        $("#processs").append(
+                                            `<option value="">None</option>`);
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+
+                });
+
+
+            </script>
+            <%- include('../includes/end.ejs') %>

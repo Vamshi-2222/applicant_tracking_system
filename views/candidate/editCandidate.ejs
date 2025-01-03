@@ -1,0 +1,2585 @@
+<%- include('../includes/head.ejs') %>
+
+<link href="/css/select2.css" rel="stylesheet" type="text/css">
+<link href="/css/tag.css" rel="stylesheet" type="text/css">
+
+
+<link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<script src='/js/registration.js'></script>
+
+</head>
+
+<body id="page-top">
+
+    <%- include('../includes/drawer.ejs') %>
+
+    <div class="container-fluid">
+
+        <div class="row mx-2 mt-2">
+
+            <div class="col-md-12">
+
+                <div class="card shadow mb-4">
+
+                    <div class="card-body ">
+
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-link active" id="nav-personal-tab" data-toggle="tab" href="#nav-personal"
+                                    role="tab" aria-controls="nav-personal" aria-selected="true">Personal Data</a>
+                                <a class="nav-link" id="nav-educational-tab" data-toggle="tab" href="#nav-educational"
+                                    role="tab" aria-controls="nav-educational" aria-selected="false">Educational
+                                    Data</a>
+                                <a class="nav-link" id="nav-expereince-tab" data-toggle="tab" href="#nav-expereince"
+                                    role="tab" aria-controls="nav-expereince" aria-selected="false">Expereince Data</a>
+                                <a class="nav-link" id="nav-oneassessment-tab" data-toggle="tab"
+                                    href="#nav-oneassessment" role="tab" aria-controls="nav-oneassessment"
+                                    aria-selected="false">L1 Assessment</a>
+                                <a class="nav-link" id="nav-twoassessment-tab" data-toggle="tab"
+                                    href="#nav-twoassessment" role="tab" aria-controls="nav-twoassessment"
+                                    aria-selected="false">L2 Assessment</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+
+
+
+                            <div class="tab-pane fade" id="nav-oneassessment" role="tabpanel"
+                                aria-labelledby="nav-oneassessment-tab">
+
+
+                                <%if(accountAccess && (accountAccess === 'ALL' || accountAccess === 'L1_ASSESSMENT' ||  accountAccess === 'L2_ASSESSMENT'
+                                                              || accountAccess === 'L1 ASSESSMENT' || accountAccess === 'L2 ASSESSMENT')){%>
+                                <% if(levelOneAssesssment){%>
+
+                                <form action="/candidate/level-one-assessment-update" method="POST">
+                                    <div class="card shadow mb-4" id="Form3">
+                                        <div class="card-header">
+                                            <h3 class="m-0 font-weight-bold text-primary">L1 Assessment
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="assessmentone">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <select class="form-control select2" name="l1assessment"
+                                                                id="l1assessment" required style="width:100%;"
+                                                                onclick="getNewData();">
+                                                                <option value="" Selected>
+                                                                    Select</option>
+                                                                <option value="number_not_reachable"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'number_not_reachable' ? 'selected' : '' %>>
+                                                                    NUMBER NOT
+                                                                    REACHABLE
+                                                                </option>
+                                                                <option value="did_not_pick"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'did_not_pick' ? 'selected' : '' %>>
+                                                                    DIDN'T PICK
+                                                                </option>
+                                                                <option value="wrong_number"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'wrong_number' ? 'selected' : '' %>>
+                                                                    WRONG
+                                                                    NUMBER
+                                                                </option>
+                                                                <option value="call_back"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'call_back' ? 'selected' : '' %>>
+                                                                    CALLBACK
+                                                                </option>
+                                                                <option value="black_list" <%=levelOneAssesssment.dataValues.Assessment==='black_list' ? 'selected' : '' %>>
+                                                                    BLACKLIST
+                                                                </option>
+                                                                <option value="other_client"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'other_client' ? 'selected' : '' %>>
+                                                                    NE-FRESHER
+                                                                </option>
+
+                                                                <option value="ni_in_job" <%= levelOneAssesssment.dataValues.Assessment==='ni_in_job' ? 'selected' : '' %>>
+                                                                    NI-IN-JOB
+                                                                </option>
+
+                                                                <option value="ni_experienced" <%= levelOneAssesssment.dataValues.Assessment==='ni_experienced' ? 'selected' : '' %>>
+                                                                    NI-EXPERIENCED
+                                                                </option>
+
+                                                                <option value="ni_convincing" <%= levelOneAssesssment.dataValues.Assessment==='ni_convincing' ? 'selected' : '' %>>
+                                                                    NI-CONVINCING
+                                                                </option>
+
+
+                                                                <option value="wd"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'wd' ? 'selected' : '' %>>
+                                                                    WD</option>
+                                                                <option value="good"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'good' ? 'selected' : '' %>>
+                                                                    GOOD</option>
+                                                                <option value="tac"
+                                                                    <%= levelOneAssesssment.dataValues.Assessment === 'tac' ? 'selected' : '' %>>
+                                                                    TAC</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <% if (languageList.length > 0) { var count = 1; %>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Language</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Level</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <%for(let loc of languageList) {%>
+                                                                            
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            
+                                                                            
+                                                                            <input type="text" disabled
+                                                                                class="form-control"
+                                                                                value="<%= loc.name %>" name="language<%=count%>">
+                                                                            <input type="hidden"  value="<%= loc.name %>" name="language<%=count%>">
+                                                                            
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <select class="form-control select2"
+                                                                                required style="width: 100%;" name="languageOneLevel<%=count%>">
+
+                                                                                <option value="" Selected>--Select--</option>
+                                                                                <option value="None"  <%= loc.levelone === 'None' ? 'selected': '' %>>None</option>
+                                                                                <option value="Poor"  <%= loc.levelone === 'Poor' ? 'selected': '' %>>Poor</option>
+                                                                                <option value="Manageable"  <%= loc.levelone === 'Manageable' ? 'selected': '' %>>Manageable
+                                                                                </option>
+                                                                                <option value="Above manageable"  <%= loc.levelone === 'Above manageable' ? 'selected': '' %>>Above
+                                                                                    manageable</option>
+                                                                                <option value="Excellent" <%= loc.levelone === 'Excellent' ? 'selected': '' %>>Excellent
+                                                                                </option>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <input type="hidden" value="<%= loc.leveltwo %>"  name ="languageTwolevel<%=count%>">
+                                                                </div>
+                                                                <% count++;}} %>
+
+                                                <div id="visible">
+                                                    <% if(levelOneAssesssment.dataValues.Assessment && (levelOneAssesssment.dataValues.Assessment === 'wd' 
+                                                        || levelOneAssesssment.dataValues.Assessment === 'tac' || levelOneAssesssment.dataValues.Assessment === 'good')) {%>
+                                                            <div id="second_l1">
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label>Client</label>
+                                                                <select class="form-control select2"
+                                                                    style="width: 100%;" name="clients" id="clients"
+                                                                    onclick="getRole();">
+                                                                    <% var s = 0; list = []; if(companyAssessment.length > 0){ for(let com of companyAssessment){console.log(com)%>
+                                                                    <% if(levelOneAssesssment.dataValues.client == com.id){ s = com.id; list = com.roleData;%>
+                                                                    <option value="<%= com.id %>" selected>
+                                                                        <%= com.name %>
+                                                                    </option>
+                                                                    <%}else{%>
+                                                                    <option value="<%= com.id %>">
+                                                                        <%= com.name %>
+                                                                    </option>
+                                                                    <%}%>
+                                                                    <%}}else{%>
+                                                                    <option selected="selected">
+                                                                        <%= levelOneAssesssment.dataValues.client %>
+                                                                    </option>
+                                                                    <%}%>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Process</label>
+                                                            <select class="form-control select2" 
+                                                                style="width: 100%;" name="processs" id="processs" >
+                                                                <% console.log(list); if(list.length > 0){ for(let com of list){%>
+                                                                    <% if(levelOneAssesssment.dataValues.process == com.id){%>
+                                                                    <option value="<%= com.id %>" selected>
+                                                                        <%= com.pseudoName %>
+                                                                    </option>
+                                                                    <%}else{%>
+                                                                    <option value="<%= com.id %>">
+                                                                        <%= com.pseudoName %>
+                                                                    </option>
+                                                                    <%}%>
+                                                                    <%}}else{%>
+                                                                    <option selected="selected">
+                                                                        <%= levelOneAssesssment.dataValues.process %>
+                                                                    </option>
+                                                                    <%}%>
+                                                                
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference">Interview</label>
+                                                            <input type="date" class="form-control" name="startDate"
+                                                                value="<%= levelOneAssesssment.dataValues.interview %>"
+                                                                    required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12 ">
+                                                            <div class="form-group ">
+                                                                <label>Remark</label>
+                                                                <textarea class="form-control" rows="5"
+                                                                    style="resize: none;" name="remarkDescription"><%= levelOneAssesssment.dataValues.remark %></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+                                                    <%}else{%>
+                                                    <div id="show">
+                                                        <div class="row">
+                                                            <div class="col-md-12 ">
+                                                                <div class="form-group ">
+                                                                    <label>Remark</label>
+                                                                    <textarea class="form-control" rows="5"
+                                                                        style="resize: none;" name="remarkDescription"><%= levelOneAssesssment.dataValues.remark %></textarea>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%}%>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                                                    <input type="hidden" name="candidateId"
+                                                        value="<%= levelOneAssesssment.dataValues.levelOneId%>">
+                                                    <input type="hidden" name="assessmentId"
+                                                        value="<%= levelOneAssesssment.dataValues.id%>">
+                                                    <input type="submit" class="btn btn-primary" id="third"
+                                                        value="Next">
+                                                </div>
+                                                <!-- </form> -->
+                                            </div>
+                                </form>
+                                <% }else{ %>
+
+                                    <form action="/candidate/level-oneassessment" method="POST">
+                                        <div class="card shadow mb-4" id="Form3">
+                                        <div class="card-header">
+                                            <h3 class="m-0 font-weight-bold text-primary">L1 Assessment
+                                            </h3>
+                                        </div>
+                                        <div class="card-body">
+
+                                            <div id="assessmentone">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <select class="form-control select2" name="l1assessment"
+                                                                id="l1assessment" required style="width:100%;"
+                                                                onclick="getNewData();">
+
+                                                                <option selected value="">Select
+                                                                </option>
+
+                                                                <option value="number_not_reachable">
+                                                                    NUMBER NOT
+                                                                    REACHABLE</option>
+                                                                <option value="did_not_pick">DIDN'T PICK
+                                                                </option>
+                                                                <option value="wrong_number">WRONG
+                                                                    NUMBER</option>
+                                                                <option value="call_back">CALLBACK
+                                                                </option>
+                                                                <option value="black_list">BLACKLIST</option>
+                                                                <option value="other_client">NE-FRESHER</option>
+                                                                <option value="ni_in_job">NI-IN-JOB</option>
+                                                                <option value="ni_experienced">NI-EXPERIENCED</option>
+                                                                <option value="ni_convincing">NI-CONVINCING</option>
+
+                                                                <option value="wd">WD</option>
+                                                                <option value="good">GOOD</option>
+                                                                <option value="tac">TAC</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <% if (languageList.length > 0) { var count = 1; %>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Language</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Level</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <%for(let loc of languageList) {%>
+                                                                            
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            
+                                                                            
+                                                                            <input type="text" disabled
+                                                                                class="form-control"
+                                                                                value="<%= loc.name %>" name="language<%=count%>">
+                                                                            <input type="hidden"  value="<%= loc.name %>" name="language<%=count%>">
+                                                                            
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <select class="form-control select2"
+                                                                                required style="width: 100%;" name="languageOneLevel<%=count%>">
+
+                                                                                <option value="" Selected>--Select--</option>
+                                                                                <option value="None">None</option>
+                                                                                <option value="Poor">Poor</option>
+                                                                                <option value="Manageable">Manageable
+                                                                                </option>
+                                                                                <option value="Above manageable">Above
+                                                                                    manageable</option>
+                                                                                <option value="Excellent">Excellent
+                                                                                </option>
+
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <input type="hidden" value="<%= loc.leveltwo %>"  name ="languageTwolevel<%=count%>">
+                                                                </div>
+                                                                <% count++;}} %>
+
+                                                <div id="visible"></div>
+
+                                            </div>
+                                            
+
+
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken%>">
+                                            <input type="hidden" name="candidateId" value="<%= personalData.id %>">
+                                            <input type="submit" class="btn btn-primary" id="third"
+                                                        value="Next">
+                                        </div>
+                                                <!-- </form> -->
+                                        </div>
+                                    </form>
+
+                                <%}}%>
+
+
+
+                            </div>
+
+
+                            <div class="tab-pane fade" id="nav-twoassessment" role="tabpanel"
+                                aria-labelledby="nav-twoassessment-tab">
+
+
+                                <% if(accountAccess && (accountAccess === 'ALL' || accountAccess === 'L2_ASSESSMENT' || accountAccess === 'L2 ASSESSMENT')){%>
+                                <% if(levelOneAssesssment){ %>
+                                <% if (levelOneAssesssment.dataValues.Assessment === 'wd' ||
+                                                        levelOneAssesssment.dataValues.Assessment === 'good' || 
+                                                        levelOneAssesssment.dataValues.Assessment === 'tac') {%>
+                                <% if(l2AssessmentListData && l2AssessmentListData.length > 0 ) { var a = 0; %>
+                                <% for(let data of l2AssessmentListData){ %>
+
+                                <form action="/candidate/level-two-assessment-update" method="POST">
+                                    <div class="card shadow mb-4 " id="Form3">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">L2 Assessment
+                                            <%if(user === "MANAGER" || user === "ADMIN"){%>
+                                            <a href="/candidate/candidate/levelTwoDelete/<%=data.id%>/?delete=true" class="edit" title="Delete" data-toggle="tooltip"><i
+                                                    class="fas fa-fw fa-trash"></i></a>
+                                                    </h3>
+                                            <%}%>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+
+                                        <div class="card-body ">
+                                            <div id="assessmentone">
+                                                <div class="row ">
+                                                    <div class="col-md-6 col-sm-12 ">
+                                                        <div class="form-group ">
+                                                            <label>L2 Assessment</label>
+                                                            <select class="form-control select2"
+                                                                name="l2assessment<%=a%>" id="l2assessment<%=a%>"
+                                                                required style="width: 100%;"
+                                                                onclick="getData('<%=a%>');">
+
+
+
+                                                                <option value="number_not_reachable"
+                                                                    <%= data.Assessment === 'number_not_reachable'? 'selected': '' %>>
+                                                                    NUMBER NOT
+                                                                    REACHABLE</option>
+                                                                <option value="did_not_pick"
+                                                                    <%= data.Assessment === 'did_not_pick'? 'selected': '' %>>
+                                                                    DIDN'T PICK
+                                                                </option>
+                                                                <option value="wrong_number"
+                                                                    <%= data.Assessment === 'wrong_number'? 'selected': '' %>>
+                                                                    WRONG
+                                                                    NUMBER</option>
+                                                                <option value="call_back"
+                                                                    <%= data.Assessment === 'call_back'? 'selected': '' %>>
+                                                                    CALLBACK
+                                                                </option>
+
+                                                                <option value="black_list" <%= data.Assessment==='black_list' ? 'selected' : '' %>>BLACKLIST
+                                                                </option>
+                                                                <option value="other_client"
+                                                                    <%= data.Assessment === 'other_client'? 'selected': '' %>>
+                                                                    NE-FRESHER</option>
+
+                                                                <option value="ni_in_job" <%= data.Assessment==='ni_in_job' ? 'selected' : '' %>>
+                                                                    NI-IN-JOB</option>
+
+                                                                <option value="ni_experienced" <%= data.Assessment==='ni_experienced' ? 'selected' : '' %>>
+                                                                    NI-EXPERIENCED</option>
+
+                                                                <option value="ni_convincing" <%= data.Assessment==='ni_convincing' ? 'selected' : '' %>>
+                                                                    NI-CONVINCING</option>
+
+
+                                                                <option value="wd"
+                                                                    <%= data.Assessment === 'wd'? 'selected': '' %>>WD
+                                                                </option>
+                                                                <option value="new"
+                                                                    <%= data.Assessment === 'new'? 'selected': '' %>>NEW
+                                                                </option>
+                                                                <option value="no_show"
+                                                                    <%= data.Assessment === 'no_show'? 'selected': '' %>>
+                                                                    NO SHOW</option>
+                                                                <option value="good"
+                                                                    <%= data.Assessment === 'good'? 'selected': '' %>>
+                                                                    GOOD</option>
+                                                                <option value="tac"
+                                                                    <%= data.Assessment === 'tac'? 'selected': '' %>>TAC
+                                                                </option>
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <% if(languageList.length > 0) { var count = 1; %>
+                                                                    <div class="row">
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Language</label>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-6 col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <label>Level</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <%for(let loc of languageList) {%>
+                                                                            
+                                                                <div class="row">
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            
+                                                                            
+                                                                            <input type="text" disabled
+                                                                                class="form-control"
+                                                                                value="<%= loc.name %>" name="language<%=count%>">
+                                                                            <input type="hidden"  value="<%= loc.name %>" name="language<%=count%>">
+                                                                            
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-12">
+                                                                        <div class="form-group">
+                                                                            <select class="form-control select2"
+                                                                                required style="width: 100%;" name="languageTwolevel<%=count%>">
+
+                                                                                <option value="" Selected>--Select--</option>
+                                                                                <option value="None"  <%= loc.leveltwo === 'None' ? 'selected': '' %>>None</option>
+                                                                                <option value="Poor"  <%= loc.leveltwo === 'Poor' ? 'selected': '' %>>Poor</option>
+                                                                                <option value="Manageable"  <%= loc.leveltwo === 'Manageable' ? 'selected': '' %>>Manageable
+                                                                                </option>
+                                                                                <option value="Above manageable"  <%= loc.leveltwo === 'Above manageable' ? 'selected': '' %>>Above
+                                                                                    manageable</option>
+                                                                                <option value="Excellent" <%= loc.leveltwo === 'Excellent' ? 'selected': '' %>>Excellent
+                                                                                </option>
+                                                                                
+                                                                            </select>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <input type="hidden" value="<%= loc.levelone %>"  name ="languageOneLevel<%=count%>">
+                                                                </div>
+                                                <% count++;}} %>
+
+                                                <div id="visible<%=a%>">
+
+                                                    <%if(data.Assessment){if(data.Assessment === 'good' || data.Assessment === 'tac'
+                                                    || data.Assessment === 'no_show' || data.Assessment === 'wd'){%>
+
+                                                    <div class="row">
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label>Client</label>
+                                                                <select class="form-control select2" name="client<%=a%>"
+                                                                    id="client<%=a%>" style="width: 100%;"
+                                                                    onclick="getRoleValue('<%= a%>');">
+
+                                                                    <% var b = 0; alist = []; if(companyAssessment.length > 0){ for(let com of companyAssessment){%>
+                                                                    <% if(data.Client == com.id){ b = com.id; alist = com.roleData;%>
+                                                                    <option value="<%= com.id %>" selected>
+                                                                        <%= com.name %>
+                                                                    </option>
+                                                                    <%}else{%>
+                                                                    <option value="<%= com.id %>">
+                                                                        <%= com.name %>
+                                                                    </option>
+                                                                    <%}%>
+                                                                    <%}}else{%>
+                                                                    <option selected>
+                                                                        <%= data.Client %>
+                                                                    </option>
+                                                                    <%}%>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Process</label>
+                                                            <select id="process<%=a%>" name="process<%=a%>"
+                                                                    class="form-control select2"
+                                                                    style="width: 100%;">
+
+                                                                    <% if(alist.length > 0){ for(let com of alist){%>
+                                                                    <% if(data.process == com.id){%>
+                                                                    <option value="<%= com.id %>" selected>
+                                                                        <%= com.pseudoName %>
+                                                                    </option>
+                                                                    <%}else{%>
+                                                                    <option value="<%= com.id %>">
+                                                                        <%= com.pseudoName %>
+                                                                    </option>
+                                                                    <%}%>
+                                                                    <%}}else{%>
+                                                                    <option selected="selected">
+                                                                        <%= data.process %>
+                                                                    </option>
+                                                                    <%}%>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-12 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Interview</label>
+                                                            <input type="date" id="startDate<%=a%>"
+                                                                    name="startDate<%=a%>" value="<%= data.date %>"
+                                                                    class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%}%>
+                                                    <div class="row">
+                                                        <div class="col-md-12 ">
+                                                            <div class="form-group ">
+                                                                <label>Remark</label>
+                                                                <textarea class="form-control" id="remark<%=a%>"
+                                                                    name='remarkDescription<%=a%>' rows="5"
+                                                                    style="resize: none;" required><%= data.remark %></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%if(data.Assessment === 'good' || data.Assessment === 'tac'){%>
+                                                    <div class="row ">
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label>Document Check</label>
+                                                                <select class="form-control select2"
+                                                                    name="docCheck<%=a%>" style="width: 100%;">
+                                                                    <option
+                                                                        <%= data.documentCheck === 'Select' ? 'selected' : ''%>>
+                                                                        Select</option>
+                                                                    <option value="DONE"
+                                                                        <%= data.documentCheck === 'DONE' ? 'selected' : ''%>>
+                                                                        DONE</option>
+                                                                    <option value="PENDING"
+                                                                        <%= data.documentCheck === 'PENDING' ? 'selected' : ''%>>
+                                                                        PENDING</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label for="Reference ">Training Status</label>
+                                                                <select class="form-control select2"
+                                                                    name="trainingStatus<%=a%>" style="width: 100%;">
+                                                                    <option
+                                                                        <%= data.trainingStatus === 'Select' ? 'selected' : ''%>>
+                                                                        Select</option>
+                                                                    <option value="DONE"
+                                                                        <%= data.trainingStatus === 'DONE' ? 'selected' : ''%>>
+                                                                        DONE</option>
+                                                                    <option value="PENDING"
+                                                                        <%= data.trainingStatus === 'PENDING' ? 'selected' : ''%>>
+                                                                        PENDING</option>
+
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label for="Reference ">Interview Status</label>
+                                                                <select class="form-control select2"
+                                                                    style="width: 100%;" name="InterviewStatus<%=a%>"
+                                                                    required>
+                                                                    <option>--Select--</option>
+                                                                    <option value="FSR"
+                                                                        <%= data.InterviewStatus === 'FSR' ? 'selected' : ''%>>
+                                                                        Reject: FSR</option>
+                                                                    <option value="AMCAT"
+                                                                        <%= data.InterviewStatus === 'AMCAT' ? 'selected' : ''%>>
+                                                                        Reject: AMCAT</option>
+                                                                    <option value="AMCAT_COOLING" 
+                                                                        <%= data.InterviewStatus==='AMCAT_COOLING' ? 'selected' : '' %>>
+                                                                        AMCAT_COOLING</option>
+                                                                    <option value="GAT"
+                                                                        <%= data.InterviewStatus === 'GAT' ? 'selected' : ''%>>
+                                                                        Reject: GAT</option>
+                                                                    <option value="VERSANT"
+                                                                        <%= data.InterviewStatus === 'VERSANT' ? 'selected' : ''%>>
+                                                                        Reject: VERSANT</option>
+                                                                    <option value="TYPING"
+                                                                        <%= data.InterviewStatus === 'TYPING' ? 'selected' : ''%>>
+                                                                        Reject: TYPING</option>
+                                                                    <option value="OPS"
+                                                                        <%= data.InterviewStatus === 'OPS' ? 'selected' : ''%>>
+                                                                        Reject: OPS</option>
+                                                                    <option value="CLIENT"
+                                                                        <%= data.InterviewStatus === 'CLIENT' ? 'selected' : ''%>>
+                                                                        Reject: CLIENT</option>
+                                                                    <option value="GROUP_DISCUSSION"
+                                                                        <%= data.InterviewStatus === 'GROUP_DISCUSSION' ? 'selected' : ''%>>
+                                                                        Reject: GROUP DISCUSSION</option>
+                                                                    <option value="NO_SHOW"
+                                                                        <%= data.InterviewStatus === 'NO_SHOW' ? 'selected' : ''%>>
+                                                                        No Show - IM</option>
+                                                                    <option value="OFFER_DROP"
+                                                                        <%= data.InterviewStatus === 'OFFER_DROP' ? 'selected' : ''%>>
+                                                                        Offer Drop</option>
+                                                                    <option value="HOLD"
+                                                                        <%= data.InterviewStatus === 'HOLD' ? 'selected' : ''%>>
+                                                                        Hold</option>
+                                                                    <option value="NO_SHOW_LINE_UP"
+                                                                        <%= data.InterviewStatus === 'NO_SHOW_LINE_UP' ? 'selected' : ''%>>
+                                                                        No Show Line Up</option>
+
+                                                                    <option value="HR(P)"
+                                                                        <%= data.InterviewStatus === 'HR(P)' ? 'selected' : ''%>>
+                                                                        HR(P)</option>
+                                                                    <option value="AMCAT(P)"
+                                                                        <%= data.InterviewStatus === 'AMCAT(P)' ? 'selected' : ''%>>
+                                                                        AMCAT(P)</option>
+
+                                                                    <option value="AMCAT_COOLING" 
+                                                                        <%= data.InterviewStatus==='AMCAT_COOLING' ? 'selected' : '' %>>
+                                                                        AMCAT_COOLING</option>
+                                                                    <option value="GROUP_DISCUSSION(P)"
+                                                                        <%= data.InterviewStatus === 'GROUP_DISCUSSION(P)' ? 'selected' : ''%>>
+                                                                        GROUP DISCUSSION(P)</option>
+                                                                    <option value="JAM(P)"
+                                                                        <%= data.InterviewStatus === 'JAM(P)' ? 'selected' : ''%>>
+                                                                        JAM(P)</option>
+                                                                    <option value="VERSANT(P)"
+                                                                        <%= data.InterviewStatus === 'VERSANT(P)' ? 'selected' : ''%>>
+                                                                        VERSANT(P)</option>
+                                                                    <option value="OPS(P)"
+                                                                        <%= data.InterviewStatus === 'OPS(P)' ? 'selected' : ''%>>
+                                                                        OPS(P)</option>
+                                                                    <option value="CLIENT(P)"
+                                                                        <%= data.InterviewStatus === 'CLIENT(P)' ? 'selected' : ''%>>
+                                                                        CLIENT(P)</option>
+                                                                    <option value="TYPING(P)"
+                                                                        <%= data.InterviewStatus === 'TYPING(P)' ? 'selected' : ''%>>
+                                                                        TYPING(P)</option>
+                                                                    <option value="GAT(P)"
+                                                                        <%= data.InterviewStatus === 'GAT(P)' ? 'selected' : ''%>>
+                                                                        GAT(P)</option>
+                                                                    <option value="ONLINE_TEST(P)"
+                                                                        <%= data.InterviewStatus === 'ONLINE_TEST(P)' ? 'selected' : ''%>>
+                                                                        ONLINE TEST(P)</option>
+                                                                    <option value="MEDICAL(P)"
+                                                                        <%= data.InterviewStatus === 'MEDICAL(P)' ? 'selected' : ''%>>
+                                                                        MEDICAL(P)</option>
+                                                                    <option value="WRITTEN_TEST(P)"
+                                                                        <%= data.InterviewStatus === 'WRITTEN_TEST(P)' ? 'selected' : ''%>>
+                                                                        WRITTEN_TEST(P)</option>
+                                                                    <option value="CODING(P)"
+                                                                        <%= data.InterviewStatus === 'CODING(P)' ? 'selected' : ''%>>
+                                                                        CODING(P)</option>
+                                                                    <option value="TECHNICAL(P)"
+                                                                        <%= data.InterviewStatus === 'TECHNICAL(P)' ? 'selected' : ''%>>
+                                                                        TECHNICAL(P)</option>
+                                                                    <option value="PRE_ASSESSMENT(P)"
+                                                                        <%= data.InterviewStatus === 'PRE_ASSESSMENT(P)' ? 'selected' : ''%>>
+                                                                        PRE ASSESSMENT(P)</option>
+                                                                    <option value="MID_ASSESSMENT(P)"
+                                                                        <%= data.InterviewStatus === 'MID_ASSESSMENT(P)' ? 'selected' : ''%>>
+                                                                        MID ASSESSMENT(P)</option>
+                                                                    <option value="POST_ASSESSMENT(P)"
+                                                                        <%= data.InterviewStatus === 'POST_ASSESSMENT(P)' ? 'selected' : ''%>>
+                                                                        POST_ASSESSMENT(P)</option>
+
+
+                                                                    <option value="CLIENT_VENUE"
+                                                                        <%= data.InterviewStatus === 'CLIENT_VENUE' ? 'selected' : ''%>>
+                                                                        CLIENT VENUE</option>
+                                                                    <option value="TPP_VENUE"
+                                                                        <%= data.InterviewStatus === 'TPP_VENUE' ? 'selected' : ''%>>
+                                                                        TPP VENUE</option>
+                                                                    <option value="TELEPHONIC"
+                                                                        <%= data.InterviewStatus === 'TELEPHONIC' ? 'selected' : ''%>>
+                                                                        TELEPHONIC</option>
+
+                                                                    <option value="AMCAT(TEL)" 
+                                                                        <%= data.InterviewStatus==='AMCAT(TEL)' ? 'selected' : '' %>>
+                                                                        AMCAT(TEL)</option>
+
+                                                                    <!-- <option value="SVVR:CLOSED" <%= data.InterviewStatus === 'SVVR:CLOSED' ? 'selected' : ''%>>SVVR:CLOSED</option> -->
+                                                                    <option value="SVVR:DONE" <%= data.InterviewStatus === 'SVVR:DONE' ? 'selected' : ''%>>SVVR:DONE</option>
+                                                                    <option value="SVVR:NI" <%= data.InterviewStatus === 'SVVR:NI' ? 'selected' : ''%>>SVVR:NI</option>    
+    
+
+                                                                    <!-- <option value="IN_PROCESS"
+                                                                        <%= data.InterviewStatus === 'IN_PROCESS' ? 'selected' : ''%>>
+                                                                        In Process</option>
+                                                                    <option value="IN_PROCESS(i)"
+                                                                        <%= data.InterviewStatus === 'IN_PROCESS(i)' ? 'selected' : ''%>>
+                                                                        In Process(i)</option> -->
+
+                                                                    <option value="SVVR:SEND EMAIL"
+                                                                        <%= data.InterviewStatus === 'SVVR:SEND EMAIL' ? 'selected' : ''%>>
+                                                                        SVVR:SEND EMAIL</option>
+                                                                    <option value="SVVR:MAIL CONFIRMATION"
+                                                                        <%= data.InterviewStatus === 'SVVR:MAIL CONFIRMATION' ? 'selected' : ''%>>
+                                                                        SVVR:MAIL CONFIRMATION</option>
+                                                                    <option value="SVVR:AWAITING ONBOARDING"
+                                                                        <%= data.InterviewStatus === 'SVVR:AWAITING ONBOARDING' ? 'selected' : ''%>>
+                                                                        SVVR:AWAITING ONBOARDING</option>
+                                                                    <option value="SVVR:L3 CHECK"
+                                                                        <%= data.InterviewStatus === 'SVVR:L3 CHECK' ? 'selected' : ''%>>
+                                                                        SVVR:L3 CHECK</option>
+                                                                    <option value="SVVR:TRAINING"
+                                                                        <%= data.InterviewStatus === 'SVVR:TRAINING' ? 'selected' : ''%>>
+                                                                        SVVR:TRAINING</option>
+                                                                    <option value="SVVR:ADD TO GROUP"
+                                                                        <%= data.InterviewStatus === 'SVVR:ADD TO GROUP' ? 'selected' : ''%>>
+                                                                        SVVR:ADD TO GROUP</option>
+                                                                    <option value="SVVR:LOGIN CREATION"
+                                                                        <%= data.InterviewStatus === 'SVVR:LOGIN CREATION' ? 'selected' : ''%>>
+                                                                        SVVR:LOGIN CREATION</option>
+
+                                                                    <option value="INTERNSHIP IN PROCESS" <%= data.InterviewStatus === 'INTERNSHIP IN PROCESS' ? 'selected' : ''%>>INTERNSHIP IN PROCESS</option>
+                                                                    <option value="INTERNSHIP DROP" <%= data.InterviewStatus === 'INTERNSHIP DROP' ? 'selected' : ''%>>INTERNSHIP DROP</option>
+                                                                    <option value="INTERNSHIP JOINED" <%= data.InterviewStatus === 'INTERNSHIP JOINED' ? 'selected' : ''%>>INTERNSHIP JOINED</option>    
+    
+
+                                                                    <option value="FINAL_FEEDBACK"
+                                                                        <%= data.InterviewStatus === 'FINAL_FEEDBACK' ? 'selected' : ''%>>
+                                                                        Final Feedback</option>
+                                                                    <option value="SELECTED"
+                                                                        <%= data.InterviewStatus === 'SELECTED' ? 'selected' : ''%>>
+                                                                        Select</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row ">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group ">
+                                                                <label>Interview Remark</label>
+                                                                <textarea class="form-control"
+                                                                    id="Interviewremark<%=a%>"
+                                                                    name="Interviewremark<%=a%>" rows="5"
+                                                                    style="resize: none;" required><%= data.InterviewRemark %></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <%}%>
+
+                                                    <%}else{%>
+                                                    <div id="show<%=a%>"></div>
+                                                    <%}%>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                    <input type="hidden" name="candidateId"
+                                                        value="<%= data.leveltwoId%>">
+                                                    <input type="hidden" name="assessment" value="<%= data.id%>">
+                                                    <input type="hidden" name="counter" value="<%= a%>">
+                                                    
+                                                    <input type="submit" class="btn btn-primary" id="third"
+                                                        value="Next">
+                                                   
+                                                    
+                                                </div>
+                                            </div>
+
+                                            
+                                </form>
+
+                                <% a++;}%>
+
+                                <%}%>
+                                <%}%>
+                                <%}%>
+
+                                <%}%>
+
+
+
+
+
+                            </div>
+
+
+
+                            <div class="tab-pane fade show active" id="nav-personal" role="tabpanel"
+                                aria-labelledby="nav-personal-tab">
+
+                                <form action="/candidate/updatepersonal" method="POST">
+                                    <div class="card shadow mb-4" id="Form1">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">Personal Information
+                                            </h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+                                        <div class="card-body ">
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Source</label>
+                                                        <select class="form-control select2 " style="width: 100%;"
+                                                            onchange="getClicked(this.value)" name="sourceData">
+
+                                                            <% for(let src of sourceValue){ if(src === personalData.source){ %>
+                                                            <option selected="selected"><%= personalData.source %>
+                                                            </option>
+                                                            <%}else{%>
+                                                            <option><%= src %></option>
+                                                            <%}}%>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Reference</label>
+                                                        <input type="text" class="form-control " id="Reference"
+                                                            name="Reference" placeholder="Reference"
+                                                            value="<%= personalData.reference == null ? 'None' : personalData.reference %>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="name ">Full Name</label>
+                                                <input type="text " class="form-control " id="name" name="name"
+                                                    placeholder="Full Name"
+                                                    value="<%= personalData.fullName == null ? 'None' : personalData.fullName %>">
+
+                                            </div>
+                                            <label for="name ">Mobile</label>
+
+                                            <div class="row " id="files">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile "
+                                                            name="mobileone" aria-label="Recipient's username"
+                                                            value="<%= personalData.phoneNumberOne %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile "
+                                                            name="mobiletwo" aria-label="Recipient's username"
+                                                            value="<%= personalData.phoneNumberTwo %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile "
+                                                            name="mobilethree" aria-label="Recipient's username"
+                                                            value="<%= personalData.phoneNumberthree %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+
+                                                    <div class="form-group ">
+
+                                                        <input type="number" class="form-control " placeholder="Mobile "
+                                                            name="mobilefour" aria-label="Recipient's username"
+                                                            value="<%= personalData.phoneNumberfour %>"
+                                                            aria-describedby="button-addon2">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <label for="name">Email</label>
+                                            <div class="row " id="emails">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email "
+                                                            name="emailone" value="<%= personalData.emailOne %>"
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email "
+                                                            name="emailtwo" value="<%= personalData.emailTwo %>"
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email "
+                                                            name="emailthree" value="<%= personalData.emailThree %>"
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Email "
+                                                            name="emailfour" value="<%= personalData.emailFour %>"
+                                                            aria-label="Recipient's username"
+                                                            aria-describedby="button-addon2">
+
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Hometown</label>
+                                                        <select class="form-control select2 " style="width: 100%; " id="homeLocation"
+                                                            name="homeLocation" required>
+                                                            <% if(locationCityData.length > 0) { for(let src of locationCityData){%>
+                                                            <option
+                                                                <%= (personalData.homeTown === src) ? 'selected': ''%>
+                                                                value="<%=src %>">
+                                                                <%=src.split("~")[0] %></option>
+                                                            <%}}%>
+
+
+                                                        </select>
+                                                        <% if(personalData.homeTown){ if(personalData.homeTown.split("~")[1]){%>
+                                                        <p style="border:2px; border-style:solid; border-color:#FF0000; margin-top: 5px; padding: 5px; color: #FF0000;" id="home_para">
+                                                        <%= personalData.homeTown.split("~")[1]%>
+                                                        </p>
+                                                        <%}}%>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Current Location</label>
+                                                        <select class="form-control select2 " style="width: 100%;"
+                                                            name="currentLocation" id="currentLocation" required>
+                                                            <% if(locationCityData.length > 0) { for(let src of locationCityData){%>
+                                                            <option
+                                                                <%= (personalData.currentLocation === src) ? 'selected': ''%>
+                                                                value="<%=src %>"><%=src.split("~")[0] %></option>
+                                                            <%}}%>
+
+
+                                                        </select>
+                                                        <% if(personalData.currentLocation){ if(personalData.currentLocation.split("~")[1]){%>
+                                                        <p style="border:2px; border-style:solid; border-color:#FF0000; margin-top: 5px; padding: 5px; color: #FF0000;" id="current_para">
+                                                         <%= personalData.currentLocation.split("~")[1]%>
+                                                        </p>
+                                                        <%}}%>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>DOB</label>
+                                                        <input type="date" id="birthday" value="<%= personalData.dob %>"
+                                                            name="birthday" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Prefered Location</label>
+                                                        <div class="s2-example">
+                                                            <p>
+                                                                <select class="js-example-basic-multiple"
+                                                                    name="preferedLocation" multiple="multiple"
+                                                                    style="width: 100%;" required>
+
+
+                                                                    <% if(location.length > 0){ 
+                                                                        for (let src of location) { %>
+                                                                                      
+                                                                        <option selected value="<%=src %>"><%=src %></option>
+                                                                                     
+                                                                        <%}%>
+                                                                     <%}%>
+
+                                                                    <% if(locData.length > 0){ 
+                                                                         for (let src of locData) { %>
+                                                                    <option value="<%=src %>"><%=src %></option>
+
+                                                                        <%}%>
+                                                                    <%}%>
+
+                                                                    <% if(locationData.length > 0 && (locData.length === 0 || location.length === 0)){%>
+                                                                         <% for (let src of locationData) { %>
+                                                                    <option value="<%=src %>"><%=src %></option>
+
+                                                                        <%}%>
+                                                                    <%}%>
+
+                                                                </select>
+
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="languageComponent">
+                                               
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Language</label>
+                                                            <select class="js-example-basic-multiple"
+                                                                    name="language" id="language" multiple="multiple"
+                                                                    style="width: 100%;" required>
+                                                            
+                                                                <%if(languageList.length > 0) { var a = 1; %>
+                                                                  <% for(let lang of languageList) {%>
+                                                                <option value="<%=lang.name %>" selected><%=lang.name %></option>
+                                                                
+                                                                  <%}%>
+                                                                <%}%>
+
+                                                                <%if(listLanguage.length > 0) { %>
+                                                                   <% for(let lang of listLanguage) {%>
+                                                                <option value="<%=lang.name %>"><%=lang.name %></option>
+                                                                   <%}%>
+                                                                <%}%>
+
+                                    
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                
+                                            </div>
+
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer ">
+                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                            <input type="hidden" name="candidateId" value="<%= personalData.id %>">
+                                            <input type="hidden" name="languageCount" id="languageCount" value="1">
+                                            <input type="submit" class="btn btn-primary" id="first" value="update">
+                                            <!-- onclick="executeNext(this.id); return false" -->
+                                        </div>
+                                                                                <!-- </form> -->
+                                        </div>
+                                </form>
+
+                            </div>
+
+
+
+                            <div class="tab-pane fade" id="nav-educational" role="tabpanel"
+                                aria-labelledby="nav-educational-tab">
+
+                                <form action="/candidate/update-education-info" method="POST">
+                                    <div class="card shadow mb-4 " id="Form2">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary  ">Educational
+                                                Information
+                                            </h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+                                        <div class="card-body ">
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Class 10</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            name="class10" required id="class10">
+                                                            <option value="-1">Select</option>
+                                                            <option value="10"
+                                                                <%= (educationData && educationData.highscool) === '10' ? 'selected' : ''%>>
+                                                                10</option>
+                                                            <option value="NONE"
+                                                                <%= (educationData && educationData.highscool) === 'NONE' ? 'selected' : ''%>>
+                                                                NONE</option>
+
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Passing year</label>
+                                                        <input type="date" id="class10Date" name="class10Date"
+                                                            value="<%= (educationData !== null && educationData.highscoolDate !== null)? educationData.highscoolDate: ""%>"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Under Graduation</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            name="class12" id="class12" required>
+                                                            <%if(educationData !== null && educationData.Intermediate !== null) {%>
+                                                            <option value="Diploma"
+                                                                <%= (educationData.Intermediate) === 'Diploma' ? 'selected' : ''%>>
+                                                                DIPLOMA</option>
+                                                            <option value="ITI"
+                                                                <%= (educationData.Intermediate) === 'ITI' ? 'selected' : ''%>>
+                                                                ITI</option>
+                                                            <option value="12"
+                                                                <%= (educationData.Intermediate) === '12' ? 'selected' : ''%>>
+                                                                12</option>
+                                                            <option value="NONE"
+                                                                <%= (educationData.Intermediate) === 'NONE' ? 'selected' : ''%>>
+                                                                NONE</option>
+                                                            <%}else{%>
+                                                            <option value="-1" selected>--Select--
+                                                            </option>
+                                                            <option value="12">12</option>
+                                                            <option value="ITI">ITI</option>
+                                                            <option value="DIPLOMA">DIPLOMA</option>
+                                                            <option value="NONE">NONE</option>
+
+                                                            <%}%>
+                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 ">
+                                                            <div class="form-group ">
+                                                                <label for="Reference ">Passing year</label>
+                                                                <input type="date" id="class12Date" 
+                                                                value="<%=( educationData !== null && educationData.IntermediateDate ) ? educationData.IntermediateDate : ""%>"
+                                                            name="class12Date" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row ">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Graduation</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            name="classG" id="classG" required>
+                                                            <% if(graduationData.length > 0) { for(let src of graduationData){%>
+                                                            <option
+                                                                <%= (educationData !== null && educationData.graduation !== null && educationData.graduation === src) ? 'selected': ''%>
+                                                                value="<%=src %>"><%=src %></option>
+                                                            <%}}%>
+                                                            <option value="NONE">NONE</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Passing year</label>
+                                                        <input type="date" id="classGDate" name="classGDate"
+                                                            value="<%= (educationData !== null && educationData.graduationDate !== null) ? educationData.graduationDate : '' %>"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Post Graduation</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            name="classP" id="classP" required>
+                                                            <% if(postGraduationData.length > 0) { for(let src of postGraduationData){%>
+                                                            <option
+                                                                <%= (educationData && educationData.postGraduation && educationData.postGraduation === src) ? 'selected': '' %>
+                                                                value="<%=src %>"><%=src %></option>
+                                                            <%}}%>
+                                                            <option value="NONE">NONE</option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="Reference">Passing year</label>
+                                                        <input type="date" id="classPDate" name="classPDate"
+                                                            value="<%= (educationData !== null && educationData.postGraduationDate !== null ) ? educationData.postGraduationDate : ''%>"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Skills set</label>
+
+                                                        <input id="form-tags-3" name="preferedSkillset" type="text"
+                                                            value="<%= skillSet !== null ? skillSet : ''%>">
+
+                                                        <!-- <div class="s2-example">
+                                                                    <p>
+                                                                        <select class="js-example-basic-multiple" name="preferedSkillset" multiple="multiple" style="width: 100%;">
+
+                                                                    <option value="python">Python</option>
+                                                                    <option value="java">Java</option>
+
+                                                                </select>
+
+                                                                    </p>
+                                                                </div> -->
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <% var i=0; for(let src of certificate){if(i==0){ %>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Certificate</label>
+                                                        <input type="type" class="form-control" name="certificateName"
+                                                            value="<%= src !== null? src.certificateName: ''%>"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label for="Reference ">Certification
+                                                            Number</label>
+                                                        <input type="type" class="form-control" name="certificateNumber"
+                                                            value="<%= src !== null? src.certificateNumber: ''%>"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <% i=1;}}%>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Typing Speed</label>
+                                                        <select class="form-control select2" style="width: 100%;"
+                                                            required name="typingspeed">
+
+                                                            <%if(educationData !== null && educationData.typingSpeed !== null) {%>
+                                                            <option
+                                                                selected="<%= (educationData.typingSpeed) === '1 to 20 wpm' ? 'selected' : ''%>"
+                                                                value="<%= educationData.typingSpeed %>">
+                                                                1 to 20 wpm</option>
+
+                                                            <option
+                                                                selected="<%= (educationData.typingSpeed) === '20 to 30 wpm' ? 'selected' : ''%>"
+                                                                value="<%= educationData.typingSpeed %>">
+                                                                20 to 30 wpm
+                                                            </option>
+                                                            <option
+                                                                selected="<%= (educationData.typingSpeed) === '30+ wpm' ? 'selected' : ''%>"
+                                                                value="<%= educationData.typingSpeed %>">
+                                                                30+ wpm
+                                                            </option>
+
+                                                            <% }else{ %>
+                                                            <option value="-1" selected>--Select--
+                                                            </option>
+                                                            <option>1 to 20 wpm</option>
+                                                            <option>20 to 30 wpm</option>
+                                                            <option>30+ wpm</option>
+
+                                                            <%}%>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <input type="hidden" name="candidateKey" value="<%=candidateId%>">
+                                                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                                            <%if(educationData !== null && educationData.id !== null){%>
+                                                            <input type="hidden" name="educationKey"
+                                                                value="<%= educationData.id  %>">
+                                                            <%}%>
+                                                            <input type="submit" class="btn btn-primary" id="second"
+                                                                value="Next">
+                                                    </div>
+                                                    <!-- </form> -->
+                                                </div>
+                                </form>
+
+                            </div>
+
+
+                            <div class="tab-pane fade" id="nav-expereince" role="tabpanel"
+                                aria-labelledby="nav-expereince-tab">
+                                <form action="/candidate/update-experience-info" method="POST" novalidate>
+                                    <div class="card shadow mb-4 " id="Form3">
+                                        <div class="card-header ">
+                                            <h3 class="m-0 font-weight-bold text-primary ">Experience Information
+                                            </h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <!-- form start -->
+                                        <!-- <form role="form "> -->
+                                        <div class="card-body">
+                                            <div class="row mb-2">
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="experiencestatus" id="fresher" value="EXPERIENCE"
+                                                            <%= experienceData !== null && experienceData.experience === 'EXPERIENCE' ?  'checked'  : ''%>>
+                                                        <label class="form-check-label" for="fresher">
+                                                            EXPERIENCE
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="experiencestatus" id="experience" value="FRESHER"
+                                                            <%= experienceData !== null && experienceData.experience === 'FRESHER' ?  'checked'  : ''%>>
+                                                        <label class="form-check-label" for="experience">
+                                                            FRESHER
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% var i = 1; j = 1; if (experienceData !== null && experienceData.experience === 'EXPERIENCE' && companyJobData.length > 0) { for(let src of companyJobData) { %>
+                                            <div>
+                                                <div id="company">
+                                                    <div class="row ">
+                                                        <div class="col-md-12 ">
+                                                            <div class="form-group ">
+                                                                <label>Company Name</label>
+                                                                <input type="organization-title" class="form-control"
+                                                                    value="<%= src.name %>" placeholder="Company Name"
+                                                                    required name="company<%= i%>" autocomplete="on">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row ">
+                                                        <div class="col-md-6 ">
+                                                            <div class="form-group ">
+                                                                <label>Company Industry</label>
+                                                                <select class="form-control select2"
+                                                                    name="companyIndustry<%= i%>" required
+                                                                    style="width: 100%; ">
+                                                                    <% if (industryData.length > 0) { for(let srcIndustry of industryData) {%>
+                                                                    <option
+                                                                        <%= src.companyIndustry === srcIndustry ? 'selected': ''%>
+                                                                        value="<%=srcIndustry %>">
+                                                                        <%=srcIndustry %>
+                                                                    </option>
+                                                                    <%}} %>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 ">
+                                                            <div class="form-group ">
+                                                                <label for="Reference ">Role</label>
+                                                                <select class="form-control select2"
+                                                                    name="companyRole<%= i%>" style="width: 100%;"
+                                                                    required>
+                                                                    <% if (roleTypeData.length > 0) { for(let srcRoleTypeData of roleTypeData) {%>
+                                                                    <option
+                                                                        <%= src.companyRole === srcRoleTypeData ? 'selected': ''%>
+                                                                        value="<%=srcRoleTypeData %>">
+                                                                        <%=srcRoleTypeData %>
+                                                                    </option>
+                                                                    <%}} %>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row ">
+                                                        <div class="col-md-4 ">
+                                                            <div class="form-group ">
+                                                                <label for="Reference ">Start
+                                                                    year</label>
+                                                                <input type="date" id="startDate<%= i%>"
+                                                                    name="startDate<%= i%>" value="<%= src.startDate %>"
+                                                                    class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 ">
+                                                            <div class="form-group ">
+                                                                <label for="Reference ">End year</label>
+                                                                <input type="date" id="endDate<%= i%>"
+                                                                    name="endDate<%= i%>" value="<%= src.endDate %>"
+                                                                    class="form-control ">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 ">
+                                                            <div class="form-group ">
+                                                                <label>Salary</label>
+                                                                <input type="text" name="salary<%= i%>"
+                                                                    value="<%= src.Salary %>" required
+                                                                    style="width: 100%; ">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <%  i++;} %>
+                                            <div class="row" id="addCompany">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Add more</label>
+                                                        <button type="button" class="btn btn-primary"
+                                                            onclick="addCompany();"><i class="fa fa-plus">
+                                                            </i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%} else{ i = 0; %>
+                                            <div id="companys">
+                                                <div class="row">
+                                                    <div class="col-md-12 ">
+                                                        <div class="form-group ">
+                                                            <label>Company Name</label>
+                                                            <input type="organization-title" class="form-control"
+                                                                placeholder="Company Name" required name="company1"
+                                                                autocomplete="on">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Company Industry</label>
+                                                            <select class="form-control select2" name="companyIndustry1"
+                                                                required style="width: 100%; ">
+                                                                <% if (industryData.length > 0) { for(let srcIndustry of industryData) {%>
+                                                                <option value="<%=srcIndustry %>">
+                                                                    <%=srcIndustry %>
+                                                                </option>
+                                                                <%}} %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">Role</label>
+                                                            <select class="form-control select2" name="companyRole1"
+                                                                style="width: 100%;" required>
+                                                                <% if (roleTypeData.length > 0) { for(let srcRoleTypeData of roleTypeData) {%>
+                                                                <option value="<%=srcRoleTypeData %>">
+                                                                    <%=srcRoleTypeData %>
+                                                                </option>
+                                                                <%}} %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="Reference">Start year</label>
+                                                            <input type="date" id="startDate" name="startDate1"
+                                                                class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 ">
+                                                        <div class="form-group ">
+                                                            <label for="Reference ">End year</label>
+                                                            <input type="date" id="endDate" name="endDate1"
+                                                                class="form-control ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 ">
+                                                        <div class="form-group ">
+                                                            <label>Salary</label>
+                                                            <input type="text" name="salary1" required
+                                                                style="width: 100%; ">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" id="addCompanys">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Add more</label>
+                                                        <button type="button" class="btn btn-primary"
+                                                            onclick="addCompanys();"><i class="fa fa-plus">
+                                                            </i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <%}%>
+            
+                                         <% if(preferedIndustryData.length > 0) {  for(let src of preferedIndustryData){ %>
+                                            <div id="prefer">
+                                                <div class="row">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Prefered Industry</label>
+                                                            <select class="form-control select2"
+                                                                name="preferedIndustry<%= j %>" style="width: 100%;"
+                                                                required>
+                                                                <% if (industryData.length > 0) { for(let srcIndustry of industryData) {%>
+                                                                <option
+                                                                    <%= (src.preferedIndustry === srcIndustry) ? 'selected': ''%>
+                                                                    value="<%=srcIndustry %>">
+                                                                    <%=srcIndustry %>
+                                                                </option>
+                                                                <%}} %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Prefered Job Role</label>
+                                                            <select class="form-control select2"
+                                                                name="preferedIndustryJobRole<%= j %>"
+                                                                style="width: 100%;" required>
+                                                                <% if (roleTypeData.length > 0) { for(let srcRoleTypeData of roleTypeData) {%>
+                                                                <option
+                                                                    <%= (src.preferedJobRole === srcRoleTypeData) ? 'selected': ''%>
+                                                                    value="<%=srcRoleTypeData %>">
+                                                                    <%=srcRoleTypeData %>
+                                                                </option>
+                                                                <%}} %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% j++; }%>
+                                            <div class="row">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Add more</label>
+                                                        <button type="button" class="btn btn-primary"
+                                                            onclick="addPreferences();"><i class="fa fa-plus">
+                                                            </i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%}else{ j = 0;%>
+                                            <div id="prefer">
+                                                <div class="row">
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Prefered Industry</label>
+                                                            <select class="form-control select2"
+                                                                name="preferedIndustry1" style="width: 100%;" required>
+                                                                <% if (industryData.length > 0) { for(let srcIndustry of industryData) {%>
+                                                                <option value="<%=srcIndustry %>">
+                                                                    <%=srcIndustry %>
+                                                                </option>
+                                                                <%}} %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 ">
+                                                        <div class="form-group ">
+                                                            <label>Prefered Job Role</label>
+                                                            <select class="form-control select2"
+                                                                name="preferedIndustryJobRole1" style="width: 100%;"
+                                                                required>
+                                                                <% if (roleTypeData.length > 0) { for(let srcRoleTypeData of roleTypeData) {%>
+                                                                <option value="<%=srcRoleTypeData %>">
+                                                                    <%=srcRoleTypeData %>
+                                                                </option>
+                                                                <%}} %>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 ">
+                                                    <div class="form-group ">
+                                                        <label>Add more</label>
+                                                        <button type="button" class="btn btn-primary"
+                                                            onclick="addPreferences();"><i class="fa fa-plus">
+                                                            </i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <%}%>
+            <div class="row ">
+               <div class="col-md-6 ">
+                  <div class="form-group ">
+                     <label>Prefered Job Type</label>
+                     <select class="form-control select2" name="preferedJobType"
+                        required style="width: 100%;">
+                        <option value="">--Select--</option>
+                        <option
+                           <%= experienceData !== null && experienceData.preferedJobType !== null && experienceData.preferedJobType === 'FULL_TIME' ? 'selected': ''%>
+                                            value="FULL_TIME">Full-Time</option>
+                                            <option
+                                                <%= experienceData !== null && experienceData.preferedJobType !== null && experienceData.preferedJobType === 'PART_TIME' ? 'selected': ''%>
+                                                value="PART_TIME">Part-Time</option>
+                                            <option
+                                                <%= experienceData !== null && experienceData.preferedJobType !== null && experienceData.preferedJobType === 'INTERNSHIP' ? 'selected': ''%>
+                                                value="INTERNSHIP">Internship</option>
+                                            <option
+                                                <%= experienceData !== null && experienceData.preferedJobType !== null && experienceData.preferedJobType === 'FREELANCER' ? 'selected': ''%>
+                                                value="FREELANCER">Freelancer</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group ">
+                                            <label>Prefered Shift</label>
+                                            <select class="form-control select2" style="width: 100%;" required
+                                                name="preferedShift">
+                                                <option value="">--Select--</option>
+                                                <option
+                                                    <%= experienceData !== null && experienceData.preferedShift !== null && experienceData.preferedShift === 'DAY' ? 'selected': ''%>
+                                                    value="DAY">DAY</option>
+                                                <option
+                                                    <%= experienceData !== null && experienceData.preferedShift !== null && experienceData.preferedShift === 'AFTERNOON' ? 'selected': ''%>
+                                                    value="AFTERNOON">AFTERNOON</option>
+                                                <option
+                                                    <%= experienceData !== null && experienceData.preferedShift !== null && experienceData.preferedShift === 'NIGHT' ? 'selected': ''%>
+                                                    value="NIGHT">NIGHT</option>
+                                                <option
+                                                    <%= experienceData !== null && experienceData.preferedShift !== null && experienceData.preferedShift === 'ANY' ? 'selected': ''%>
+                                                    value="ANY">ANY</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer ">
+                            <input type="hidden" name="candidateKey" value="<%=candidateId%>">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="hidden" name="companyCount" id="companyCount">
+                            <input type="hidden" name="preferenceCount" id="preferenceCount" value="<%= j-1 %>">
+                            <%if(experienceData !== null && experienceData.id !== null){%>
+                            <input type="hidden" name="experienceKey" value="<%=experienceData.id%>">
+                            <%}%>
+            <input type="submit" class="btn btn-primary" id="third" value="Next">
+         </div>
+         <!-- </form> -->
+      </div>
+   </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        function getClicked() {
+            $(document).ready(function () {
+
+                $("#sourceData").on("change", function (e) {
+
+                    e.preventDefault();
+                    var type = $(this).val();
+                    if (type !== '-1') {
+                        $("#Reference").removeAttr('disabled');
+                    } else {
+                        $("#Reference").attr('disabled', true);
+                    }
+                })
+
+            })
+        }
+
+
+        $(document).ready(function(){
+            $("#classP").on('change', function(e){
+                var type = $(this).val();
+                console.log(type);
+                if (type === '-1' || type === 'NONE') {
+                    $("#classPDate").attr('disabled', true);
+                    } else {
+                       $("#classPDate").removeAttr('disabled'); 
+                    }
+            })
+
+            $("#classG").on('change', function(e){
+                var type = $(this).val();
+                console.log(type);
+
+                if (type === '-1' || type === 'NONE') {
+                    $("#classGDate").attr('disabled', true);     
+                    } else {
+                        $("#classGDate").removeAttr('disabled');
+                    }
+            })
+
+            $("#class10").on('change', function(e){
+                var type = $(this).val();
+                console.log(type);
+                if (type === '-1' || type === 'NONE') {
+                    $("#class10Date").attr('disabled', true);
+                        
+                    } else {
+                       $("#class10Date").removeAttr('disabled'); 
+                    }
+            })
+
+            $("#class12").on('change', function(e){
+                var type = $(this).val();
+                console.log(type);
+                if (type === '-1' || type === 'NONE') {
+                    $("#class12Date").attr('disabled', true); 
+                    } else {
+                        $("#class12Date").removeAttr('disabled');
+                    }
+            })
+
+            $("#homeLocation").on('change', function (e) {
+                $('#home_para').show();
+                var type = $(this).val();     
+                console.log(type)           
+                $('#home_para').html(''+type.split("~")[1])
+            })
+
+            $("#currentLocation").on('change', function (e) {
+                $('#current_para').show();
+                var type = $(this).val();     
+                console.log(type)            
+                $('#current_para').html(''+type.split("~")[1])
+            })
+        })
+
+        $(document).ready(function () {
+            
+            $('#companys').hide();
+            $('#addCompanys').hide();
+
+        })
+
+        $(document).ready(function () {
+
+            $("input[name$='experiencestatus']").click(function () {
+                var test = $(this).val();
+                
+                if (test === 'FRESHER') {
+                    console.log(test, '-s');
+                    $('#companyShow').slideUp()
+                    $("#company").slideUp();
+                    $('#addCompany').hide();
+                    
+                } else {
+                    $('#companyShow').slideDown()
+                    $("#company").slideDown();
+                    $('#addCompany').show();
+                    $('#companyCount').val("1");
+                }
+
+                if (test === 'FRESHER') {
+                    console.log(test, 's');
+                     $('#companyShow').slideUp()
+                    $("#companys").slideUp();
+                    $('#addCompanys').hide();
+                } else {
+                     $('#companyShow').slideDown()
+                    $("#companys").slideDown();
+                    $('#addCompanys').show();
+                    $('#companyCount').val("1");
+                }
+
+            });
+        })
+
+        
+        function getRole()
+        {
+        $(document).ready(function () {
+            $("#client").on("change", function (e) {
+                var type = $(this).val();
+                console.log(type);
+                if(type && type !== '-1')
+                {
+                    $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompanyRole/'+type,
+                            success: function (res) {
+                                var len = res.companyRoleName.length;
+                                $("#process").empty();
+                                if (len > 0) {
+                                    
+                                    for (var i = 0; i < len; i++) {
+                                        var name = res.companyRoleName[i].name;
+                                        var id = res.companyRoleName[i].id;
+
+                                        $("#process").append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#process").append(
+                                        "<option value='-1'>None</option>");
+                                }
+
+                            }
+                        });
+                }
+            })
+
+            $("#clients").on("change", function (e) {
+                var type = $(this).val();
+                console.log(type);
+                if(type && type !== '-1')
+                {
+                    $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompanyRole/'+type,
+                            success: function (res) {
+                                var len = res.companyRoleName.length;
+                                $("#processs").empty();
+                                if (len > 0) {
+                                    
+                                    for (var i = 0; i < len; i++) {
+                                        var name = res.companyRoleName[i].name;
+                                        var id = res.companyRoleName[i].id;
+
+                                        $("#processs").append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#processs").append(
+                                        "<option value='-1'>None</option>");
+                                }
+
+                            }
+                        });
+                }
+            })
+        })
+    }
+
+    
+        function getRoleValue(i)
+        {
+            
+            $(document).ready(function () {
+                
+            $("#client"+i).on("change", function (e) {
+                const dd = i;
+                var type = $(this).val();
+                const data = "#process"+dd;
+                if(type && type !== '-1')
+                {
+                    $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompanyRole/'+type,
+                            success: function (res) {
+                                var len = res.companyRoleName.length;
+                                
+                                $(data).empty();
+                                if (len > 0) {
+                                    
+                                    for (var i = 0; i < len; i++) {
+                                        var name = res.companyRoleName[i].name;
+                                        var id = res.companyRoleName[i].id;
+
+                                        $(data).append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $(data).append(
+                                        "<option value='-1'>None</option>");
+                                }
+
+                            }
+                        });
+                }else{
+                    $(data).empty();
+                }
+            });
+        });
+        }
+
+
+        function getData(i) {
+
+            $(document).ready(function () {
+                $("#l2assessment"+i).on("change", function (e) {
+
+                    var type = $(this).val();
+                    if(type === 'no_show' || type === 'wd')
+                    {
+                        $('#visible'+i).html(`
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>Client</label>
+                                    <select class="form-control select2" name="client`+i+`" id="client`+i+`" required
+                                        style="width: 100%;" onClick="getRoleValue('`+i+`');">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Process</label>
+                                    <select class="form-control select2" id="process`+i+`" name="process`+i+`"
+                                        style="width: 100%;" required>
+                                        <option selected>--Select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference ">Interview</label>
+                                    <input type="date" id="startDate`+i+`" name="startDate`+i+`" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark`+i+`" name='remarkDescription`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>`);
+
+                        $("#show"+i).html(`
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>Client</label>
+                                    <select class="form-control select2" name="client`+i+`" id="client`+i+`" required
+                                        style="width: 100%;" onClick="getRoleValue('`+i+`');">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Process</label>
+                                    <select class="form-control select2" id="process`+i+`" name="process`+i+`"
+                                        style="width: 100%;" required>
+                                        <option selected>--Select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference ">Interview</label>
+                                    <input type="date" id="startDate`+i+`" name="startDate`+i+`" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark`+i+`" name='remarkDescription`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>`);
+
+                        $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompany/',
+                            success: function (res) {
+                                var len = res.companyName.length;
+                                
+                                if (len > 1) {
+                                    $("#client"+i).empty();
+                                    for (var j = 0; j < len; j++) {
+                                        var name = res.companyName[j].name;
+                                        var id = res.companyName[j].id;
+
+                                        $("#client"+i).append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#client"+i).append(
+                                        "<option>None</option>");
+                                }
+
+                            }
+                        });
+                    }
+                    else if (type === 'good' || type === 'tac') {
+
+                        $('#visible'+i).html(`
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>Client</label>
+                                    <select class="form-control select2" name="client`+i+`" id="client`+i+`" required
+                                        style="width: 100%;" onClick="getRoleValue('`+i+`');">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Process</label>
+                                    <select class="form-control select2" id="process`+i+`" name="process`+i+`"
+                                        style="width: 100%;" required>
+                                        <option selected>--Select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference ">Interview</label>
+                                    <input type="date" id="startDate`+i+`" name="startDate`+i+`" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark`+i+`" name='remarkDescription`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>Document Check</label>
+                                    <select class="form-control select2" name="docCheck`+i+`" required style="width: 100%; ">
+                                        <option selected="selected ">Select</option>
+                                        <option value="DONE">DONE</option>
+                                        <option value="PENDING">PENDING</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Training Status</label>
+                                    <select class="form-control select2" name="trainingStatus`+i+`" style="width: 100%;"
+                                        required>
+                                        <option selected="selected ">Select</option>
+                                        <option value="DONE">DONE</option>
+                                        <option value="PENDING">PENDING</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Interview Status</label>
+                                    <select class="form-control select2" name="InterviewStatus`+i+`" style="width: 100%;"
+                                        required>
+                                        <option selected="selected">--Select--</option>
+                                        <option value="FSR">Reject: FSR</option>
+                                        <option value="AMCAT">Reject: AMCAT</option>
+                                        <option value="AMCAT_COOLING">AMCAT_COOLING</option>
+                                        <option value="GAT">Reject: GAT</option>
+                                        <option value="VERSANT">Reject: VERSANT</option>
+                                        <option value="TYPING">Reject: TYPING</option>
+                                        <option value="OPS">Reject: OPS</option>
+                                        <option value="CLIENT">Reject: CLIENT</option>
+                                        <option value="GROUP_DISCUSSION">Reject: GROUP DISCUSSION</option>
+                                        <option value="NO_SHOW">No Show - IM</option>
+                                        <option value="OFFER_DROP">Offer Drop</option>
+                                        <option value="HOLD">Hold</option>
+                                        <option value="NO_SHOW_LINE_UP">No Show Line Up</option>
+                                        <option value="HR(P)">HR(P)</option>
+                                        <option value="AMCAT(P)">AMCAT(P)</option>
+                                        <option value="GROUP_DISCUSSION(P)">GROUP DISCUSSION(P)</option>
+                                        <option value="JAM(P)">JAM(P)</option>
+                                        <option value="VERSANT(P)">VERSANT(P)</option>
+                                        <option value="OPS(P)">OPS(P)</option>
+                                        <option value="CLIENT(P)">CLIENT(P)</option>
+                                        <option value="TYPING(P)">TYPING(P)</option>
+                                        <option value="GAT(P)">GAT(P)</option>
+                                        <option value="ONLINE_TEST(P)">ONLINE TEST(P)</option>
+                                        <option value="MEDICAL(P)">MEDICAL(P)</option>
+                                        <option value="WRITTEN_TEST(P)">WRITTEN_TEST(P)</option>
+                                        <option value="CODING(P)">CODING(P)</option>
+                                        <option value="TECHNICAL(P)">TECHNICAL(P)</option>
+                                        <option value="PRE_ASSESSMENT(P)">PRE ASSESSMENT(P)</option>
+                                        <option value="MID_ASSESSMENT(P)">MID ASSESSMENT(P)</option>
+                                        <option value="POST_ASSESSMENT(P)">POST_ASSESSMENT(P)</option>
+
+
+                                        <option value="CLIENT_VENUE">CLIENT VENUE</option>
+                                        <option value="TPP_VENUE">TPP VENUE</option>
+                                        <option value="TELEPHONIC">TELEPHONIC</option>
+                                        <option value="AMCAT(TEL)">AMCAT(TEL)</option>
+
+
+                                        <option value="SVVR:DONE">SVVR:DONE</option>
+                                        <option value="SVVR:NI">SVVR:NI</option>    
+
+                                        <option value="SVVR:SEND EMAIL">SVVR:SEND EMAIL</option>
+                                        <option value="SVVR:MAIL CONFIRMATION">SVVR:MAIL CONFIRMATION</option>
+                                        <option value="SVVR:AWAITING ONBOARDING">SVVR:AWAITING ONBOARDING</option>
+                                        <option value="SVVR:L3 CHECK">SVVR:L3 CHECK</option>
+                                        <option value="SVVR:TRAINING">SVVR:TRAINING</option>
+                                        <option value="SVVR:ADD TO GROUP">SVVR:ADD TO GROUP</option>
+                                        <option value="SVVR:LOGIN CREATION">SVVR:LOGIN CREATION</option>
+
+                                        <option value="INTERNSHIP IN PROCESS">INTERNSHIP IN PROCESS</option>
+                                        <option value="INTERNSHIP DROP">INTERNSHIP DROP</option>
+                                        <option value="INTERNSHIP JOINED">INTERNSHIP JOINED</option>
+                                        
+                                        <option value="FINAL_FEEDBACK">Final Feedback</option>
+                                        <option value="SELECTED">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group ">
+                                    <label>Interview Check</label>
+                                    <textarea class="form-control" rows="5" id="Interviewremark`+i+`" name='Interviewremark`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        `)
+
+
+                        $("#show"+i).html(`
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>Client</label>
+                                    <select class="form-control select2" name="client`+i+`" id="client`+i+`" required
+                                        style="width: 100%;" onClick="getRoleValue('`+i+`');">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Process</label>
+                                    <select class="form-control select2" id="process`+i+`" name="process`+i+`"
+                                        style="width: 100%;" required>
+                                        <option selected>--Select--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference ">Interview</label>
+                                    <input type="date" id="startDate`+i+`" name="startDate`+i+`" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark`+i+`" name='remarkDescription`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label>Document Check</label>
+                                    <select class="form-control select2" name="docCheck`+i+`" required style="width: 100%; ">
+                                        <option selected="selected ">Select</option>
+                                        <option value="DONE">DONE</option>
+                                        <option value="PENDING">PENDING</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Training Status</label>
+                                    <select class="form-control select2" name="trainingStatus`+i+`" style="width: 100%;"
+                                        required>
+                                        <option selected="selected ">Select</option>
+                                        <option value="DONE">DONE</option>
+                                        <option value="PENDING">PENDING</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                    <label for="Reference">Interview Status</label>
+                                    <select class="form-control select2" name="InterviewStatus`+i+`" style="width: 100%;"
+                                        required>
+                                        <option selected="selected">--Select--</option>
+                                        <option value="FSR">Reject: FSR</option>
+                                        <option value="AMCAT">Reject: AMCAT</option>
+                                        <option value="AMCAT_COOLING">AMCAT_COOLING</option>
+                                        <option value="GAT">Reject: GAT</option>
+                                        <option value="VERSANT">Reject: VERSANT</option>
+                                        <option value="TYPING">Reject: TYPING</option>
+                                        <option value="OPS">Reject: OPS</option>
+                                        <option value="CLIENT">Reject: CLIENT</option>
+                                        <option value="GROUP_DISCUSSION">Reject: GROUP DISCUSSION</option>
+                                        <option value="NO_SHOW">No Show - IM</option>
+                                        <option value="OFFER_DROP">Offer Drop</option>
+                                        <option value="HOLD">Hold</option>
+                                        <option value="NO_SHOW_LINE_UP">No Show Line Up</option>
+                                        <option value="HR(P)">HR(P)</option>
+                                        <option value="AMCAT(P)">AMCAT(P)</option>
+                                        <option value="GROUP_DISCUSSION(P)">GROUP DISCUSSION(P)</option>
+                                        <option value="JAM(P)">JAM(P)</option>
+                                        <option value="VERSANT(P)">VERSANT(P)</option>
+                                        <option value="OPS(P)">OPS(P)</option>
+                                        <option value="CLIENT(P)">CLIENT(P)</option>
+                                        <option value="TYPING(P)">TYPING(P)</option>
+                                        <option value="GAT(P)">GAT(P)</option>
+                                        <option value="ONLINE_TEST(P)">ONLINE TEST(P)</option>
+                                        <option value="MEDICAL(P)">MEDICAL(P)</option>
+                                        <option value="WRITTEN_TEST(P)">WRITTEN_TEST(P)</option>
+                                        <option value="CODING(P)">CODING(P)</option>
+                                        <option value="TECHNICAL(P)">TECHNICAL(P)</option>
+                                        <option value="PRE_ASSESSMENT(P)">PRE ASSESSMENT(P)</option>
+                                        <option value="MID_ASSESSMENT(P)">MID ASSESSMENT(P)</option>
+                                        <option value="POST_ASSESSMENT(P)">POST_ASSESSMENT(P)</option>
+
+
+                                        <option value="CLIENT_VENUE">CLIENT VENUE</option>
+                                        <option value="TPP_VENUE">TPP VENUE</option>
+                                        <option value="TELEPHONIC">TELEPHONIC</option>
+                                        <option value="AMCAT(TEL)">AMCAT(TEL)</option>
+
+
+                                        <option value="SVVR:DONE">SVVR:DONE</option>
+                                        <option value="SVVR:NI">SVVR:NI</option>   
+                                        
+                                        <option value="SVVR:SEND EMAIL">SVVR:SEND EMAIL</option>
+                                        <option value="SVVR:MAIL CONFIRMATION">SVVR:MAIL CONFIRMATION</option>
+                                        <option value="SVVR:AWAITING ONBOARDING">SVVR:AWAITING ONBOARDING</option>
+                                        <option value="SVVR:L3 CHECK">SVVR:L3 CHECK</option>
+                                        <option value="SVVR:TRAINING">SVVR:TRAINING</option>
+                                        <option value="SVVR:ADD TO GROUP">SVVR:ADD TO GROUP</option>
+                                        <option value="SVVR:LOGIN CREATION">SVVR:LOGIN CREATION</option>
+
+
+                                        <option value="FINAL_FEEDBACK">Final Feedback</option>
+                                        <option value="SELECTED">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="form-group ">
+                                    <label>Interview Check</label>
+                                    <textarea class="form-control" rows="5" id="Interviewremark`+i+`" name='Interviewremark`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        `)
+
+                            $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompany/',
+                            success: function (res) {
+                                var len = res.companyName.length;
+                                
+                                if (len > 1) {
+                                    $("#client"+i).empty();
+                                    for (var j = 0; j < len; j++) {
+                                        var name = res.companyName[j].name;
+                                        var id = res.companyName[j].id;
+
+                                        $("#client"+i).append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#client"+i).append(
+                                        "<option>None</option>");
+                                }
+
+                            }
+                        });
+                    } else {
+                        $('#visible'+i).html(`
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark`+i+`" name='remarkDescription`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>`);
+                        $('#show'+i).html(`
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark</label>
+                                    <textarea class="form-control" rows="5" id="remark`+i+`" name='remarkDescription`+i+`'
+                                        style="resize: none;" required></textarea>
+                                </div>
+                            </div>
+                        </div>`);
+                        console.log('Select is not clear!')
+                    }
+
+                });
+            });
+        }
+
+        function getNewData() {
+
+            $(document).ready(function () {
+                $("#l1assessment").on("change", function (e) {
+
+                    e.preventDefault();
+                    var type = $(this).val();
+                    if (type === 'wd' || type === 'good' || type === 'tac') {
+                        $('#show').html(`<div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Client</label>
+                                        <select class="form-control select2" name="clients" id="clients" required
+                                            style="width: 100%;" onClick="getRole();">
+                                            <option selected>Select</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="Reference">Process</label>
+                                        <select class="form-control select2" name="processs" id="processs"  style="width: 100%;"
+                                            required>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Interview</label>
+                                        <input type="date" id="startDate" name="startDate" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Remark</label>
+                                        <textarea class="form-control" rows="5" id="remark" name='remarkDescription'
+                                            style="resize: none;" required></textarea>
+
+                                    </div>
+                                </div>
+                            </div>`)
+
+                            $('#visible').html(`<div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Client</label>
+                                        <select class="form-control select2" name="clients" id="clients" required
+                                            style="width: 100%;" onClick="getRole();">
+                                            <option selected>Select</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="form-group ">
+                                        <label for="Reference">Process</label>
+                                        <select class="form-control select2" name="processs" id="processs"  style="width: 100%;"
+                                            required>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Interview</label>
+                                        <input type="date" id="startDate" name="startDate" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Remark</label>
+                                        <textarea class="form-control" rows="5" id="remark" name='remarkDescription'
+                                            style="resize: none;" required></textarea>
+
+                                    </div>
+                                </div>
+                            </div>`);
+
+                        
+                            $.ajax({
+                            type: 'GET',
+                            url: '/ajax/getCompany/',
+                            success: function (res) {
+                                var len = res.companyName.length;
+                                if (len > 1) {
+                                    $("#clients").empty();
+                                    for (var i = 0; i < len; i++) {
+                                        var name = res.companyName[i].name;
+                                        var id = res.companyName[i].id;
+                                        $("#clients").append(
+                                            "<option value='" + id + "'>" + name +
+                                            "</option>");
+
+                                    }
+                                } else {
+                                    $("#clients").append(
+                                        "<option value='-1'>None</option>");
+                                }
+
+                            }
+                        });
+                    } else {
+                        $('#visible').show();
+                        $('#show').show();
+                        $('#visible').html(`<div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Remark</label>
+                                        <textarea class="form-control" rows="5" id="remark" name='remarkDescription'
+                                            style="resize: none;" required></textarea>
+
+                                    </div>
+                                </div>
+                            </div>`);
+                        $('#show').html(`<div class="row">
+                                <div class="col-md-12 ">
+                                    <div class="form-group ">
+                                        <label>Remark</label>
+                                        <textarea class="form-control" rows="5" id="remark" name='remarkDescription'
+                                            style="resize: none;" required></textarea>
+
+                                    </div>
+                                </div>
+                            </div>`);
+                        console.log('Select is not clear!')
+                    }
+
+
+
+                });
+            });
+        }
+
+        
+    </script>
+    <%- include('../includes/end2.ejs') %>

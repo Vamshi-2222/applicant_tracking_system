@@ -1,0 +1,1168 @@
+<%- include('../includes/head.ejs') %>
+
+<link href="/css/select2.css" rel="stylesheet" type="text/css">
+<link href="/css/tag.css" rel="stylesheet" type="text/css">
+
+<link href="/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src='/js/registration.js'></script>
+</head>
+
+<body id="page-top">
+
+    <%- include('../includes/drawer.ejs') %>
+
+
+    <div class="container-fluid">
+
+        <div class="row mx-2 mt-2">
+
+            <div class="col-md-12">
+                <!-- Form 1 for Personal Info -->
+                <% if(page === 1)  {%>
+                <form action="/candidate/personal-info" method="POST">
+                    <div class="card shadow mb-4" id="Form1">
+                        <div class="card-header ">
+                            <h3 class="m-0 font-weight-bold text-primary ">Personal Information</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <!-- <form role="form "> -->
+                        <div class="card-body ">
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Source</label>
+                                        <select class="form-control select2 " style="width: 100%;" id="sourceData"
+                                            name="sourceData" onclick="getClicked();">
+                                            <!--  -->
+                                            <option value="-1" selected="selected">Select</option>
+
+                                            <% for (let src of source) {%>
+                                            <!-- <%  if(typeof inputData === '' || typeof inputData === 'undefined') 
+                                            { 
+                                                console.log(inputData)%>
+                                            <% } %> -->
+                                            <% if(typeof inputData!=='undefined' && inputData !== null){ %>
+                                            <option selected="selected" value='<%= src %>'><%= src %></option>
+                                            <% }else{ %>
+                                            <option value='<%= src %>'><%= src %></option>
+                                            <%} } %>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Reference</label>
+                                        <input type="text" class="form-control " id="Reference" name="Reference"
+                                            placeholder="Reference" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="name ">Full Name</label>
+                                <input type="text " class="form-control " id="name" name="name" placeholder="Full Name"
+                                    value="<%=(inputData && inputData.name)? inputData.name:''%>" required>
+                                <p style="color: red;"><%=(errors && errors.name)? errors.name.msg:''%></p>
+
+                            </div>
+                            <label for="name ">Mobile</label>
+
+                            <div class="row">
+
+                                <div class="col-md-6" id="files1">
+                                    <div class="form-group ">
+
+                                        <input type="number" class="form-control mobileInputCls" placeholder="Mobile"
+                                            name="mobileone" aria-label="Recipient's username" id="mobileone" required
+                                            aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.mobileone)? inputData.mobileone:''%>">
+
+                                        <p style="color: red;" id="mobileoneerr"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="add"><i
+                                            class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="first">
+                                <div class="col-md-6" id="files2">
+                                    <div class="form-group ">
+
+                                        <input type="number" class="form-control mobileInputCls" placeholder="Mobile"
+                                            name="mobile1" aria-label="Recipient's username" id="mobile1" 
+                                            aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.mobile1)? inputData.mobile1:''%>">
+
+                                        <p style="color: red;" id="mobile1err"></p>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="sub2"><i
+                                            class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="second">
+                                <div class="col-md-6" id="files3">
+                                    <div class="form-group ">
+
+                                        <input type="number" class="form-control mobileInputCls" placeholder="Mobile"
+                                            name="mobile2" aria-label="Recipient's username" id="mobile2" 
+                                            aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.mobile2)? inputData.mobile2:''%>">
+
+                                        <p style="color: red;" id="mobile2err"></p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="sub3"><i
+                                            class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="third">
+                                <div class="col-md-6" id="files4">
+                                    <div class="form-group ">
+
+                                        <input type="number" class="form-control mobileInputCls" placeholder="Mobile"
+                                            name="mobile3" aria-label="Recipient's username" id="mobile3" 
+                                            aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.mobile3)? inputData.mobile3:''%>">
+
+                                        <p style="color: red;" id="mobile3err"></p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <button type="button" class="btn btn-primary" id="sub4"><i
+                                            class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            
+
+                            <label for="name">Email</label>
+                            <div class="row" id="emails">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" name="emailone"
+                                            aria-label="Recipient's username" required id="emailone"
+                                            aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.emailone)? inputData.emailone:''%>">
+                                        <p style="color: red;" id="emailoneerr"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="addEmail"><i
+                                            class="fa fa-plus"></i> </span></button>
+                                </div>
+
+                            </div>
+
+                            <div class="row" id="firstemail">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" name="email1"
+                                            id="email1" aria-label="Recipient's username"  
+                                            aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.email1)? inputData.email1:''%>">
+                                        <p style="color: red;" id="email1err"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="subemail1"><i
+                                            class="fa fa-minus"></i> </span></button>
+                                </div>
+
+                            </div>
+
+                            <div class="row" id="secondemail">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" name="email2"
+                                            aria-label="Recipient's username"  id="email2"
+                                            aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.email2)? inputData.email2:''%>">
+                                        <p style="color: red;" id="email2err"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="subemail2"><i
+                                            class="fa fa-minus"></i> </span></button>
+                                </div>
+
+                            </div>
+
+                            <div class="row" id="thirdemail">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" id="email3" name="email3"
+                                            aria-label="Recipient's username"  aria-describedby="button-addon2"
+                                            value="<%=(inputData && inputData.email3)? inputData.email3:''%>">
+                                        <p style="color: red;" id="email3err"></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary" id="subemail3"><i
+                                            class="fa fa-minus"></i> </span></button>
+                                </div>
+
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Hometown</label>
+                                        <select class="form-control select2 " style="width: 100%; " required
+                                            name="homeLocation">
+                                            <option selected value="">Select</option>
+                                            <% for (let src of list) {%>
+                                            <option><%= src.dataValues.locationCity %></option>
+                                            <% } %>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Current Location</label>
+                                        <select class="form-control select2 " required style="width: 100%;"
+                                            name="currentLocation" required>
+                                            <option selected value="">Select</option>
+                                            <% for (let src of list) {%>
+                                            <option><%= src.dataValues.locationCity %></option>
+                                            <% } %>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>DOB</label>
+                                        <input type="date" id="birthday " name="birthday" required class="form-control"
+                                            value="<%=(inputData && inputData.birthday)? inputData.birthday:''%>">
+                                        <p style="color: red;"><%=(errors && errors.birthday)? errors.birthday.msg:''%>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <textarea class="form-control" rows="1" id="Address" name='Address'
+                                            style="resize: none;" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Prefered Location</label>
+
+                                        <div class="s2-example">
+                                            <p>
+                                                <select class="js-example-basic-multiple" name="preferedLocation"
+                                                    multiple="multiple" style="width: 100%;" required>
+                                                    <% if(list.length > 0) {%>
+                                                    <% for (let src of list) {%>
+                                                    <option value="<%= src.dataValues.locationCity %>">
+                                                        <%= src.dataValues.locationCity %></option>
+                                                    <%}%>
+                                                    <% } %>
+                                                </select>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="languageComponent">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Language</label>
+                                             <select class="js-example-basic-multiple" name="language" id="language"
+                                                    multiple="multiple" style="width: 100%;" required>
+
+                                                    <% if(languageList.length > 0) {%>
+                                                <% for(let src of languageList) {%>
+                                                <option value="<%=src.name %>"><%=src.name %></option>
+                                                <%}%>
+                                                <%}%>
+                                                    
+                                                </select>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <!-- <%if(accountAccess && (accountAccess === 'ALL' || accountAccess === 'L1_ASSESSMENT')){%>
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>L1 Level</label>
+                                            <select class="form-control select2" required style="width: 100%;"
+                                                name="onelevel1" id="onelevel1">
+                                                <option value="-1" selected>--Select--</option>
+                                                <option value="0 to 2">0 to 2</option>
+                                                <option value="2 to 4">2 to 4</option>
+                                                <option value="4 to 5">4 to 5</option>
+                                                <option value="5 to 6">5 to 6</option>
+                                                <option value="6+">6+</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <%}%>
+
+                                    <% if(accountAccess && (accountAccess === 'ALL' || accountAccess === 'L2_ASSESSMENT')){%>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>L2 Level</label>
+                                            <select class="form-control select2" required style="width: 100%;"
+                                                name="twolevel1" id="twolevel1">
+                                                <option value="-1" selected>--Select--</option>
+                                                <option value="0 to 2">0 to 2</option>
+                                                <option value="2 to 4">2 to 4</option>
+                                                <option value="4 to 5">4 to 5</option>
+                                                <option value="5 to 6">5 to 6</option>
+                                                <option value="6+">6+</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <%}%> -->
+
+                                <!-- <input type="hidden" name="accountAccess" id="accountAccess" value="<%= accountAccess %>">
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Add more</label>
+                                            <div>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="addLanguage();"><i class="fa fa-plus">
+                                                    </i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div> -->
+
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="hidden" name="languageCount" id="languageCount" value="0">
+                            <input type="submit" class="btn btn-primary" id="firstsubmit" value="Next">
+                            <!-- onclick="executeNext(this.id); return false" -->
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </form>
+                <% } %>
+                <!-- Form 2 for Education -->
+
+                <% if(page === 2)  { %>
+                <form action="/candidate/education-info" method="POST">
+                    <div class="card shadow mb-4 " id="Form2">
+                        <div class="card-header ">
+                            <h3 class="m-0 font-weight-bold text-primary  ">Educational Information
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <!-- <form role="form "> -->
+                        <div class="card-body ">
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label>Class 10</label>
+                                        <select class="form-control select2" style="width: 100%;" name="class10"
+                                            required id="class10">
+                                            <option value="" selected>Select</option>
+                                            <option value="10">10</option>
+                                            <option value="NONE">NONE</option>
+
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="Reference ">Passing year</label>
+                                        <input type="date" id="class10Date" name="class10Date" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label>Under Graduation</label>
+                                        <select class="form-control select2" style="width: 100%;" id="class12"
+                                            name="class12" required>
+                                            <option value="" selected>Select</option>
+                                            <option value="12">12</option>
+                                            <option value="ITI">ITI</option>
+                                            <option value="DIPLOMA">DIPLOMA</option>
+                                            <option value="NONE">NONE</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="Reference ">Passing year</label>
+                                        <input type="date" id="class12Date" name="class12Date" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Graduation</label>
+                                        <select class="form-control select2" style="width: 100%;" name="classG" required
+                                            id="classG">
+                                            <option value="" selected>Select</option>
+                                            <% if(graduation.length > 0) { for(let src of graduation) { %>
+                                            <option value="<%=src %>"><%=src %></option>
+                                            <%}} %>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Reference ">Passing year</label>
+                                        <input type="date" id="classGDate" name="classGDate" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label>Post Graduation</label>
+                                        <select class="form-control select2" style="width: 100%;" name="classP" required
+                                            id="classP">
+                                            <option value="" selected>Select</option>
+                                            <% if(pGraduation.length > 0) { for(let src of pGraduation) { %>
+                                            <option value="<%=src %>"><%=src %></option>
+                                            <%}} %>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group">
+                                        <label for="Reference ">Passing year</label>
+                                        <input type="date" id="classPDate" name="classPDate" class="form-control"
+                                            disabled>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Skills set</label>
+
+                                        <input id="form-tags-3" name="preferedSkillset" type="text" value="">
+                                        <!-- <div class="s2-example">
+                                            <p>
+                                                <select class="js-example-basic-multiple" name="preferedSkillset"
+                                                    multiple="multiple" style="width: 100%;">
+
+                                                    <option value="python">Python</option>
+                                                    <option value="java">Java</option>
+
+                                                </select>
+
+                                            </p>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Certificate</label>
+                                        <input type="type" class="form-control" name="certificateName">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label for="Reference ">Certification Number</label>
+                                        <input type="type" class="form-control" name="certificateNumber">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Typing Speed</label>
+                                        <select class="form-control select2" style="width: 100%;" required
+                                            name="typingspeed">
+                                            <option selected value="">Select</option>
+                                            <option>1 to 20 wpm</option>
+                                            <option>20 to 30 wpm</option>
+                                            <option>30+ wpm</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer ">
+                            <input type="hidden" name="candidateKey" value="<%=candidateKey%>">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="submit" class="btn btn-primary" id="secondSubmit" value="Next">
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </form>
+                <% } %>
+                <% if(page === 3)  { %>
+                <form action="/candidate/experience-info" method="POST" novalidate>
+                    <div class="card shadow mb-4 " id="Form3">
+                        <div class="card-header ">
+                            <h3 class="m-0 font-weight-bold text-primary ">Experience Information
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <!-- <form role="form "> -->
+
+                        <div class="card-body ">
+
+                            <div class="row mb-2">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="experiencestatus"
+                                            id="fresher" value="EXPERIENCE" checked>
+                                        <label class="form-check-label" for="fresher">
+                                            EXPERIENCE
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="experiencestatus"
+                                            id="experience" value="FRESHER">
+                                        <label class="form-check-label" for="experience">
+                                            FRESHER
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div id="company">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Company Name</label>
+                                            <input type="organization-title" class="form-control"
+                                                placeholder="Company Name" name="company1" autocomplete="on">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-md-6 ">
+                                        <div class="form-group ">
+                                            <label>Company Industry</label>
+                                            <select class="form-control select2" name="companyIndustry1"
+                                                style="width: 100%;">
+                                                <option selected value="">Select</option>
+                                                <% if(preferedIndustry.length > 0) { for(let src of preferedIndustry) { %>
+                                                <option value="<%= src %>"><%= src %></option>
+                                                <%}} %>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group">
+                                            <label for="Reference">Role</label>
+                                            <select class="form-control select2" name="companyRole1"
+                                                style="width: 100%;">
+                                                <option selected value="">Select</option>
+                                                <% if(preferedJob.length > 0) { for(let src of preferedJob) {  %>
+                                                <option value="<%= src %>"><%= src %></option>
+                                                <%}} %>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row ">
+                                    <div class="col-md-4 ">
+                                        <div class="form-group ">
+                                            <label for="Reference ">Start year</label>
+                                            <input type="date" id="startDate" name="startDate1" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 ">
+                                        <div class="form-group ">
+                                            <label for="Reference ">End year</label>
+                                            <input type="date" id="endDate" name="endDate1" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 ">
+                                        <div class="form-group ">
+                                            <label>Salary</label>
+                                            <input type="type" class="form-control" name="salary1" style="width: 100%;">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row" id="addCompany">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Add more</label>
+                                        <button type="button" class="btn btn-primary" onclick="addCompany();"><i
+                                                class="fa fa-plus">
+                                            </i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="prefer">
+                                <div class="row ">
+                                    <div class="col-md-6 ">
+                                        <div class="form-group ">
+                                            <label>Prefered Industry</label>
+                                            <select class="form-control select2" name="preferedIndustry1"
+                                                style="width: 100%;" required>
+                                                <option selected value="">Select</option>
+                                                <% if(preferedIndustry.length > 0) { for(let src of preferedIndustry) { %>
+                                                <option value="<%= src %>"><%= src %></option>
+                                                <%}} %>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 ">
+                                        <div class="form-group ">
+                                            <label>Prefered Job Role</label>
+                                            <select class="form-control select2" name="preferedIndustryJobRole1"
+                                                required style="width: 100%;">
+                                                <option selected value="">Select</option>
+                                                <% if(preferedJob.length > 0) { for(let src of preferedJob) {  %>
+                                                <option value="<%= src %>"><%= src %></option>
+                                                <%}} %>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Add more</label>
+                                        <button type="button" class="btn btn-primary" id="addRow"
+                                            onclick="addPreferences();">
+                                            <i class="fa fa-plus">
+                                            </i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <label>Prefered Job Type</label>
+                                        <select class="form-control select2" name="preferedJobType" required
+                                            style="width: 100%;">
+                                            <option value="" selected>Select</option>
+                                            <option value="FULL_TIME">Full-Time</option>
+                                            <option value="PART_TIME">Part-Time</option>
+                                            <option value="INTERNSHIP">Internship</option>
+                                            <option value="FREELANCER">Freelancer</option>
+
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <div class="form-group ">
+                                        <label>Prefered Shift</label>
+                                        <select class="form-control select2" style="width: 100%;" required
+                                            name="preferedShift">
+                                            <option selected value="">Select</option>
+                                            <option value="DAY">DAY</option>
+                                            <option value="AFTERNOON">AFTERNOON</option>
+                                            <option value="NIGHT">NIGHT</option>
+                                            <option value="ANY">ANY</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- /.card-body -->
+
+                        <div class="card-footer ">
+                            <input type="hidden" name="candidateKey" value="<%=candidateKey%>">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <input type="hidden" name="companyCount" id="companyCount">
+                            <input type="hidden" name="preferenceCount" id="preferenceCount">
+                            <input type="submit" class="btn btn-primary" id="thirdsubmit" value="Next">
+                        </div>
+                        <!-- </form> -->
+                    </div>
+                </form>
+                <% } %>
+                <% if(page === 4)  { %>
+                <div class="card card-primary " id="Form4">
+                    <div class="card-header ">
+                        <h3 class="card-title ">Finish</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <!-- <form role="form "> -->
+
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-md-12">
+                                You have successfully submitted your profile with us. You will receive a email or call
+                                for your login credential. Best of luck.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+    <script type="text/javascript">
+
+         $(document).ready(function () {
+
+            $("#firstemail").hide();
+            $("#secondemail").hide();
+            $("#thirdemail").hide();
+            $("#first").hide();
+            $("#second").hide();
+            $("#third").hide();
+
+            $("#firstsubmit").attr("disabled", true);
+         })
+
+         $(document).ready(function () {
+
+               $("#add").click(function() {
+               if(!$('#first').is(':visible'))
+               {
+               $("#first").show();
+               }
+               else if(!$('#second').is(':visible'))
+               {
+               $("#second").show();
+               }
+               else if(!$('#third').is(':visible'))
+               {
+               $("#third").show();
+               }
+               })
+
+               $("#sub2").click(function(){
+                   $("#first").hide();
+               })
+
+               $("#sub3").click(function(){
+                   $("#second").hide();
+               })
+
+               $("#sub4").click(function(){
+                   $("#third").hide();
+               })
+
+               $("#addEmail").click(function() {
+               if(!$('#firstemail').is(':visible'))
+               {
+               $("#firstemail").show();
+               }
+               else if(!$('#secondemail').is(':visible'))
+               {
+               $("#secondemail").show();
+               }
+               else if(!$('#thirdemail').is(':visible'))
+               {
+               $("#thirdemail").show();
+               }
+               })
+
+               $("#subemail1").click(function(){
+                   $("#firstemail").hide();
+               })
+
+               $("#subemail2").click(function(){
+                   $("#secondemail").hide();
+               })
+
+               $("#subemail3").click(function(){
+                   $("#thirdemail").hide();
+               })
+         })
+
+        function getClicked() {
+            $(document).ready(function () {
+
+                $("#sourceData").on("change", function (e) {
+
+                    e.preventDefault();
+                    var type = $(this).val();
+                    if (type !== '-1') {
+                        $("#Reference").removeAttr('disabled');
+                    } else {
+                        $("#Reference").attr('disabled', true);
+                    }
+                })
+
+            })
+        }
+
+        $(document).ready(function () {
+            $("#classP").on('change', function (e) {
+                var type = $(this).val();
+                console.log(type);
+                if (type === '-1' || type === 'NONE') {
+                    $("#classPDate").attr('disabled', true);
+                } else {
+                    $("#classPDate").removeAttr('disabled');
+                }
+            })
+
+            $("#classG").on('change', function (e) {
+                var type = $(this).val();
+                console.log(type);
+
+                if (type === '-1' || type === 'NONE') {
+                    $("#classGDate").attr('disabled', true);
+                } else {
+                    $("#classGDate").removeAttr('disabled');
+                }
+            })
+
+            $("#class10").on('change', function (e) {
+                var type = $(this).val();
+                console.log(type);
+                if (type === '-1' || type === 'NONE') {
+                    $("#class10Date").attr('disabled', true);
+
+                } else {
+                    $("#class10Date").removeAttr('disabled');
+                }
+            })
+
+            $("#class12").on('change', function (e) {
+                var type = $(this).val();
+                console.log(type);
+                if (type === '-1' || type === 'NONE') {
+                    $("#class12Date").attr('disabled', true);
+                } else {
+                    $("#class12Date").removeAttr('disabled');
+                }
+            })
+        })
+
+        $(document).ready(function () {
+
+            $("input[name$='experiencestatus']").click(function () {
+                var test = $(this).val();
+                console.log(test);
+                if (test === 'FRESHER') {
+                    $("#company").slideUp();
+                    $('#addCompany').hide();
+                } else {
+                    $("#company").slideDown();
+                    $('#addCompany').show();
+                }
+
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mobile1").on("keyup",function () {
+                console.log("#mobile1")
+                let inputValue = $(this).val();
+                    getMobile(inputValue,"#mobile1")
+                
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mobile2").on("keyup",function (event) {
+                let inputValue = $(this).val();
+                    getMobile(inputValue, "#mobile2")
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mobileone").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getMobile(inputValue, "#mobileone") 
+            });
+        });
+
+        $(document).ready(function () {
+            $("#mobile3").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getMobile(inputValue,"#mobile3")
+            
+            });
+        });
+
+        $(document).ready(function () {
+            $("#emailone").on("keyup",function () {
+                let inputValue = $(this).val();
+                getEmail(inputValue,"#emailone")
+                
+            });
+        });
+
+        $(document).ready(function () {
+            $("#email1").on("keyup",function (event) {
+                let inputValue = $(this).val();
+                    getEmail(inputValue, "#email1")
+            });
+        });
+
+        $(document).ready(function () {
+            $("#email2").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getEmail(inputValue, "#email2") 
+            });
+        });
+
+        $(document).ready(function () {
+            $("#email3").on("keyup",function () {
+                let inputValue = $(this).val();
+                    getEmail(inputValue,"#email3")
+            
+            });
+        });
+
+        function getMobile(inputValue, divId)
+        {
+            var temp, divCId;
+            $.ajax({
+            type: "GET",
+            url: "/ajax/checkmobile/",
+            data: "value="+inputValue,
+            //dataType: "html", //expect html to be returned
+            success: function (response) {
+                console.log(response);
+            if(response === 'YES')
+                temp = 'YES';
+            else
+                temp = 'NO';
+
+            if(temp && temp === 'YES')
+            {
+                if(divId === "#mobile1")
+                {
+                $("#mobile1err").html("Mobile already exist!");
+                }
+                if(divId === "#mobile2")
+                {
+                $("#mobile2err").html("Mobile already exist!");
+                }
+                if(divId === "#mobile3")
+                {
+                $("#mobile3err").html("Mobile already exist!");
+                }
+                if(divId === "#mobileone")
+                {
+                $("#mobileoneerr").html("Mobile already exist!");
+                }
+
+                $("#firstsubmit").attr('disabled',true);   
+            }
+            else if(temp && temp === 'NO' && (inputValue.length < 10 || inputValue.length > 10 || inputValue.length !== 10 )){
+                console.log(temp);
+                 if(divId === "#mobile1")
+                {
+                    $("#mobile1err").show()
+                    $("#mobile1err").html("Mobile should be 10 digit!");
+                }
+                if(divId === "#mobile2")
+                {
+                     $("#mobile2err").show()
+                     $("#mobile2err").html("Mobile should be 10 digit!");
+                }
+                if(divId === "#mobile3")
+                {
+                     $("#mobile3err").show()
+                     $("#mobile3err").html("Mobile should be 10 digit!");
+                }
+                if(divId === "#mobileone")
+                {
+                     $("#mobileoneerr").show()
+                     $("#mobileoneerr").html("Mobile should be 10 digit!");
+                }
+                $("#firstsubmit").attr('disabled',true);   
+
+            }
+            else if(inputValue.length === 10)
+            {
+               
+                if(divId === "#mobile1")
+                {
+                $("#mobile1err").hide();
+                }
+                if(divId === "#mobile2")
+                {
+                $("#mobile2err").hide();
+                }
+                if(divId === "#mobile3")
+                {
+                $("#mobile3err").hide();
+                }
+                if(divId === "#mobileone")
+                {
+                $("#mobileoneerr").hide();
+                }
+                $("#firstsubmit").attr('disabled',false); 
+
+                
+            }
+            }
+            });
+        }
+
+        function getEmail(inputValue, divId)
+        {
+            var temp, divCId;
+            $.ajax({
+            type: "GET",
+            url: "/ajax/checkemail/",
+            data: "value="+inputValue,
+            //dataType: "html", //expect html to be returned
+            success: function (response) {
+                console.log(response);
+            if(response === 'YES')
+                temp = 'YES';
+            else
+                temp = 'NO';
+
+            if(temp && temp === 'YES')
+            {
+                if(divId === "#email1")
+                {
+                    $("#email1err").show();
+                    $("#email1err").html("Email already exist!");
+                }
+                if(divId === "#email2")
+                {
+                    $("#email2err").show();
+                    $("#email2err").html("Email already exist!");
+                }
+                if(divId === "#email3")
+                {
+                    $("#email3err").show();
+                    $("#email3err").html("Email already exist!");
+                }
+                if(divId === "#emailone")
+                {
+                    $("#emailoneerr").show();
+                    $("#emailoneerr").html("Email already exist!");
+                
+                }
+
+                $("#firstsubmit").attr('disabled',true);   
+            }
+            else if(temp && temp === 'NO'){
+                console.log(temp);
+                if(divId === "#email1")
+                {
+                $("#email1err").hide();
+                }
+                if(divId === "#email2")
+                {
+                $("#email2err").hide();
+                }
+                if(divId === "#email3")
+                {
+                $("#email3err").hide();
+                }
+                if(divId === "#emailone")
+                {
+                $("#emailoneerr").hide();
+                }
+
+                $("#firstsubmit").attr('disabled',false);   
+
+            }
+            
+            }
+            });
+        }
+    </script>
+    <%- include('../includes/end2.ejs') %>
