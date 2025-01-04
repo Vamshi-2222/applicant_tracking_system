@@ -7,7 +7,7 @@ const csrf = require("csurf");
 const bcrypt = require("bcryptjs");
 const fs = require("fs");
 const flash = require('connect-flash');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3306;
 const {Op} = require("sequelize");
 
 const adminRoute = require("./routes/admin");
